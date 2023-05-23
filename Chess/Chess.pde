@@ -16,17 +16,35 @@ void setup(){
 }
 
 void draw(){
+  
   image(board, 0, 0);
+  
+  if (turnCount == 1){  //initial board draw
   image(WhPawn, 0, 0);
+  }
   
   if (phase == 2){
-    pieceDraw();
+    movementDraw();
   }
+  
+  //if turn count is odd, call whiteBoard
+  //if turn count is even, call blackBoard
+  
   
 }
 
-void pieceDraw(){
-  image(WhPawn, mouseX, mouseY);
+void movementDraw(){
+  //highlight the piece that was clicked
+  //draw a circle where the piece can move
+  turnCount +=1;
+}
+
+void whiteDraw(){
+  //draw board from white POV
+}
+
+void blackDraw(){
+  //draw board from black POV
 }
 
 void mouseClicked(){
@@ -37,13 +55,17 @@ void mouseClicked(){
   fill(0);
   text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
   
-  if (chessBoard[x][y] == 0){
+  //phase 1 "neutral phase"
+  //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
+  
+  if (chessBoard[x][y] == 0){ //change to != null when piece constructor is made (aka checking if a piece is on that tile)
       if (phase == 2){
       phase = 1;
     }else{
       phase +=1;
     }
   }
+  
   
 
 
