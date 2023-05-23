@@ -27,8 +27,8 @@ void draw(){
     movementDraw();
   }
   
-  //if turn count is odd, call whiteBoard
-  //if turn count is even, call blackBoard
+  //if turn count is odd, call whiteDraw
+  //if turn count is even, call blackDraw
   
   
 }
@@ -58,15 +58,14 @@ void mouseClicked(){
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
   
-  if (chessBoard[x][y] == 0){ //change to != null when piece constructor is made (aka checking if a piece is on that tile)
-      if (phase == 2){
-      phase = 1;
-    }else{
-      phase +=1;
-    }
+  if (chessBoard[x][y] == 1){ //change to != null when piece constructor is made (aka checking if a piece is on that tile)
+    phase = 2;
   }
   
-  
+  if (chessBoard[x][x] == 0 && phase == 2){ //if player clicks on an empty space after clicking on a piece
+    //move that piece
+    phase = 1;
+  }
 
 
 }
