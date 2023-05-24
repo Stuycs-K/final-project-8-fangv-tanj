@@ -42,6 +42,7 @@ private int[][] chessBoard; //change to array of pieces when constructor is done
         res[7 - r][7 - c] = chessBoard[r][c];
       }
     }
+    chessBoard = res;
   }
   
 }
