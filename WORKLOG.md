@@ -17,12 +17,12 @@ Victor Fang
   -Wrote flip method which flips the contents of the array (necessary to flip the board after a player makes a move).
 
 
-## GROUP MEMBER 2
+Junxi Tan
 
-### date x
+5/22/23
 
-info
+Made board with Victor. 
 
-### date y
+5/23/23
 
-info
+Began work on Piece class and Pawn class.
