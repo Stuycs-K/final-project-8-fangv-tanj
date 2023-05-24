@@ -1,11 +1,11 @@
 public class Piece{
   int row;
   int col;
-  int name;
+  String name;
   int Color;
   int[][] space;
   
-  public Piece(r, c, n, co){
+  public Piece(int r, int c, String n, int co){
    row = r;
    col = c;
    name = n;
