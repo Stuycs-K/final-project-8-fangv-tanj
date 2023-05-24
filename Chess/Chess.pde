@@ -26,11 +26,10 @@ void setup(){
   turnCount = 1;
   field = new Board();
   phase = 1;
+  image(board, 0, 0);
 }
 
 void draw(){
-  
-  image(board, 0, 0);
 
   
   if (turnCount == 1){  //initial board draw

@@ -1,8 +1,10 @@
 public class Pawn extends Piece{
+  int[][] space;
+  
   boolean canPassant;
   
-  public Pawn(){
-    super();
+  public Pawn(int r, int c, String n, int co){
+    super(r, c, n, co);
   }
   
   void move(){
