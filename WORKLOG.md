@@ -26,3 +26,7 @@ Made board with Victor.
 5/23/23
 
 Began work on Piece class and Pawn class.
+
+5/24/23
+
+Finished the movement for Queen, Knight, Rook and Bishop.
