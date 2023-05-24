@@ -1,7 +1,7 @@
 PImage board;
 PImage WhPawn;
 int turnCount;
-int[][] chessBoard; //will change it to array of pieces when piece constructor is made
+Board field;
 int phase;
 
 void setup(){
@@ -10,7 +10,7 @@ void setup(){
   WhPawn = loadImage("WhPawn.png");
   
   turnCount = 1;
-  chessBoard = new int[8][8];
+  field = new Board();
   phase = 1;
 }
 
@@ -25,8 +25,7 @@ void draw(){
     movementDraw();
   }
   
-  //if turn count is odd, call whiteDraw
-  //if turn count is even, call blackDraw
+//after each turn flip the board
   
   
 }
@@ -35,14 +34,6 @@ void movementDraw(){
   //highlight the piece that was clicked
   //draw a circle where the piece can move
   turnCount +=1;
-}
-
-void whiteDraw(){
-  //draw board from white POV
-}
-
-void blackDraw(){
-  //draw board from black POV
 }
 
 void mouseClicked(){
@@ -56,11 +47,11 @@ void mouseClicked(){
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
   
-  if (chessBoard[x][y] == 1){ //change to != null when piece constructor is made (aka checking if a piece is on that tile)
+  if (field.chessBoard[x][y] == 1){ //change to != null when piece constructor is made (aka checking if a piece is on that tile)
     phase = 2;
   }
   
-  if (chessBoard[x][x] == 0 && phase == 2){ //if player clicks on an empty space after clicking on a piece
+  if (field.chessBoard[x][x] == 0 && phase == 2){ //if player clicks on an empty space after clicking on a piece
     //move that piece
     phase = 1;
   }
