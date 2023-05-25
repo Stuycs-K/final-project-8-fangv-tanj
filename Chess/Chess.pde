@@ -95,7 +95,6 @@ void mouseClicked(){
   if (field.chessBoard[y][x] == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
     //move that piece
     field.chessBoard[y][x] = field.chessBoard[lastY][lastX];
-    
     field.chessBoard[y][x].setRow(y);
     field.chessBoard[y][x].setCol(x);
     

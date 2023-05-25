@@ -14,41 +14,47 @@ public class Piece{
   }
   
   void move(){
+    space = new ArrayList<float[]>();
     if(name == "Queen"){
        for(int i = 1; i < 8; i++){
-         if(row > 0 && col > 0 && row < 8 && col < 8){
-           space.add(new float[]{row-i, col-i});
-           space.add(new float[]{row-i, col+i});
-           space.add(new float[]{row+i, col+i});
-           space.add(new float[]{row+i, col-i});          
-           space.add(new float[]{row, col-i});
-           space.add(new float[]{row, col+i});
-           space.add(new float[]{row+i, col});
-           space.add(new float[]{row+i, col});
-         }
+          space.add(new float[]{row-i, col-i});
+          space.add(new float[]{row-i, col+i});
+          space.add(new float[]{row+i, col+i});
+          space.add(new float[]{row+i, col-i});          
+          space.add(new float[]{row, col-i});
+          space.add(new float[]{row, col+i});
+          space.add(new float[]{row+i, col});
+          space.add(new float[]{row-i, col});  
        }
      }
      
      if(name == "Bishop"){
        for(int i = 1; i < 8; i++){
-         if(row > 0 && col > 0 && row < 8 && col < 8){
-           space.add(new float[]{row-i, col-i});
-           space.add(new float[]{row-i, col+i});
-           space.add(new float[]{row+i, col+i});
-           space.add(new float[]{row+i, col-i});
-         }
+          space.add(new float[]{row-i, col-i});
+          space.add(new float[]{row-i, col+i});
+          space.add(new float[]{row+i, col+i});
+          space.add(new float[]{row+i, col-i});       
+       }
+     }
+     
+     if(name == "Rook"){
+       for(int i = 1; i < 8; i++){
+          space.add(new float[]{row, col-i});
+          space.add(new float[]{row, col+i});
+          space.add(new float[]{row+i, col});
+          space.add(new float[]{row-i, col});        
        }
      }
      
      if(name == "Knight"){  
-       space.add(new float[]{row-2, col-1});
-       space.add(new float[]{row-1, col-2});
-       space.add(new float[]{row-2, col+1});      
-       space.add(new float[]{row-1, col+2});
-       space.add(new float[]{row+2, col+1});
-       space.add(new float[]{row+1, col+2});
-       space.add(new float[]{row+2, col-1});      
-       space.add(new float[]{row+1, col-2});
+        space.add(new float[]{row-2, col-1});
+        space.add(new float[]{row-1, col-2});
+        space.add(new float[]{row-2, col+1});      
+        space.add(new float[]{row-1, col+2});
+        space.add(new float[]{row+2, col+1});
+        space.add(new float[]{row+1, col+2});
+        space.add(new float[]{row+2, col-1});      
+        space.add(new float[]{row+1, col-2});
      }
   }
   
