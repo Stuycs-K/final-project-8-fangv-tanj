@@ -63,11 +63,11 @@ void mouseClicked(){
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
   
-  if (field.chessBoard[x][y] == 1){ //change to != null when piece constructor is made (aka checking if a piece is on that tile)
+  if (field.chessBoard[x][y] != null){ //change to != null when piece constructor is made (aka checking if a piece is on that tile)
     phase = 2;
   }
   
-  if (field.chessBoard[x][y] == 0 && phase == 2){ //if player clicks on an empty space after clicking on a piece
+  if (field.chessBoard[x][y] == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
     //move that piece
     phase = 1;
   }
@@ -88,4 +88,18 @@ void loadImages(){
   BlRook = loadImage("BlRook.png");
   BlQueen = loadImage("BlQueen.png");
   BlKing = loadImage("BlKing.png");
+}
+
+void loadPieces(){
+  for (int y = 0; y < 8; y +=1){
+    for (int x = 0; x < 8; x +=1){
+      if (field.chessBoard[x][y] != null){
+        
+          if (field.chessBoard[x][y].name == "Rook" && field.chessBoard[x][y].Color == 1){
+            image(WhRook, x, y);
+          }
+        
+      }
+    }
+  }
 }
