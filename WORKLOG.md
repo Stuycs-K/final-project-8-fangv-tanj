@@ -21,6 +21,11 @@ Victor Fang
 -Drew all the pieces on the board
 -Pieces can now move (with the exception of king since the constructor is not done yet)
 
+5/25/23
+
+-After every turn the board switches sides as well as the pieces.
+-Player can no longer move other player's pieces.
+-When a piece is clicked circles are drawn to where the piece can move, clicking on another piece will clear the old circles.
 
 Junxi Tan
 
