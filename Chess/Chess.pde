@@ -31,6 +31,7 @@ void setup(){
 
 void draw(){
 
+  loadPieces();
   
   if (turnCount == 1){  //initial board draw
   field.start(); //add all the pieces to the board
@@ -76,29 +77,78 @@ void mouseClicked(){
 void loadImages(){
   board = loadImage("board.png");
   WhPawn = loadImage("WhPawn.png");
+  WhPawn.resize(80, 0);
+  
   WhKnight = loadImage("WhKnight.png");
+  WhKnight.resize(80, 0);
+  
   WhBishop = loadImage("WhBishop.png");
+  WhBishop.resize(80,0);
+  
   WhRook = loadImage("WhRook.png");
+  WhRook.resize(80, 0);
+  
   WhQueen = loadImage("WhQueen.png");
+  WhQueen.resize(80, 0);
+  
   WhKing = loadImage("WhKing.png");
   
   BlPawn = loadImage("BlPawn.png");
+  BlPawn.resize(80, 0);
+  
   BlKnight = loadImage("BlKnight.png");
+  BlKnight.resize(80, 0);
+  
   BlBishop = loadImage("BlBishop.png");
+  BlBishop.resize(80, 0);
+  
   BlRook = loadImage("BlRook.png");
+  BlRook.resize(80, 0);
+  
   BlQueen = loadImage("BlQueen.png");
+  BlQueen.resize(80, 0);
+  
   BlKing = loadImage("BlKing.png");
 }
 
 void loadPieces(){
-  for (int y = 0; y < 8; y +=1){
-    for (int x = 0; x < 8; x +=1){
-      if (field.chessBoard[x][y] != null){
+  for (int r = 0; r < 8; r +=1){
+    for (int c = 0; c < 8; c +=1){
+      if (field.chessBoard[r][c] != null){
         
-          if (field.chessBoard[x][y].name == "Rook" && field.chessBoard[x][y].Color == 1){
-            image(WhRook, x, y);
+        
+          if (field.chessBoard[r][c].name.equals("Bishop") && field.chessBoard[r][c].Color == 1){
+            image(WhBishop, c * 100, r * 100);
           }
-        
+          if (field.chessBoard[r][c].name.equals("Rook") && field.chessBoard[r][c].Color == 1){
+            image(WhRook, c * 100, r * 100);
+          }
+          if (field.chessBoard[r][c].name.equals("Queen") && field.chessBoard[r][c].Color == 1){
+            image(WhQueen, c * 100, r * 100);
+          }
+          if (field.chessBoard[r][c].name.equals("Knight") && field.chessBoard[r][c].Color == 1){
+            image(WhKnight, c * 100, r * 100);
+          }
+          if (field.chessBoard[r][c].name.equals("Pawn") && field.chessBoard[r][c].Color == 1){
+            image(WhPawn, c * 100, r * 100);
+          }
+          
+          if (field.chessBoard[r][c].name.equals("Bishop") && field.chessBoard[r][c].Color == 0){
+            image(BlBishop, c * 100, r * 100);
+          }
+          if (field.chessBoard[r][c].name.equals("Rook") && field.chessBoard[r][c].Color == 0){
+            image(BlRook, c * 100, r * 100);
+          }
+          if (field.chessBoard[r][c].name.equals("Queen") && field.chessBoard[r][c].Color == 0){
+            image(BlQueen, c * 100, r * 100);
+          }
+          if (field.chessBoard[r][c].name.equals("Knight") && field.chessBoard[r][c].Color == 0){
+            image(BlKnight, c * 100, r * 100);
+          }
+          if (field.chessBoard[r][c].name.equals("Pawn") && field.chessBoard[r][c].Color == 0){
+            image(BlPawn, c * 100, r * 100);
+          }
+          
       }
     }
   }
