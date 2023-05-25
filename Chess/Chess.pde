@@ -47,13 +47,12 @@ void draw(){
   
   if (prevTurnCount < turnCount){
     background(255);
+    field.flip(); //after each turn flip the board
     image(board, 0, 0);
     loadPieces();
     prevTurnCount = turnCount;
   }
   
-  
-//after each turn flip the board
   
   
 }
@@ -65,10 +64,16 @@ void movementDraw(int x, int y){
   held.move();
   int spaces = held.space.size();
   for (int i = 0; i < spaces; i +=1){
+<<<<<<< HEAD
+    float[] tiles = held.space.get(i);
+    fill(100);
+    circle(tiles[1] * 100, tiles[0] * 100, 20);
+=======
     float[] a = held.space.get(i);
     System.out.println(a[1]);
     fill(0, 255, 0);
     circle(a[1] * 100, a[0] * 100, 20);
+>>>>>>> 006326baca058fc97b8eeea953d8f85c261c27c0
   }
   //draw a circle where the piece can move
   
@@ -85,15 +90,20 @@ void mouseClicked(){
   
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
+    Piece clicked = field.chessBoard[y][x];
+    int playerTurn = turnCount % 2;
   
-  if (field.chessBoard[y][x] != null){ //if player clicks on a tile with a piece
+  if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
       lastX = x;
       lastY = y;
     phase = 2;
+    System.out.println(field.chessBoard[y][x].row);
+    System.out.println(field.chessBoard[y][x].col);
+    System.out.println(field.chessBoard[y][x].Color);
     movementDraw(lastX, lastY);
   }
   
-  if (field.chessBoard[y][x] == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
+  if (clicked == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
     //move that piece
       field.chessBoard[y][x] = field.chessBoard[lastY][lastX];
       field.chessBoard[y][x].setRow(y);
@@ -113,6 +123,8 @@ void mouseClicked(){
 
 void loadImages(){
   board = loadImage("board.png");
+  board.resize(800, 0);
+  
   WhPawn = loadImage("WhPawn.png");
   WhPawn.resize(80, 0);
   
@@ -178,8 +190,6 @@ void loadPieces(){
           }
           if (field.chessBoard[r][c].name.equals("Queen") && field.chessBoard[r][c].Color == 0){
             image(BlQueen, c * 100, r * 100);
-            //System.out.println(field.chessBoard[r][c]);
-            //System.out.println("" + r + " " + c);
           }
           if (field.chessBoard[r][c].name.equals("Knight") && field.chessBoard[r][c].Color == 0){
             image(BlKnight, c * 100, r * 100);
