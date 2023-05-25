@@ -35,3 +35,7 @@ Began work on Piece class and Pawn class.
 5/24/23
 
 Finished the movement for Queen, Knight, Rook and Bishop.
+
+5/25/23
+Removed the boundaries on piece as it does not work.
+Added rook piece
