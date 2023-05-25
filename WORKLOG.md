@@ -40,3 +40,4 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 Removed the boundaries on piece as it does not work.
 Added rook piece
 pawn can move now
+started king
