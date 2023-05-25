@@ -88,12 +88,15 @@ void mouseClicked(){
     int playerTurn = turnCount % 2;
   
   if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
+      background(255);
       lastX = x;
       lastY = y;
     phase = 2;
     System.out.println(field.chessBoard[y][x].row);
     System.out.println(field.chessBoard[y][x].col);
     System.out.println(field.chessBoard[y][x].Color);
+    image(board, 0, 0);
+    loadPieces();
     movementDraw(lastX, lastY);
   }
   
