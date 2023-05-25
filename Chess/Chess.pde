@@ -14,7 +14,8 @@ PImage BlRook;
 PImage BlQueen;
 PImage BlKing;
 
-Piece lastHeld;
+int lastX;
+int lastY;
 
 int turnCount;
 int prevTurnCount;
@@ -79,24 +80,23 @@ void mouseClicked(){
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
   
-  if (field.chessBoard[y][x] != null){ 
-    lastHeld = field.chessBoard[y][x];
-    System.out.println("lastrow: "+lastHeld.row);
-    System.out.println("lastcol: "+lastHeld.col);
-      System.out.println(field.chessBoard[y][x]);
-      System.out.println(y);
-      System.out.println(x);
+  if (field.chessBoard[y][x] != null){ //if player clicks on a tile with a piece
+      lastX = x;
+      lastY = y;
     phase = 2;
   }
   
   if (field.chessBoard[y][x] == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
     //move that piece
-    field.chessBoard[lastHeld.row][lastHeld.col] = null;
-    field.chessBoard[y][x] = lastHeld;
-    System.out.println(field.chessBoard[y][x]);
-    System.out.println(x);
-    System.out.println(y);
+    field.chessBoard[y][x] = field.chessBoard[lastY][lastX];
+    
+    //remove the old piece
+    field.chessBoard[lastY][lastX] = null;
+    
+    //return to neutral phaase
     phase = 1;
+    
+    //increase turn count
     turnCount +=1;
   }
 }
