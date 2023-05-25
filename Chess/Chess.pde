@@ -52,20 +52,25 @@ void draw(){
     prevTurnCount = turnCount;
   }
   
-  //if (phase == 2){
-  //  movementDraw();
-  //}
   
 //after each turn flip the board
   
   
 }
 
-void movementDraw(){
+void movementDraw(int x, int y){
   //highlight the piece that was clicked
-
+  
+  Piece held = field.chessBoard[y][x];
+  held.move();
+  int spaces = held.space.size();
+  for (int i = 0; i < spaces; i +=1){
+    float[] a = held.space.get(i);
+    fill(100);
+    circle(a[1] * 100, a[0] * 100, 20);
+  }
   //draw a circle where the piece can move
-  turnCount +=1;
+  
 }
 
 void mouseClicked(){
@@ -84,11 +89,15 @@ void mouseClicked(){
       lastX = x;
       lastY = y;
     phase = 2;
+    movementDraw(lastX, lastY);
   }
   
   if (field.chessBoard[y][x] == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
     //move that piece
     field.chessBoard[y][x] = field.chessBoard[lastY][lastX];
+    
+    field.chessBoard[y][x].setRow(y);
+    field.chessBoard[y][x].setCol(x);
     
     //remove the old piece
     field.chessBoard[lastY][lastX] = null;
