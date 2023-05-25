@@ -13,8 +13,12 @@ public class Piece{
    Color = co;
   }
   
+  public Piece(String n){
+   name = n;
+  }
+  
   void move(){
-    space = new ArrayList<float[]>();
+    space = new ArrayList<float[]>();  
     if(name == "Queen"){
        for(int i = 1; i < 8; i++){
           space.add(new float[]{row-i, col-i});

@@ -66,7 +66,8 @@ void movementDraw(int x, int y){
   int spaces = held.space.size();
   for (int i = 0; i < spaces; i +=1){
     float[] a = held.space.get(i);
-    fill(100);
+    System.out.println(a[1]);
+    fill(0, 255, 0);
     circle(a[1] * 100, a[0] * 100, 20);
   }
   //draw a circle where the piece can move
