@@ -45,6 +45,10 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     for (int r = 7; r >= 0; r -=1){
       for (int c = 7; c >= 0; c -=1){
         res[7 - r][7 - c] = chessBoard[r][c];
+        if (res[7 - r][7 - c] != null){
+          res[7 - r][7 - c].setRow(7 - r);
+          res[7 - r][7 - c].setCol(7 - c);
+        }
       }
     }
     chessBoard = res;
