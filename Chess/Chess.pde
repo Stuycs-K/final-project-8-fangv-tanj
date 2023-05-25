@@ -14,6 +14,7 @@ PImage BlRook;
 PImage BlQueen;
 PImage BlKing;
 
+Piece lastHeld;
 
 int turnCount;
 Board field;
@@ -32,14 +33,17 @@ void setup(){
 void draw(){
 
   loadPieces();
+  //System.out.println(phase);
   
   if (turnCount == 1){  //initial board draw
   field.start(); //add all the pieces to the board
   //draw out all the pieces
+  System.out.println("a");
   }
   
   if (phase == 2){
     movementDraw();
+     loadPieces();
   }
   
 //after each turn flip the board
@@ -61,18 +65,29 @@ void mouseClicked(){
   fill(0);
   text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
   
+    System.out.println(x);
+    System.out.println(y);
+  
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
   
-  if (field.chessBoard[x][y] != null){ //change to != null when piece constructor is made (aka checking if a piece is on that tile)
+  if (field.chessBoard[y][x] != null){ //change to != null when piece constructor is made (aka checking if a piece is on that tile)
     phase = 2;
+    lastHeld = field.chessBoard[y][x];
   }
   
-  if (field.chessBoard[x][y] == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
+  if (field.chessBoard[y][x] == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
     //move that piece
+    field.chessBoard[lastHeld.row][lastHeld.col] = null;
+    System.out.println(lastHeld.row);
+    System.out.println(lastHeld.col);
+    System.out.println(field.chessBoard[lastHeld.row][lastHeld.col]);
+    field.chessBoard[y][x] = lastHeld;
     phase = 1;
+    turnCount +=1;
   }
 }
+
 
 void loadImages(){
   board = loadImage("board.png");
