@@ -16,12 +16,17 @@ Victor Fang
   -Start method places all the pieces in the correct position on the array.
   -Wrote flip method which flips the contents of the array (necessary to flip the board after a player makes a move).
 
+5/24/23
+
+-Drew all the pieces on the board
+-Pieces can now move (with the exception of king since the constructor is not done yet)
+
 
 Junxi Tan
 
 5/22/23
 
-Made board with Victor. 
+Made board with Victor.
 
 5/23/23
 
