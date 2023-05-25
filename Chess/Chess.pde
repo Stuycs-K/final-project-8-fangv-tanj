@@ -64,9 +64,16 @@ void movementDraw(int x, int y){
   held.move();
   int spaces = held.space.size();
   for (int i = 0; i < spaces; i +=1){
+<<<<<<< HEAD
     float[] tiles = held.space.get(i);
     fill(100);
     circle(tiles[1] * 100, tiles[0] * 100, 20);
+=======
+    float[] a = held.space.get(i);
+    System.out.println(a[1]);
+    fill(0, 255, 0);
+    circle(a[1] * 100, a[0] * 100, 20);
+>>>>>>> 006326baca058fc97b8eeea953d8f85c261c27c0
   }
   //draw a circle where the piece can move
   
@@ -98,10 +105,9 @@ void mouseClicked(){
   
   if (clicked == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
     //move that piece
-    field.chessBoard[y][x] = field.chessBoard[lastY][lastX];
-    
-    field.chessBoard[y][x].setRow(y);
-    field.chessBoard[y][x].setCol(x);
+      field.chessBoard[y][x] = field.chessBoard[lastY][lastX];
+      field.chessBoard[y][x].setRow(y);
+      field.chessBoard[y][x].setCol(x);
     
     //remove the old piece
     field.chessBoard[lastY][lastX] = null;
