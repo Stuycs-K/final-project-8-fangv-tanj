@@ -83,15 +83,17 @@ void mouseClicked(){
   
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
+    Piece clicked = field.chessBoard[y][x];
+    int playerTurn = turnCount % 2;
   
-  if (field.chessBoard[y][x] != null){ //if player clicks on a tile with a piece
+  if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
       lastX = x;
       lastY = y;
     phase = 2;
     movementDraw(lastX, lastY);
   }
   
-  if (field.chessBoard[y][x] == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
+  if (clicked == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
     //move that piece
     field.chessBoard[y][x] = field.chessBoard[lastY][lastX];
     
