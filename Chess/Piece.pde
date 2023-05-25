@@ -64,4 +64,8 @@ public class Piece{
   col = c;
   }
   
+  void setColor(int co){
+  Color = co;
+  }
+  
 }

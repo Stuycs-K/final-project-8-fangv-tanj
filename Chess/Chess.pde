@@ -64,9 +64,9 @@ void movementDraw(int x, int y){
   held.move();
   int spaces = held.space.size();
   for (int i = 0; i < spaces; i +=1){
-    float[] a = held.space.get(i);
+    float[] tiles = held.space.get(i);
     fill(100);
-    circle(a[1] * 100, a[0] * 100, 20);
+    circle(tiles[1] * 100, tiles[0] * 100, 20);
   }
   //draw a circle where the piece can move
   
@@ -90,6 +90,9 @@ void mouseClicked(){
       lastX = x;
       lastY = y;
     phase = 2;
+    System.out.println(field.chessBoard[y][x].row);
+    System.out.println(field.chessBoard[y][x].col);
+    System.out.println(field.chessBoard[y][x].Color);
     movementDraw(lastX, lastY);
   }
   
@@ -114,6 +117,8 @@ void mouseClicked(){
 
 void loadImages(){
   board = loadImage("board.png");
+  board.resize(800, 0);
+  
   WhPawn = loadImage("WhPawn.png");
   WhPawn.resize(80, 0);
   
@@ -179,8 +184,6 @@ void loadPieces(){
           }
           if (field.chessBoard[r][c].name.equals("Queen") && field.chessBoard[r][c].Color == 0){
             image(BlQueen, c * 100, r * 100);
-            //System.out.println(field.chessBoard[r][c]);
-            //System.out.println("" + r + " " + c);
           }
           if (field.chessBoard[r][c].name.equals("Knight") && field.chessBoard[r][c].Color == 0){
             image(BlKnight, c * 100, r * 100);
