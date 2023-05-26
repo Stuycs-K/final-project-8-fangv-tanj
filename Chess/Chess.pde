@@ -57,22 +57,6 @@ void draw(){
   
 }
 
-//void movementDraw(int x, int y){
-//  //highlight the piece that was clicked
-  
-//  Piece held = field.chessBoard[y][x];
-//  held.move();
-//  int spaces = held.space.size();
-//  for (int i = 0; i < spaces; i +=1){
-//    float[] a = held.space.get(i);
-//    System.out.println(a[1]);
-//    fill(211, 211, 211);
-//    circle(a[1] * 100 + 50, a[0] * 100 + 50, 30);
-//  //draw a circle where the piece can move
-  
-//  }
-//}
-
 void mouseClicked(){
   
   int x = mouseX/100;
@@ -138,6 +122,7 @@ void loadImages(){
   WhQueen.resize(80, 0);
   
   WhKing = loadImage("WhKing.png");
+  WhKing.resize(80, 0);
   
   BlPawn = loadImage("BlPawn.png");
   BlPawn.resize(80, 0);
@@ -155,6 +140,7 @@ void loadImages(){
   BlQueen.resize(80, 0);
   
   BlKing = loadImage("BlKing.png");
+  BlKing.resize(80, 0);
 }
 
 void loadPieces(){
@@ -178,6 +164,9 @@ void loadPieces(){
           if (field.chessBoard[r][c].name.equals("Pawn") && field.chessBoard[r][c].Color == 1){
             image(WhPawn, c * 100, r * 100);
           }
+          if (field.chessBoard[r][c].name.equals("King") && field.chessBoard[r][c].Color == 1){
+            image(WhKing, c * 100, r * 100);
+          }
           
           if (field.chessBoard[r][c].name.equals("Bishop") && field.chessBoard[r][c].Color == 0){
             image(BlBishop, c * 100, r * 100);
@@ -193,6 +182,9 @@ void loadPieces(){
           }
           if (field.chessBoard[r][c].name.equals("Pawn") && field.chessBoard[r][c].Color == 0){
             image(BlPawn, c * 100, r * 100);
+          }
+          if (field.chessBoard[r][c].name.equals("King") && field.chessBoard[r][c].Color == 0){
+            image(BlKing, c * 100, r * 100);
           }
           
       }

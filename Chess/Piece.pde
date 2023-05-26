@@ -67,7 +67,6 @@ public class Piece{
   //highlight the piece that was clicked
   
   Piece held = field.chessBoard[y][x];
-  held.move();
   int spaces = held.space.size();
   for (int i = 0; i < spaces; i +=1){
     float[] a = held.space.get(i);
