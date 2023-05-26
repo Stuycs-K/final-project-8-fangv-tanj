@@ -51,6 +51,11 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 
 -started king.
 
+5/26/23
+- king can move too
+- movementdraw is now in piece class
+- i hate sam
+
 
 
 
