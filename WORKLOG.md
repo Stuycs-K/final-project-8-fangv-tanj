@@ -27,6 +27,11 @@ Victor Fang
 -Player can no longer move other player's pieces.
 -When a piece is clicked circles are drawn to where the piece can move, clicking on another piece will clear the old circles.
 
+5/26/23
+
+-Worked with Junxi to fix a bug involving movementdraw and the first move of a pawn.
+-Discussed ideas on how to make it so pieces can't move past other pieces.
+
 Junxi Tan
 
 5/22/23
@@ -55,9 +60,3 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 - king can move too
 - movementdraw is now in piece class
 - i hate sam
-
-
-
-
-
-
