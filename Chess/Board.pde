@@ -63,5 +63,33 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     //remove the old piece
     chessBoard[lastY][lastX] = null;
  }
+ 
+ /*need to figure out a way for movement to be stopped if piece is blocking path
+ movement should probably be moved to board class because position of the other pieces
+ is needed in order for this to work */
+ 
+ void movement(Piece piece){
+   piece.space = new ArrayList<float[]>(); 
+    if(piece.name == "Queen"){
+      
+      for(int i = 1; i < 8; i++){
+        //top left, top right
+        piece.space.add(new float[]{piece.row-i, piece.col-i});
+        piece.space.add(new float[]{piece.row-i, piece.col+i});
+        
+        //bottom left, bottom right
+        piece.space.add(new float[]{piece.row+i, piece.col+i});
+        piece.space.add(new float[]{piece.row+i, piece.col-i});   
+        
+        //left, right
+        piece.space.add(new float[]{piece.row, piece.col-i});
+        piece.space.add(new float[]{piece.row, piece.col+i});
+        
+        //down, up
+        piece.space.add(new float[]{piece.row+i, piece.col});
+        piece.space.add(new float[]{piece.row-i, piece.col});  
+      }
+     }
+   }
   
 }

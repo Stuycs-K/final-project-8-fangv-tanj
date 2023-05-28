@@ -57,11 +57,11 @@ void draw(){
 }
 
 int[][] movementDraw(int x, int y){
-  //highlight the piece that was clicked
   
   int[][] circles = new int[8][8];
   
   if (field.chessBoard[y][x] != null){
+    //highlight the piece that was clicked
     if ((x + y) % 2 == 1){
     fill(187, 203, 43);
     }
