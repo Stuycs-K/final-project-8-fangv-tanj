@@ -6,7 +6,6 @@ PImage WhBishop;
 PImage WhRook;
 PImage WhQueen;
 PImage WhKing;
-
 PImage BlPawn;
 PImage BlKnight;
 PImage BlBishop;
@@ -16,11 +15,14 @@ PImage BlKing;
 
 int lastX;
 int lastY;
-
 int turnCount;
 int prevTurnCount;
+
 Board field;
+int[][]circles;
+
 int phase;
+
 
 void setup(){
   size(900, 800);
@@ -28,22 +30,21 @@ void setup(){
   
   prevTurnCount = 1;
   turnCount = 1;
+  
   field = new Board();
   phase = 1;
+  
   background(255);
   field.start(); //add all the pieces to the board
   image(board, 0, 0);
   loadPieces();  //draw out all the pieces
 }
-
 void draw(){
   
    textSize(40);
   fill(0);
   text("turnCount: "+turnCount, 600, 400); //sake of testing
   text("prevTurn: "+prevTurnCount, 600, 500); //sake of testing
-  
-  
   
   if (prevTurnCount < turnCount){
     background(255);
@@ -53,10 +54,46 @@ void draw(){
     prevTurnCount = turnCount;
   }
   
-  
-  
 }
 
+int[][] movementDraw(int x, int y){
+  
+  int[][] circles = new int[8][8];
+  
+  if (field.chessBoard[y][x] != null){
+    //highlight the piece that was clicked
+    if ((x + y) % 2 == 1){
+    fill(187, 203, 43);
+    }
+    if ((x + y) % 2 == 0){
+    fill(247, 247, 105);
+    }
+    
+    square(x * 100, y * 100, 100);
+    loadPieces();
+    
+    Piece held = field.chessBoard[y][x];
+    held.movement(held.row, held.col);
+    int spaces = held.space.size();
+  
+  
+    for (int i = 0; i < spaces; i +=1){
+    
+      float[] coord = held.space.get(i);
+      int xCoord = (int)coord[1];
+      int yCoord = (int)coord[0];
+    
+      //draw a circle where the piece can move
+      if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
+      fill(211, 211, 211);
+      circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
+    
+      circles[yCoord][xCoord] = 1;
+      }
+    }
+  }
+  return circles;
+}
 void mouseClicked(){
   
   int x = mouseX/100;
@@ -70,28 +107,25 @@ void mouseClicked(){
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
     Piece clicked = field.chessBoard[y][x];
     int playerTurn = turnCount % 2;
-  
+
   if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
+      //reset screen
       background(255);
+      image(board, 0, 0);
+      loadPieces();
+      
+      phase = 2;
       lastX = x;
       lastY = y;
-    phase = 2;
-    System.out.println(field.chessBoard[y][x].row);
-    System.out.println(field.chessBoard[y][x].col);
-    System.out.println(field.chessBoard[y][x].Color);
-    image(board, 0, 0);
-    loadPieces();
-    clicked.movementDraw(lastX, lastY);
+      int[][]temp = movementDraw(x, y);
+      circles = temp;
   }
   
-  if (clicked == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
-    //move that piece
-      field.chessBoard[y][x] = field.chessBoard[lastY][lastX];
-      field.chessBoard[y][x].setRow(y);
-      field.chessBoard[y][x].setCol(x);
+          
+  
+  if (phase == 2 && circles[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
+    field.move(y, x, lastY, lastX);
     
-    //remove the old piece
-    field.chessBoard[lastY][lastX] = null;
     
     //return to neutral phaase
     phase = 1;

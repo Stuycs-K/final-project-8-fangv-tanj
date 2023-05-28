@@ -17,11 +17,10 @@ public class Piece{
    name = n;
   }
   
-  void move(){
-    
-  }
+  void move(){}
   
-  void movementDraw(int x, int y){
+  
+  void movement(int x, int y){
     space = new ArrayList<float[]>();  
     if(name == "Queen"){
        for(int i = 1; i < 8; i++){
@@ -64,18 +63,6 @@ public class Piece{
         space.add(new float[]{row+2, col-1});      
         space.add(new float[]{row+1, col-2});
      }
-  //highlight the piece that was clicked
-  
-  Piece held = field.chessBoard[y][x];
-  int spaces = held.space.size();
-  for (int i = 0; i < spaces; i +=1){
-    float[] a = held.space.get(i);
-    System.out.println(a[1]);
-    fill(211, 211, 211);
-    circle(a[1] * 100 + 50, a[0] * 100 + 50, 30);
-  //draw a circle where the piece can move
-  
-  }
 }
   
   void capture(){
@@ -89,9 +76,4 @@ public class Piece{
   void setCol(int c){
   col = c;
   }
-  
-  void setColor(int co){
-  Color = co;
-  }
-  
 }
