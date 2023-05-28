@@ -19,6 +19,7 @@ int turnCount;
 int prevTurnCount;
 
 Board field;
+int[][]circles;
 
 int phase;
 
@@ -55,29 +56,33 @@ void draw(){
   
 }
 
-void movementDraw(int x, int y){
+int[][] movementDraw(int x, int y){
   //highlight the piece that was clicked
   
-  Piece held = field.chessBoard[y][x];
-  held.movement(held.row, held.col);
-  int spaces = held.space.size();
+  int[][] circles = new int[8][8];
   
-  for (int i = 0; i < spaces; i +=1){
+  if (field.chessBoard[y][x] != null){
+    Piece held = field.chessBoard[y][x];
+    held.movement(held.row, held.col);
+    int spaces = held.space.size();
+  
+  
+    for (int i = 0; i < spaces; i +=1){
     
-    float[] coord = held.space.get(i);
-    int xCoord = (int)coord[1];
-    int yCoord = (int)coord[0];
+      float[] coord = held.space.get(i);
+      int xCoord = (int)coord[1];
+      int yCoord = (int)coord[0];
     
-    //draw a circle where the piece can move
-    if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
-    fill(211, 211, 211);
-    circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
+      //draw a circle where the piece can move
+      if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
+      fill(211, 211, 211);
+      circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
     
-    field.chessBoard[y][x].circles[yCoord][xCoord] = 1;
+      circles[yCoord][xCoord] = 1;
+      }
     }
-
-  
-}
+  }
+  return circles;
 }
 void mouseClicked(){
   
@@ -102,13 +107,15 @@ void mouseClicked(){
       phase = 2;
       lastX = x;
       lastY = y;
-
-    movementDraw(lastX, lastY);
+      int[][]temp = movementDraw(x, y);
+      circles = temp;
   }
   
+          
   
-  if (clicked == null && phase == 2 && field.chessBoard[lastY][lastX].circles[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
+  if (phase == 2 && circles[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
+    
     
     //return to neutral phaase
     phase = 1;

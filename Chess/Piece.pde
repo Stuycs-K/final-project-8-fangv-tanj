@@ -5,7 +5,6 @@ public class Piece{
   String name;
   int Color;
   ArrayList<float[]> space = new ArrayList<float[]>();
-  int[][] circles = new int[8][8];
   
   public Piece(int r, int c, String n, int co){
    row = r;
@@ -18,9 +17,8 @@ public class Piece{
    name = n;
   }
   
-  void move(){
-    
-  }
+  void move(){}
+  
   
   void movement(int x, int y){
     space = new ArrayList<float[]>();  
