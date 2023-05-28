@@ -6,7 +6,6 @@ PImage WhBishop;
 PImage WhRook;
 PImage WhQueen;
 PImage WhKing;
-
 PImage BlPawn;
 PImage BlKnight;
 PImage BlBishop;
@@ -16,11 +15,13 @@ PImage BlKing;
 
 int lastX;
 int lastY;
-
 int turnCount;
 int prevTurnCount;
+
 Board field;
+
 int phase;
+
 
 void setup(){
   size(900, 800);
@@ -28,22 +29,21 @@ void setup(){
   
   prevTurnCount = 1;
   turnCount = 1;
+  
   field = new Board();
   phase = 1;
+  
   background(255);
   field.start(); //add all the pieces to the board
   image(board, 0, 0);
   loadPieces();  //draw out all the pieces
 }
-
 void draw(){
   
    textSize(40);
   fill(0);
   text("turnCount: "+turnCount, 600, 400); //sake of testing
   text("prevTurn: "+prevTurnCount, 600, 500); //sake of testing
-  
-  
   
   if (prevTurnCount < turnCount){
     background(255);
@@ -56,7 +56,27 @@ void draw(){
   
   
 }
-
+void movementDraw(int x, int y){
+  //highlight the piece that was clicked
+  
+  Piece held = field.chessBoard[y][x];
+  held.movement(held.row, held.col);
+  int spaces = held.space.size();
+  
+  for (int i = 0; i < spaces; i +=1){
+    
+    float[] a = held.space.get(i);
+    int xCoord = (int)a[1];
+    int yCoord = (int)a[0];
+    
+    if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
+    fill(211, 211, 211);
+    circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
+    }
+  //draw a circle where the piece can move
+  
+}
+}
 void mouseClicked(){
   
   int x = mouseX/100;
@@ -70,28 +90,23 @@ void mouseClicked(){
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
     Piece clicked = field.chessBoard[y][x];
     int playerTurn = turnCount % 2;
-  
+
   if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
+      //reset screen
       background(255);
+      image(board, 0, 0);
+      loadPieces();
+      
+      phase = 2;
       lastX = x;
       lastY = y;
-    phase = 2;
-    System.out.println(field.chessBoard[y][x].row);
-    System.out.println(field.chessBoard[y][x].col);
-    System.out.println(field.chessBoard[y][x].Color);
-    image(board, 0, 0);
-    loadPieces();
-    clicked.movementDraw(lastX, lastY);
+
+    movementDraw(lastX, lastY);
   }
   
+  
   if (clicked == null && phase == 2){ //if player clicks on an empty space after clicking on a piece
-    //move that piece
-      field.chessBoard[y][x] = field.chessBoard[lastY][lastX];
-      field.chessBoard[y][x].setRow(y);
-      field.chessBoard[y][x].setCol(x);
-    
-    //remove the old piece
-    field.chessBoard[lastY][lastX] = null;
+    field.move(y, x, lastY, lastX);
     
     //return to neutral phaase
     phase = 1;
@@ -122,7 +137,6 @@ void loadImages(){
   WhQueen.resize(80, 0);
   
   WhKing = loadImage("WhKing.png");
-  WhKing.resize(80, 0);
   
   BlPawn = loadImage("BlPawn.png");
   BlPawn.resize(80, 0);
@@ -140,9 +154,7 @@ void loadImages(){
   BlQueen.resize(80, 0);
   
   BlKing = loadImage("BlKing.png");
-  BlKing.resize(80, 0);
 }
-
 void loadPieces(){
   for (int r = 0; r < 8; r +=1){
     for (int c = 0; c < 8; c +=1){
@@ -164,9 +176,6 @@ void loadPieces(){
           if (field.chessBoard[r][c].name.equals("Pawn") && field.chessBoard[r][c].Color == 1){
             image(WhPawn, c * 100, r * 100);
           }
-          if (field.chessBoard[r][c].name.equals("King") && field.chessBoard[r][c].Color == 1){
-            image(WhKing, c * 100, r * 100);
-          }
           
           if (field.chessBoard[r][c].name.equals("Bishop") && field.chessBoard[r][c].Color == 0){
             image(BlBishop, c * 100, r * 100);
@@ -182,9 +191,6 @@ void loadPieces(){
           }
           if (field.chessBoard[r][c].name.equals("Pawn") && field.chessBoard[r][c].Color == 0){
             image(BlPawn, c * 100, r * 100);
-          }
-          if (field.chessBoard[r][c].name.equals("King") && field.chessBoard[r][c].Color == 0){
-            image(BlKing, c * 100, r * 100);
           }
           
       }

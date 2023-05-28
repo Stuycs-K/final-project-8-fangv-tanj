@@ -54,4 +54,14 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     chessBoard = res;
   }
   
+ public void move(int y, int x, int lastY, int lastX){
+     //move that piece
+     chessBoard[y][x] = chessBoard[lastY][lastX];
+     chessBoard[y][x].setRow(y);
+     chessBoard[y][x].setCol(x);
+     
+    //remove the old piece
+    chessBoard[lastY][lastX] = null;
+ }
+  
 }
