@@ -5,6 +5,7 @@ public class Piece{
   String name;
   int Color;
   ArrayList<float[]> space = new ArrayList<float[]>();
+  int[][] circles = new int[8][8];
   
   public Piece(int r, int c, String n, int co){
    row = r;
