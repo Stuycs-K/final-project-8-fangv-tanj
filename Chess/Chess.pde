@@ -146,6 +146,7 @@ void loadImages(){
   WhQueen.resize(80, 0);
   
   WhKing = loadImage("WhKing.png");
+  WhKing.resize(80, 0);
   
   BlPawn = loadImage("BlPawn.png");
   BlPawn.resize(80, 0);
@@ -163,6 +164,8 @@ void loadImages(){
   BlQueen.resize(80, 0);
   
   BlKing = loadImage("BlKing.png");
+  BlKing.resize(80, 0);
+  
 }
 void loadPieces(){
   for (int r = 0; r < 8; r +=1){
@@ -185,6 +188,9 @@ void loadPieces(){
           if (field.chessBoard[r][c].name.equals("Pawn") && field.chessBoard[r][c].Color == 1){
             image(WhPawn, c * 100, r * 100);
           }
+          if (field.chessBoard[r][c].name.equals("King") && field.chessBoard[r][c].Color == 1){
+            image(WhKing, c * 100, r * 100);
+          }
           
           if (field.chessBoard[r][c].name.equals("Bishop") && field.chessBoard[r][c].Color == 0){
             image(BlBishop, c * 100, r * 100);
@@ -200,6 +206,9 @@ void loadPieces(){
           }
           if (field.chessBoard[r][c].name.equals("Pawn") && field.chessBoard[r][c].Color == 0){
             image(BlPawn, c * 100, r * 100);
+          }
+          if (field.chessBoard[r][c].name.equals("King") && field.chessBoard[r][c].Color == 0){
+            image(BlKing, c * 100, r * 100);
           }
           
       }
