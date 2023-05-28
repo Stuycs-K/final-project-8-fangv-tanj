@@ -32,6 +32,10 @@ Victor Fang
 -Worked with Junxi to fix a bug involving movementdraw and the first move of a pawn.
 -Discussed ideas on how to make it so pieces can't move past other pieces.
 
+5/27/23
+-Pieces can now only move onto their respective circles.
+-Held piece is now highlighted.
+
 Junxi Tan
 
 5/22/23
