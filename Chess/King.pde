@@ -4,10 +4,6 @@ public class King extends Piece{
    super(r, c, n, co);
   }
   
-  void move(){
-    
-  }
-  
   void movement(int x, int y){
    super.space = new ArrayList<float[]>(); 
    space.add(new float[]{row-1, col-1});
@@ -22,7 +18,4 @@ public class King extends Piece{
   
    }
   
-  void capture(){
-    
-  }
 }

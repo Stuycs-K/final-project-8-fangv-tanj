@@ -16,10 +16,7 @@ public class Piece{
   public Piece(String n){
    name = n;
   }
-  
-  void move(){}
-  
-  
+   
   void movement(int x, int y){
     space = new ArrayList<float[]>();  
     if(name == "Queen"){
@@ -64,10 +61,6 @@ public class Piece{
         space.add(new float[]{row+1, col-2});
      }
 }
-  
-  void capture(){
-    
-  }
   
   void setRow(int r){
   row = r;

@@ -7,10 +7,6 @@ public class Pawn extends Piece{
    firstMove = true;
   }
   
-  void move(){
-    
-  }
-  
   void movement(int x, int y){
    super.space = new ArrayList<float[]>(); 
    if(row != 6){
