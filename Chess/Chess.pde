@@ -62,6 +62,16 @@ int[][] movementDraw(int x, int y){
   int[][] circles = new int[8][8];
   
   if (field.chessBoard[y][x] != null){
+    if ((x + y) % 2 == 1){
+    fill(187, 203, 43);
+    }
+    if ((x + y) % 2 == 0){
+    fill(247, 247, 105);
+    }
+    
+    square(x * 100, y * 100, 100);
+    loadPieces();
+    
     Piece held = field.chessBoard[y][x];
     held.movement(held.row, held.col);
     int spaces = held.space.size();
@@ -165,8 +175,8 @@ void loadImages(){
   
   BlKing = loadImage("BlKing.png");
   BlKing.resize(80, 0);
-  
 }
+
 void loadPieces(){
   for (int r = 0; r < 8; r +=1){
     for (int c = 0; c < 8; c +=1){
