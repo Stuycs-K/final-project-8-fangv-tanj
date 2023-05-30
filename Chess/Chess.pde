@@ -73,10 +73,10 @@ int[][] movementDraw(int x, int y){
     loadPieces();
     
     Piece held = field.chessBoard[y][x];
-    if (held.name != "Queen"){
-    held.movement(held.row, held.col);
-    }else{
+    if (held.name == "Queen" || held.name == "Rook"){
     field.movement(held);
+    }else{
+    held.movement(held.row, held.col);
     }
     int spaces = held.space.size();
   
