@@ -27,11 +27,11 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
     chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
     chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
-    chessBoard[4][3] = new Piece(4, 3, "Queen", 1);
+    chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
     chessBoard[7][4] = new King(7, 4, "King", 1);
-    chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
+    chessBoard[4][5] = new Piece(4, 5, "Bishop", 1);
     chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
-    chessBoard[4][5] = new Piece(4, 5, "Rook", 1);
+    chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
     
     for (int i = 0; i < 8; i +=1){
       chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
@@ -89,6 +89,12 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
       direction(piece, "DOWN", "NONE");
       direction(piece, "NONE", "RIGHT");
       direction(piece, "NONE", "LEFT");
+   }
+   if (piece.name == "Bishop"){
+      direction(piece, "UP", "LEFT");
+      direction(piece, "UP", "RIGHT");
+      direction(piece, "DOWN", "LEFT");
+      direction(piece, "DOWN", "RIGHT");
    }
       
      }
