@@ -73,7 +73,11 @@ int[][] movementDraw(int x, int y){
     loadPieces();
     
     Piece held = field.chessBoard[y][x];
+    if (held.name == "Rook" || held.name == "Bishop" || held.name == "Queen"|| held.name == "Knight"){
+    field.movement(held);
+    }else{
     held.movement(held.row, held.col);
+    }
     int spaces = held.space.size();
   
   
@@ -94,6 +98,7 @@ int[][] movementDraw(int x, int y){
   }
   return circles;
 }
+
 void mouseClicked(){
   
   int x = mouseX/100;
@@ -101,6 +106,10 @@ void mouseClicked(){
   textSize(40);
   fill(0);
   text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
+  
+  if (field.chessBoard[y][x] != null){
+    System.out.println(field.chessBoard[y][x].toString());
+  }
   
   
   //phase 1 "neutral phase"

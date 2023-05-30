@@ -68,28 +68,120 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
  movement should probably be moved to board class because position of the other pieces
  is needed in order for this to work */
  
+ boolean inBound(int r, int c){
+   return ((r >= 0) && (r < 8) && (c >= 0) && (c < 8)); 
+ }
+ 
  void movement(Piece piece){
-   piece.space = new ArrayList<float[]>(); 
+   piece.space = new ArrayList<float[]>();
+   int row = piece.row;
+   int col = piece.col;
     if(piece.name == "Queen"){
-      
-      for(int i = 1; i < 8; i++){
-        //top left, top right
-        piece.space.add(new float[]{piece.row-i, piece.col-i});
-        piece.space.add(new float[]{piece.row-i, piece.col+i});
-        
-        //bottom left, bottom right
-        piece.space.add(new float[]{piece.row+i, piece.col+i});
-        piece.space.add(new float[]{piece.row+i, piece.col-i});   
-        
-        //left, right
-        piece.space.add(new float[]{piece.row, piece.col-i});
-        piece.space.add(new float[]{piece.row, piece.col+i});
-        
-        //down, up
-        piece.space.add(new float[]{piece.row+i, piece.col});
-        piece.space.add(new float[]{piece.row-i, piece.col});  
+      direction(piece, "UP", "LEFT");
+      direction(piece, "UP", "RIGHT");
+      direction(piece, "DOWN", "LEFT");
+      direction(piece, "DOWN", "RIGHT");
+      direction(piece, "UP", "NONE");
+      direction(piece, "DOWN", "NONE");
+      direction(piece, "NONE", "RIGHT");
+      direction(piece, "NONE", "LEFT");
+   }
+   if (piece.name == "Rook"){
+      direction(piece, "UP", "NONE");
+      direction(piece, "DOWN", "NONE");
+      direction(piece, "NONE", "RIGHT");
+      direction(piece, "NONE", "LEFT");
+   }
+   if (piece.name == "Bishop"){
+      direction(piece, "UP", "LEFT");
+      direction(piece, "UP", "RIGHT");
+      direction(piece, "DOWN", "LEFT");
+      direction(piece, "DOWN", "RIGHT");
+   } 
+   if (piece.name == "Knight"){
+      if (legalKnightMove(piece, row - 2, col -1)){
+        piece.space.add(new float[]{row - 2, col - 1});
       }
+      if (legalKnightMove(piece, row - 1, col - 2)){
+        piece.space.add(new float[]{row - 1, col - 2}); 
+      }
+      if (legalKnightMove(piece, row - 2, col + 1)){
+        piece.space.add(new float[]{row - 2, col + 1});
+      }
+      if (legalKnightMove(piece, row - 1, col + 2)){
+        piece.space.add(new float[]{row - 1, col + 2});
+      }
+      if (legalKnightMove(piece, row + 2, col + 1)){
+        piece.space.add(new float[]{row + 2, col + 1});
+      }
+      if (legalKnightMove(piece, row + 1, col + 2)){
+        piece.space.add(new float[]{row + 1, col + 2});
+      }
+      if (legalKnightMove(piece, row + 2, col - 1)){
+        piece.space.add(new float[]{row + 2, col - 1});
+      }
+      if (legalKnightMove(piece, row + 1, col - 2)){
+        piece.space.add(new float[]{row + 1, col - 2});
+      }
+   }
+      
      }
+     
+   boolean legalKnightMove(Piece piece, int r, int c){
+     if (!inBound(r, c)){
+       return false;
+     }
+     if (chessBoard[r][c] == null){
+       return true;
+     }else{
+       return chessBoard[r][c].Color != chessBoard[piece.row][piece.col].Color;
+     }
+   }
+     
+     
+   void direction(Piece piece, String dirOne, String dirTwo){
+     boolean cont = true;
+     int r = 0;
+     int c = 0;
+     if (dirOne.equals("UP")){
+       r = -1;
+     }
+     if (dirOne.equals("DOWN")){
+       r = 1;
+     }
+     if (dirTwo.equals("RIGHT")){
+       c = 1;
+     }
+     if (dirTwo.equals("LEFT")){
+       c = -1;
+     }
+     while (cont && inBound(piece.row + r, piece.col + c)){
+       boolean empty = chessBoard[piece.row + r][piece.col + c] == null;
+       boolean capturable = false;
+       if (!empty){
+       capturable = chessBoard[piece.row + r][piece.col + c].Color != chessBoard[piece.row][piece.col].Color;
+       }
+      if (empty || capturable){
+          piece.space.add(new float[]{piece.row + r, piece.col + c});
+          if (r < 0){
+          r -=1;
+          }
+          if (r > 0){
+          r +=1;
+          }
+          if (c < 0){
+          c -=1;
+          }
+          if (c > 0){
+          c +=1;
+          }
+          if (capturable){
+          cont = false;
+          }
+       }else{
+       cont = false;
+       }
+      }
    }
   
 }
