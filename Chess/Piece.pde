@@ -5,6 +5,7 @@ public class Piece{
   String name;
   int Color;
   ArrayList<float[]> space = new ArrayList<float[]>();
+  ArrayList<float[]> capturableSpace = new ArrayList<float[]>();
   
   public Piece(int r, int c, String n, int co){
    row = r;
@@ -60,8 +61,7 @@ public class Piece{
         space.add(new float[]{row+2, col-1});      
         space.add(new float[]{row+1, col-2});
      }
-}
-  
+  }
   void setRow(int r){
   row = r;
   }

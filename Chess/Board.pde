@@ -124,8 +124,7 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
         piece.space.add(new float[]{row + 1, col - 2});
       }
    }
-      
-     }
+  }
      
    boolean legalKnightMove(Piece piece, int r, int c){
      if (!inBound(r, c)){
@@ -162,6 +161,9 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
        capturable = chessBoard[piece.row + r][piece.col + c].Color != chessBoard[piece.row][piece.col].Color;
        }
       if (empty || capturable){
+        if(capturable){
+          piece.capturableSpace.add(new float[]{piece.row + r, piece.col + c});
+        }
           piece.space.add(new float[]{piece.row + r, piece.col + c});
           if (r < 0){
           r -=1;

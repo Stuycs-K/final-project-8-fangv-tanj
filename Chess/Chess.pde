@@ -79,8 +79,14 @@ int[][] movementDraw(int x, int y){
     held.movement(held.row, held.col);
     }
     int spaces = held.space.size();
-  
-  
+    int cSpaces = held.capturableSpace.size();
+    int j = 0;
+    if(cSpaces > 0){
+        float[] coord2 = held.capturableSpace.get(j);
+        int xCoord2 = (int)coord2[1];
+        int yCoord2 = (int)coord2[0];
+      }
+      
     for (int i = 0; i < spaces; i +=1){
     
       float[] coord = held.space.get(i);
@@ -88,11 +94,21 @@ int[][] movementDraw(int x, int y){
       int yCoord = (int)coord[0];
     
       //draw a circle where the piece can move
+     
       if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
-      fill(211, 211, 211);
-      circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
+        if(xCoord == xCoord2 && yCoord == yCoord2){
+          fill(255, 0, 0);
+          square(xCoord * 100, yCoord * 100, 100);
     
-      circles[yCoord][xCoord] = 1;
+          circles[yCoord][xCoord] = 1;
+          j++;
+        }
+        else{
+          fill(211, 211, 211);
+          circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
+    
+          circles[yCoord][xCoord] = 1;
+        }
       }
     }
   }
