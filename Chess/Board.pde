@@ -54,6 +54,16 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     chessBoard = res;
   }
   
+  /*check implementation
+  1. have a way to keep track of the kings pos on the board
+  2. after player A makes a move check the moves player A's pieces can make
+  3. if any of those moves are the same position as player B's king, activate 
+    "check" for player B
+  4. if player B clicks on a piece check if those moves will get 
+     player B out of check (use the same method as step 3)if they don't 
+     circles are not drawn
+  */
+  
  public void move(int y, int x, int lastY, int lastX){
      //move that piece
      chessBoard[y][x] = chessBoard[lastY][lastX];
@@ -63,10 +73,6 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     //remove the old piece
     chessBoard[lastY][lastX] = null;
  }
- 
- /*need to figure out a way for movement to be stopped if piece is blocking path
- movement should probably be moved to board class because position of the other pieces
- is needed in order for this to work */
  
  boolean inBound(int r, int c){
    return ((r >= 0) && (r < 8) && (c >= 0) && (c < 8)); 
