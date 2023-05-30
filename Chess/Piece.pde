@@ -69,4 +69,8 @@ public class Piece{
   void setCol(int c){
   col = c;
   }
+  
+  String toString(){
+  return name;
+  }
 }

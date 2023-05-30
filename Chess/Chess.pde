@@ -107,6 +107,11 @@ void mouseClicked(){
   fill(0);
   text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
   
+  if (field.chessBoard[y][x] != null){
+  String a = field.chessBoard[y][x].toString();
+  text(field.chessBoard[y][x].name, mouseX, mouseY + 30);
+  }
+  
   
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
