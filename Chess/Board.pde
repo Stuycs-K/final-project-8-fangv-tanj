@@ -27,7 +27,7 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
     chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
     chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
-    chessBoard[7][3] = new Piece(4, 3, "Queen", 1);
+    chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
     chessBoard[7][4] = new King(7, 4, "King", 1);
     chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
     chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
@@ -69,11 +69,13 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
  is needed in order for this to work */
  
  boolean inBound(int r, int c){
-   return (r >= 0 && r < 8 && c >= 0 && c < 8); 
+   return ((r >= 0) && (r < 8) && (c >= 0) && (c < 8)); 
  }
  
  void movement(Piece piece){
-   piece.space = new ArrayList<float[]>(); 
+   piece.space = new ArrayList<float[]>();
+   int row = piece.row;
+   int col = piece.col;
     if(piece.name == "Queen"){
       direction(piece, "UP", "LEFT");
       direction(piece, "UP", "RIGHT");
@@ -95,9 +97,47 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
       direction(piece, "UP", "RIGHT");
       direction(piece, "DOWN", "LEFT");
       direction(piece, "DOWN", "RIGHT");
+   } 
+   if (piece.name == "Knight"){
+      if (legalKnightMove(piece, row - 2, col -1)){
+        piece.space.add(new float[]{row - 2, col - 1});
+      }
+      if (legalKnightMove(piece, row - 1, col - 2)){
+        piece.space.add(new float[]{row - 1, col - 2}); 
+      }
+      if (legalKnightMove(piece, row - 2, col + 1)){
+        piece.space.add(new float[]{row - 2, col + 1});
+      }
+      if (legalKnightMove(piece, row - 1, col + 2)){
+        piece.space.add(new float[]{row - 1, col + 2});
+      }
+      if (legalKnightMove(piece, row + 2, col + 1)){
+        piece.space.add(new float[]{row + 2, col + 1});
+      }
+      if (legalKnightMove(piece, row + 1, col + 2)){
+        piece.space.add(new float[]{row + 1, col + 2});
+      }
+      if (legalKnightMove(piece, row + 2, col - 1)){
+        piece.space.add(new float[]{row + 2, col - 1});
+      }
+      if (legalKnightMove(piece, row + 1, col - 2)){
+        piece.space.add(new float[]{row + 1, col - 2});
+      }
    }
       
      }
+     
+   boolean legalKnightMove(Piece piece, int r, int c){
+     if (!inBound(r, c)){
+       return false;
+     }
+     if (chessBoard[r][c] == null){
+       return true;
+     }else{
+       return chessBoard[r][c].Color != chessBoard[piece.row][piece.col].Color;
+     }
+   }
+     
      
    void direction(Piece piece, String dirOne, String dirTwo){
      boolean cont = true;

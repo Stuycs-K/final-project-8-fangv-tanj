@@ -73,7 +73,11 @@ int[][] movementDraw(int x, int y){
     loadPieces();
     
     Piece held = field.chessBoard[y][x];
+    if (held.name == "Rook" || held.name == "Bishop" || held.name == "Queen"|| held.name == "Knight"){
     field.movement(held);
+    }else{
+    held.movement(held.row, held.col);
+    }
     int spaces = held.space.size();
   
   
@@ -104,8 +108,7 @@ void mouseClicked(){
   text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
   
   if (field.chessBoard[y][x] != null){
-  String a = field.chessBoard[y][x].toString();
-  text(field.chessBoard[y][x].name, mouseX, mouseY + 30);
+    System.out.println(field.chessBoard[y][x].toString());
   }
   
   
