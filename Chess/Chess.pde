@@ -52,6 +52,8 @@ void draw(){
   text("BlKing row: "+field.BlKing.row, 200, 100);
   text("BlKing col: "+field.BlKing.col, 200, 200);
   
+  //text("Check: "+field.inCheck(0), 300, 400);
+  
   if (prevTurnCount < turnCount){
     background(255);
     field.flip(); //after each turn flip the board
@@ -141,6 +143,8 @@ void mouseClicked(){
   
   if (phase == 2 && circles[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
+    field.movement(field.chessBoard[y][x]);
+        System.out.println(field.inCheck(0));
     
     
     //return to neutral phaase

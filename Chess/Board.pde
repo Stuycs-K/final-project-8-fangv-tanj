@@ -68,14 +68,28 @@ King WhKing = new King(7, 4, "King", 1);
   
   boolean inCheck(int Color){
     boolean check = false;
-    if (Color == 1){
-      int kingRow = WhKing.row;
-      int kingCol = WhKing.col;
-    }else{
+    if (Color == 0){
       int kingRow = BlKing.row;
       int kingCol = BlKing.col;
+      for (int r = 0; r < 8; r +=1){
+        for (int c = 0; c < 8; c +=1){
+          if (chessBoard[r][c] != null){
+            Piece current = chessBoard[r][c];
+            if (current.Color == 1){
+              for (int i = 0; i < current.space.size(); i +=1){
+                float[] coord = current.space.get(i);
+                int xCoord = (int)coord[1];
+                int yCoord = (int)coord[0];
+                if (xCoord == kingCol && yCoord == kingRow){
+                  check = true;
+                }
+              }
+            }
+          }
+        }
+      }
     }
-    return false; //placeholder
+    return check;
   }
   
  public void move(int y, int x, int lastY, int lastX){
