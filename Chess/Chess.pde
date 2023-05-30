@@ -73,7 +73,11 @@ int[][] movementDraw(int x, int y){
     loadPieces();
     
     Piece held = field.chessBoard[y][x];
+    if (held.name != "Queen"){
     held.movement(held.row, held.col);
+    }else{
+    field.movement(held);
+    }
     int spaces = held.space.size();
   
   
@@ -94,6 +98,7 @@ int[][] movementDraw(int x, int y){
   }
   return circles;
 }
+
 void mouseClicked(){
   
   int x = mouseX/100;

@@ -68,26 +68,33 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
  movement should probably be moved to board class because position of the other pieces
  is needed in order for this to work */
  
+          // space.add(new float[]{row-i, col-i});
+          //space.add(new float[]{row-i, col+i});
+          //space.add(new float[]{row+i, col+i});
+          //space.add(new float[]{row+i, col-i});          
+          //space.add(new float[]{row, col-i});
+          //space.add(new float[]{row, col+i});
+          //space.add(new float[]{row+i, col});
+          //space.add(new float[]{row-i, col});  
+ 
+ boolean inBound(int r, int c){
+   return (r >= 0 && r < 8 && c >= 0 && c < 8); 
+ }
+ 
  void movement(Piece piece){
+   System.out.println("a");
    piece.space = new ArrayList<float[]>(); 
     if(piece.name == "Queen"){
-      
-      for(int i = 1; i < 8; i++){
-        //top left, top right
-        piece.space.add(new float[]{piece.row-i, piece.col-i});
-        piece.space.add(new float[]{piece.row-i, piece.col+i});
-        
-        //bottom left, bottom right
-        piece.space.add(new float[]{piece.row+i, piece.col+i});
-        piece.space.add(new float[]{piece.row+i, piece.col-i});   
-        
-        //left, right
-        piece.space.add(new float[]{piece.row, piece.col-i});
-        piece.space.add(new float[]{piece.row, piece.col+i});
-        
-        //down, up
-        piece.space.add(new float[]{piece.row+i, piece.col});
-        piece.space.add(new float[]{piece.row-i, piece.col});  
+      boolean cont = true;
+      int i = 1;
+      while (cont && inBound(piece.row - i, piece.col - i)){
+        if (chessBoard[piece.row - i][piece.col - i] == null){
+          piece.space.add(new float[]{piece.row - i, piece.col - i});
+          System.out.println(piece.row - i);
+          i +=1;
+       }else{
+       cont = false;
+       }
       }
      }
    }
