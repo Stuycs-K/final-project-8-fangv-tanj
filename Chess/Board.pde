@@ -27,9 +27,9 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
     chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
     chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
-    chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
+    chessBoard[7][3] = new Piece(4, 3, "Queen", 1);
     chessBoard[7][4] = new King(7, 4, "King", 1);
-    chessBoard[4][5] = new Piece(4, 5, "Bishop", 1);
+    chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
     chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
     chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
     
@@ -116,7 +116,12 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
        c = -1;
      }
      while (cont && inBound(piece.row + r, piece.col + c)){
-      if (chessBoard[piece.row + r][piece.col + c] == null){
+       boolean empty = chessBoard[piece.row + r][piece.col + c] == null;
+       boolean capturable = false;
+       if (!empty){
+       capturable = chessBoard[piece.row + r][piece.col + c].Color != chessBoard[piece.row][piece.col].Color;
+       }
+      if (empty || capturable){
           piece.space.add(new float[]{piece.row + r, piece.col + c});
           if (r < 0){
           r -=1;
@@ -129,6 +134,9 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
           }
           if (c > 0){
           c +=1;
+          }
+          if (capturable){
+          cont = false;
           }
        }else{
        cont = false;
