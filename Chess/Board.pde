@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 public class Board{
 private Piece[][] chessBoard; //change to array of pieces when constructor is done
+King BlKing = new King(0, 4, "King", 0);
+King WhKing = new King(7, 4, "King", 1);
   
   
   public Board(){
@@ -14,7 +16,7 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
     chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
     chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
-    chessBoard[0][4] = new King(0, 4, "King", 0);
+    chessBoard[0][4] = BlKing;
     chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
     chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
     chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
@@ -28,7 +30,7 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
     chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
     chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
-    chessBoard[7][4] = new King(7, 4, "King", 1);
+    chessBoard[7][4] = WhKing;
     chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
     chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
     chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
@@ -54,6 +56,28 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     chessBoard = res;
   }
   
+  /*check implementation
+  1. have a way to keep track of the kings pos on the board -done
+  2. after player A makes a move check the moves player A's pieces can make
+  3. if any of those moves are the same position as player B's king, activate 
+    "check" for player B
+  4. if player B clicks on a piece check if those moves will get 
+     player B out of check (use the same method as step 3)if they don't 
+     circles are not drawn
+  */
+  
+  boolean inCheck(int Color){
+    boolean check = false;
+    if (Color == 1){
+      int kingRow = WhKing.row;
+      int kingCol = WhKing.col;
+    }else{
+      int kingRow = BlKing.row;
+      int kingCol = BlKing.col;
+    }
+    return false; //placeholder
+  }
+  
  public void move(int y, int x, int lastY, int lastX){
      //move that piece
      chessBoard[y][x] = chessBoard[lastY][lastX];
@@ -63,10 +87,6 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
     //remove the old piece
     chessBoard[lastY][lastX] = null;
  }
- 
- /*need to figure out a way for movement to be stopped if piece is blocking path
- movement should probably be moved to board class because position of the other pieces
- is needed in order for this to work */
  
  boolean inBound(int r, int c){
    return ((r >= 0) && (r < 8) && (c >= 0) && (c < 8)); 

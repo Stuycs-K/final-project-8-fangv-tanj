@@ -46,6 +46,12 @@ void draw(){
   text("turnCount: "+turnCount, 600, 400); //sake of testing
   text("prevTurn: "+prevTurnCount, 600, 500); //sake of testing
   
+  text("WhKing row: "+field.WhKing.row, 600, 100);
+  text("WhKing col: "+field.WhKing.col, 600, 200);
+  
+  text("BlKing row: "+field.BlKing.row, 200, 100);
+  text("BlKing col: "+field.BlKing.col, 200, 200);
+  
   if (prevTurnCount < turnCount){
     background(255);
     field.flip(); //after each turn flip the board
@@ -106,6 +112,7 @@ void mouseClicked(){
   textSize(40);
   fill(0);
   text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
+  
   
   if (field.chessBoard[y][x] != null){
     System.out.println(field.chessBoard[y][x].toString());
