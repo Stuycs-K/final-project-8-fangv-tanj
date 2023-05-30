@@ -29,13 +29,19 @@ Victor Fang
 
 5/26/23
 
-<<<<<<< HEAD
 * Worked with Junxi to fix a bug involving movementDraw and the first move of a pawn.
 * Discussed ideas on how to make it so pieces can't move past other pieces.
 
 5/27/23
+
 * Added boundaries so circles don't appear off the board.
 * Pieces can now only move onto their respective circles, accomplished by returning a 2D array of ints and changing a number to a 1 if a circle was placed there. When a player clicks on a tile while holding a piece, the coords of that tile must correspond to a 1 in the 2D array in order for the piece to be moved.
+
+5/29/23
+
+* Circles are no longer drawn on player's own pieces for knight, bishop, rook, queen.
+* Knight, bishop, rook, queen no longer capture player's own pieces.
+* Updated UML diagram.
 
 Junxi Tan
 
