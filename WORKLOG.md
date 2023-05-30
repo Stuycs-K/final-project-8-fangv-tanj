@@ -39,6 +39,7 @@ Victor Fang
 
 5/29/23
 
+* Bishop, rook, queen can no longer go through pieces.
 * Circles are no longer drawn on player's own pieces for knight, bishop, rook, queen.
 * Knight, bishop, rook, queen no longer capture player's own pieces.
 * Updated UML diagram.
