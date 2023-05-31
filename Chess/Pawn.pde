@@ -50,63 +50,6 @@ boolean inBound(int r, int c){
      }
    }
   }
-     
-   boolean legalMove(Piece[][] cboard, int r, int c){
-     if (!inBound(r, c)){
-       return false;
-     }
-     if (cboard[r][c] == null){
-       return true;
-     }else{
-       return cboard[r][c].Color != cboard[row][col].Color;
-     }
-   }
-     
-     
-   void direction(Piece[][] cboard, String dirOne, String dirTwo){
-     boolean cont = true;
-     int r = 0;
-     int c = 0;
-     if (dirOne.equals("UP")){
-       r = -1;
-     }
-     if (dirOne.equals("DOWN")){
-       r = 1;
-     }
-     if (dirTwo.equals("RIGHT")){
-       c = 1;
-     }
-     if (dirTwo.equals("LEFT")){
-       c = -1;
-     }
-     while (cont && inBound(row + r, col + c)){
-       boolean empty = cboard[row + r][col + c] == null;
-       boolean capturable = false;
-       if (!empty){
-       capturable = cboard[row + r][col + c].Color != cboard[row][col].Color;
-       }
-      if (empty || capturable){
-          space.add(new float[]{row + r, col + c});
-          if (r < 0){
-          r -=1;
-          }
-          if (r > 0){
-          r +=1;
-          }
-          if (c < 0){
-          c -=1;
-          }
-          if (c > 0){
-          c +=1;
-          }
-          if (capturable){
-          cont = false;
-          }
-       }else{
-       cont = false;
-       }
-      }
-   }
   
   void capture(){
     
