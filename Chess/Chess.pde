@@ -71,10 +71,13 @@ int[][] movementDraw(int x, int y){
     
     square(x * 100, y * 100, 100);
     loadPieces();
+  
     
     Piece held = field.chessBoard[y][x];
 
-    field.movement(held);
+
+    held.movement(field.chessBoard);
+
 
     int spaces = held.space.size();
       
@@ -89,14 +92,13 @@ int[][] movementDraw(int x, int y){
       if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
         if(field.chessBoard[yCoord][xCoord] != null && field.chessBoard[yCoord][xCoord].Color != held.Color){
           fill(200, 0, 0);
-          square(xCoord * 100, yCoord * 100, 100);
+          square(xCoord * 100, yCoord * 100, 100);  
           loadPieces();
           moveable[yCoord][xCoord] = 1;
         }
         else{
           fill(211, 211, 211);
           circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
-    
           moveable[yCoord][xCoord] = 1;
         }
       }
