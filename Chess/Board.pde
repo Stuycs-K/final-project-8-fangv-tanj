@@ -124,6 +124,15 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
         piece.space.add(new float[]{row + 1, col - 2});
       }
    }
+   
+   if (piece.name == "Pawn"){
+     if (legalMove(piece, row + 1, col)){
+        piece.space.add(new float[]{row + 1, col});
+      }
+      if (legalMove(piece, row + 2, col)){
+        piece.space.add(new float[]{row + 1, col});
+      }
+   }
   }
      
    boolean legalMove(Piece piece, int r, int c){
