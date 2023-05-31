@@ -79,13 +79,6 @@ int[][] movementDraw(int x, int y){
     held.movement(held.row, held.col);
     }
     int spaces = held.space.size();
-    int cSpaces = held.capturableSpace.size();
-    int j = 0;
-    if(cSpaces > 0){
-        float[] coord2 = held.capturableSpace.get(j);
-        int xCoord2 = (int)coord2[1];
-        int yCoord2 = (int)coord2[0];
-      }
       
     for (int i = 0; i < spaces; i +=1){
     
@@ -96,12 +89,11 @@ int[][] movementDraw(int x, int y){
       //draw a circle where the piece can move
      
       if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
-        if(xCoord == xCoord2 && yCoord == yCoord2){
-          fill(255, 0, 0);
+        if(field.chessBoard[yCoord][xCoord] != null && field.chessBoard[yCoord][xCoord].Color != held.Color){
+          fill(200, 0, 0);
           square(xCoord * 100, yCoord * 100, 100);
-    
+          loadPieces();
           circles[yCoord][xCoord] = 1;
-          j++;
         }
         else{
           fill(211, 211, 211);

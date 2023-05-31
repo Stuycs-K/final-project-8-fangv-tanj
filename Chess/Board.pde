@@ -97,36 +97,36 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
       direction(piece, "UP", "RIGHT");
       direction(piece, "DOWN", "LEFT");
       direction(piece, "DOWN", "RIGHT");
-   } 
+   }
    if (piece.name == "Knight"){
-      if (legalKnightMove(piece, row - 2, col -1)){
+      if (legalMove(piece, row - 2, col -1)){
         piece.space.add(new float[]{row - 2, col - 1});
       }
-      if (legalKnightMove(piece, row - 1, col - 2)){
+      if (legalMove(piece, row - 1, col - 2)){
         piece.space.add(new float[]{row - 1, col - 2}); 
       }
-      if (legalKnightMove(piece, row - 2, col + 1)){
+      if (legalMove(piece, row - 2, col + 1)){
         piece.space.add(new float[]{row - 2, col + 1});
       }
-      if (legalKnightMove(piece, row - 1, col + 2)){
+      if (legalMove(piece, row - 1, col + 2)){
         piece.space.add(new float[]{row - 1, col + 2});
       }
-      if (legalKnightMove(piece, row + 2, col + 1)){
+      if (legalMove(piece, row + 2, col + 1)){
         piece.space.add(new float[]{row + 2, col + 1});
       }
-      if (legalKnightMove(piece, row + 1, col + 2)){
+      if (legalMove(piece, row + 1, col + 2)){
         piece.space.add(new float[]{row + 1, col + 2});
       }
-      if (legalKnightMove(piece, row + 2, col - 1)){
+      if (legalMove(piece, row + 2, col - 1)){
         piece.space.add(new float[]{row + 2, col - 1});
       }
-      if (legalKnightMove(piece, row + 1, col - 2)){
+      if (legalMove(piece, row + 1, col - 2)){
         piece.space.add(new float[]{row + 1, col - 2});
       }
    }
   }
      
-   boolean legalKnightMove(Piece piece, int r, int c){
+   boolean legalMove(Piece piece, int r, int c){
      if (!inBound(r, c)){
        return false;
      }
@@ -161,9 +161,6 @@ private Piece[][] chessBoard; //change to array of pieces when constructor is do
        capturable = chessBoard[piece.row + r][piece.col + c].Color != chessBoard[piece.row][piece.col].Color;
        }
       if (empty || capturable){
-        if(capturable){
-          piece.capturableSpace.add(new float[]{piece.row + r, piece.col + c});
-        }
           piece.space.add(new float[]{piece.row + r, piece.col + c});
           if (r < 0){
           r -=1;
