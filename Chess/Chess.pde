@@ -144,7 +144,8 @@ void mouseClicked(){
   if (phase == 2 && circles[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
     field.movement(field.chessBoard[y][x]);
-        System.out.println(field.inCheck(0));
+        System.out.println("Black: "+field.inCheck(0));
+        System.out.println("White: "+field.inCheck(1));
     
     
     //return to neutral phaase
