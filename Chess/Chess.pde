@@ -60,6 +60,8 @@ void draw(){
     image(board, 0, 0);
     loadPieces();
     prevTurnCount = turnCount;
+    
+        
   }
   
 }
@@ -116,9 +118,9 @@ void mouseClicked(){
   text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
   
   
-  if (field.chessBoard[y][x] != null){
-    System.out.println(field.chessBoard[y][x].toString());
-  }
+  //if (field.chessBoard[y][x] != null){
+  //  System.out.println(field.chessBoard[y][x].toString());
+  //}
   
   
   //phase 1 "neutral phase"
@@ -144,9 +146,8 @@ void mouseClicked(){
   if (phase == 2 && circles[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
     field.movement(field.chessBoard[y][x]);
-        System.out.println("Black: "+field.inCheck(0));
-        System.out.println("White: "+field.inCheck(1));
     
+    System.out.println("Check: "+field.inCheck(turnCount - 1 % 2));
     
     //return to neutral phaase
     phase = 1;

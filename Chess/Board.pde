@@ -60,7 +60,7 @@ King WhKing = new King(7, 4, "King", 1);
   1. have a way to keep track of the kings pos on the board -done
   2. after player A makes a move check the moves player A's pieces can make
   3. if any of those moves are the same position as player B's king, activate 
-    "check" for player B
+    "check" for player B - done
   4. if player B clicks on a piece check if those moves will get 
      player B out of check (use the same method as step 3)if they don't 
      circles are not drawn
@@ -89,6 +89,9 @@ King WhKing = new King(7, 4, "King", 1);
                 int xCoord = (int)coord[1];
                 int yCoord = (int)coord[0];
                 if (xCoord == kingCol && yCoord == kingRow){
+                  System.out.println(current.name);
+                  System.out.println(yCoord);
+                  System.out.println(xCoord);
                   check = true;
                 }
               }
@@ -165,6 +168,25 @@ King WhKing = new King(7, 4, "King", 1);
         piece.space.add(new float[]{row + 1, col - 2});
       }
    }
+     if (piece.name.equals("Pawn")){
+       Pawn a = (Pawn)piece;
+          if(row != 6){
+     a.firstMove = false;
+   }
+   if(a.firstMove){
+     if (legalKnightMove(a, row - 1, col)){
+     a.space.add(new float[]{row-1, col});
+     }
+     if (legalKnightMove(a, row - 1, col)){
+     a.space.add(new float[]{row-2, col});
+     }
+   }
+   else{
+     if (legalKnightMove(a, row - 1, col)){
+     a.space.add(new float[]{row-1, col});
+     }
+   }
+     }
       
      }
      
