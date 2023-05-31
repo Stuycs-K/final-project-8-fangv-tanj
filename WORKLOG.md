@@ -75,4 +75,6 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 5/26/23
 - king can move too
 - movementdraw is now in piece class
-- i hate sam
+
+5/30/23
+-red square on capturable pieces
