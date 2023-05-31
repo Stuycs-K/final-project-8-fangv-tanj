@@ -78,3 +78,7 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 
 5/30/23
 -red square on capturable pieces
+
+-moved movement from the Board class to the Piece class and its subclasses so Board doesn't do everything
+
+-Pawn and King doesn't go through pieces
