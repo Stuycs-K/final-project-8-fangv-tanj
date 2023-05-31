@@ -44,6 +44,10 @@ Victor Fang
 * Knight, bishop, rook, queen no longer capture player's own pieces.
 * Updated UML diagram.
 
+5/30/23
+
+* Began work on implementing check.
+
 Junxi Tan
 
 5/22/23
