@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Board{
 private Piece[][] chessBoard; //change to array of pieces when constructor is done
-private Piece[][] futureBoard;
+private Piece[][] futureBoard = new Piece[8][8];
 King BlKing = new King(0, 4, "King", 0);
 King WhKing = new King(7, 4, "King", 1);
   
@@ -38,26 +38,33 @@ King WhKing = new King(7, 4, "King", 1);
     //}
   }
   
+  void copy(Piece[][] one, Piece[][] two){
+    for (int r = 0; r < 8; r +=1){
+      for (int c = 0; c < 8; c +=1){
+        if (one[r][c] != null){
+        two[r][c] = one[r][c];
+        }
+      }
+    }
+  }
   
   public void futureMove(Piece piece){
+     futureBoard = chessBoard;
     for (int i = 0; i < piece.space.size(); i +=1){
       float[] coord = piece.space.get(i);
       int xCoord = (int)coord[1];
       int yCoord = (int)coord[0];
-      futureBoard = chessBoard;
      //move that piece
      int prevRow = piece.row;
      int prevCol = piece.col;
      move(yCoord, xCoord, prevRow, prevCol);
-     String board = toString(chessBoard);
-     System.out.println(board);
        if (field.inCheck(turnCount % 2)){
        piece.space.remove(i);
-       System.out.println("Y: "+yCoord + " X: "+xCoord);
        i -=1;
       }
       chessBoard = futureBoard;
     }
+    chessBoard = futureBoard;
   }
   
   String toString(Piece[][] board){
@@ -141,11 +148,15 @@ King WhKing = new King(7, 4, "King", 1);
             Piece current = chessBoard[r][c];
             if (current.Color != Color){
               for (int i = 0; i < current.space.size(); i +=1){
+                movement(current);
                 float[] coord = current.space.get(i);
                 int xCoord = (int)coord[1];
                 int yCoord = (int)coord[0];
                 if (xCoord == kingCol && yCoord == kingRow){
                   check = true;
+                  System.out.println("X: "+xCoord);
+                  System.out.println("Y: "+yCoord);
+                  System.out.println("Piece: "+current.name);
                 }
               }
             }
@@ -157,6 +168,10 @@ King WhKing = new King(7, 4, "King", 1);
   
  public void move(int y, int x, int lastY, int lastX){
      //move that piece
+     System.out.println(y);
+     System.out.println(x);
+     System.out.println(lastY);
+     System.out.println(lastX);
      chessBoard[y][x] = chessBoard[lastY][lastX];
      chessBoard[y][x].setRow(y);
      chessBoard[y][x].setCol(x);

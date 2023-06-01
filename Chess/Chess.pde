@@ -145,6 +145,9 @@ void mouseClicked(){
       lastY = y;
       int[][]temp = movementDraw(x, y);
       circles = temp;
+      
+      System.out.println(field.chessBoard[y][x].name);
+      System.out.println(field.chessBoard[y][x].col);
   }
   
           
