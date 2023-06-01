@@ -118,17 +118,6 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard = res;
   }
   
-  /*check implementation
-  1. have a way to keep track of the kings pos on the board -done
-  2. after player A makes a move check the moves player A's pieces can make
-  3. if any of those moves are the same position as player B's king, activate 
-    "check" for player B - done
-  4. if player B clicks on a piece check if those moves will get 
-     player B out of check (use the same method as step 3)if they don't 
-     circles are not drawn
-  */
-  
-  
   
   King getKing(int Color){
     if (Color == 1){
@@ -165,11 +154,6 @@ King WhKing = new King(7, 4, "King", 1);
   }
   
  public void move(int y, int x, int lastY, int lastX){
-     //move that piece
-     System.out.println(y);
-     System.out.println(x);
-     System.out.println(lastY);
-     System.out.println(lastX);
      chessBoard[y][x] = chessBoard[lastY][lastX];
      chessBoard[y][x].setRow(y);
      chessBoard[y][x].setCol(x);

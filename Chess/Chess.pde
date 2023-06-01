@@ -39,30 +39,14 @@ void setup(){
   loadPieces();  //draw out all the pieces
 }
 void draw(){
-  
-   textSize(40);
-  fill(0);
-  text("turnCount: "+turnCount, 600, 400); //sake of testing
-  text("prevTurn: "+prevTurnCount, 600, 500); //sake of testing
-  
-  text("WhKing row: "+field.WhKing.row, 600, 100);
-  text("WhKing col: "+field.WhKing.col, 600, 200);
-  
-  text("BlKing row: "+field.BlKing.row, 200, 100);
-  text("BlKing col: "+field.BlKing.col, 200, 200);
-  
-  //text("Check: "+field.inCheck(0), 300, 400);
-  
+   
   if (prevTurnCount < turnCount){
     background(255);
     field.flip(); //after each turn flip the board
     image(board, 0, 0);
     loadPieces();
-    prevTurnCount = turnCount;
-    
-        
-  }
-  
+    prevTurnCount = turnCount;  
+  } 
 }
 
 int[][] movementDraw(int x, int y){
@@ -86,12 +70,7 @@ int[][] movementDraw(int x, int y){
     Piece held = field.chessBoard[y][x];
     field.movement(held);
   
-    field.futureMove(held);
-            
-    /*step 4 if player B clicks on a piece check if those moves will get 
-     player B out of check (use the same method as step 3)if they don't 
-     circles are not drawn*/
-     
+    field.futureMove(held);     
   
   
     int spaces = held.space.size();
@@ -129,9 +108,9 @@ void mouseClicked(){
   
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
+  if (x < 8 && y < 8){
     Piece clicked = field.chessBoard[y][x];
     int playerTurn = turnCount % 2;
-
 
   if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
       //reset screen
@@ -144,27 +123,22 @@ void mouseClicked(){
       lastY = y;
       int[][]temp = movementDraw(x, y);
       circles = temp;
-      
-      System.out.println(field.chessBoard[y][x].name);
-      System.out.println(field.chessBoard[y][x].col);
-  }
-  
-          
+    }
+         
   
   if (phase == 2 && circles[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
     field.movement(field.chessBoard[y][x]);
     
-    System.out.println("Check: "+field.inCheck(turnCount - 1 % 2));
     
-    //return to neutral phaase
-    phase = 1;
+      //return to neutral phaase
+      phase = 1;
     
-    //increase turn count
-    turnCount +=1;
+      //increase turn count
+      turnCount +=1;
+    }
   }
 }
-
 
 void loadImages(){
   board = loadImage("board.png");
