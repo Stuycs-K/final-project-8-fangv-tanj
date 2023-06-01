@@ -86,14 +86,13 @@ int[][] movementDraw(int x, int y){
     Piece held = field.chessBoard[y][x];
     field.movement(held);
   
-          if (field.inCheck(turnCount % 2)){
-            field.futureMove(held);
+    field.futureMove(held);
             
     /*step 4 if player B clicks on a piece check if those moves will get 
      player B out of check (use the same method as step 3)if they don't 
      circles are not drawn*/
      
-  }
+  
   
     int spaces = held.space.size();
     for (int i = 0; i < spaces; i +=1){

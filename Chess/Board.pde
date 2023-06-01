@@ -37,7 +37,7 @@ King WhKing = new King(7, 4, "King", 1);
     //}
   }
   
-  public void futureMove(Piece piece){
+  void futureMove(Piece piece){
      int prevRow = piece.row;
      int prevCol = piece.col;
      Piece temp;
@@ -47,7 +47,6 @@ King WhKing = new King(7, 4, "King", 1);
       int yCoord = (int)coord[0];
       if (chessBoard[yCoord][xCoord] != null){
         temp = chessBoard[yCoord][xCoord];
-        capture = true;
           
           move(yCoord, xCoord, prevRow, prevCol);
           
@@ -254,7 +253,6 @@ King WhKing = new King(7, 4, "King", 1);
      }
    }
      }
-      
      }
      
    boolean legalKnightMove(Piece piece, int r, int c){
