@@ -19,7 +19,7 @@ int turnCount;
 int prevTurnCount;
 
 Board field;
-int[][]circles;
+int[][]moveable;
 
 int phase;
 
@@ -58,7 +58,7 @@ void draw(){
 
 int[][] movementDraw(int x, int y){
   
-  int[][] circles = new int[8][8];
+  int[][] moveable = new int[8][8];
   
   if (field.chessBoard[y][x] != null){
     //highlight the piece that was clicked
@@ -71,21 +71,15 @@ int[][] movementDraw(int x, int y){
     
     square(x * 100, y * 100, 100);
     loadPieces();
+  
     
     Piece held = field.chessBoard[y][x];
-    if (held.name == "Rook" || held.name == "Bishop" || held.name == "Queen"|| held.name == "Knight"){
-    field.movement(held);
-    }else{
-    held.movement(held.row, held.col);
-    }
+
+
+    held.movement(field.chessBoard);
+
+
     int spaces = held.space.size();
-    int cSpaces = held.capturableSpace.size();
-    int j = 0;
-    if(cSpaces > 0){
-        float[] coord2 = held.capturableSpace.get(j);
-        int xCoord2 = (int)coord2[1];
-        int yCoord2 = (int)coord2[0];
-      }
       
     for (int i = 0; i < spaces; i +=1){
     
@@ -96,23 +90,21 @@ int[][] movementDraw(int x, int y){
       //draw a circle where the piece can move
      
       if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
-        if(xCoord == xCoord2 && yCoord == yCoord2){
-          fill(255, 0, 0);
-          square(xCoord * 100, yCoord * 100, 100);
-    
-          circles[yCoord][xCoord] = 1;
-          j++;
+        if(field.chessBoard[yCoord][xCoord] != null && field.chessBoard[yCoord][xCoord].Color != held.Color){
+          fill(200, 0, 0);
+          square(xCoord * 100, yCoord * 100, 100);  
+          loadPieces();
+          moveable[yCoord][xCoord] = 1;
         }
         else{
           fill(211, 211, 211);
           circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
-    
-          circles[yCoord][xCoord] = 1;
+          moveable[yCoord][xCoord] = 1;
         }
       }
     }
   }
-  return circles;
+  return moveable;
 }
 
 void mouseClicked(){
@@ -143,12 +135,12 @@ void mouseClicked(){
       lastX = x;
       lastY = y;
       int[][]temp = movementDraw(x, y);
-      circles = temp;
+      moveable = temp;
   }
   
           
   
-  if (phase == 2 && circles[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
+  if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
     
     
