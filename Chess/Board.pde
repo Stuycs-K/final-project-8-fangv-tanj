@@ -40,16 +40,32 @@ King WhKing = new King(7, 4, "King", 1);
   public void futureMove(Piece piece){
      int prevRow = piece.row;
      int prevCol = piece.col;
+     Piece temp;
     for (int i = 0; i < piece.space.size(); i +=1){
       float[] coord = piece.space.get(i);
       int xCoord = (int)coord[1];
       int yCoord = (int)coord[0];
-      move(yCoord, xCoord, prevRow, prevCol);
-       if (field.inCheck(turnCount % 2)){
-       piece.space.remove(i);
-       i -=1;
+      if (chessBoard[yCoord][xCoord] != null){
+        temp = chessBoard[yCoord][xCoord];
+        capture = true;
+          
+          move(yCoord, xCoord, prevRow, prevCol);
+          
+           if (field.inCheck(turnCount % 2)){
+             piece.space.remove(i);
+             i -=1;
+          }
+           move(prevRow, prevCol, yCoord, xCoord);
+            chessBoard[yCoord][xCoord] = temp;
+      }else{
+      
+         move(yCoord, xCoord, prevRow, prevCol);
+           if (field.inCheck(turnCount % 2)){
+           piece.space.remove(i);
+           i -=1;
+          }
+          move(prevRow, prevCol, yCoord, xCoord);
       }
-      move(prevRow, prevCol, yCoord, xCoord);
     }
   }
   
