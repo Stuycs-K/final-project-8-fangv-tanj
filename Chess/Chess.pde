@@ -35,7 +35,6 @@ void setup(){
   phase = 1;
   
   background(255);
-  field.start(); //add all the pieces to the board
   image(board, 0, 0);
   loadPieces();  //draw out all the pieces
 }
@@ -70,6 +69,7 @@ int[][] movementDraw(int x, int y){
   
   int[][] circles = new int[8][8];
   
+  
   if (field.chessBoard[y][x] != null){
     //highlight the piece that was clicked
     if ((x + y) % 2 == 1){
@@ -82,15 +82,20 @@ int[][] movementDraw(int x, int y){
     square(x * 100, y * 100, 100);
     loadPieces();
     
+    
     Piece held = field.chessBoard[y][x];
-    if (held.name == "Rook" || held.name == "Bishop" || held.name == "Queen"|| held.name == "Knight"){
     field.movement(held);
-    }else{
-    held.movement(held.row, held.col);
-    }
+  
+          if (field.inCheck(turnCount % 2)){
+            field.futureMove(held);
+            
+    /*step 4 if player B clicks on a piece check if those moves will get 
+     player B out of check (use the same method as step 3)if they don't 
+     circles are not drawn*/
+     
+  }
+  
     int spaces = held.space.size();
-  
-  
     for (int i = 0; i < spaces; i +=1){
     
       float[] coord = held.space.get(i);
@@ -127,6 +132,7 @@ void mouseClicked(){
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
     Piece clicked = field.chessBoard[y][x];
     int playerTurn = turnCount % 2;
+
 
   if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
       //reset screen

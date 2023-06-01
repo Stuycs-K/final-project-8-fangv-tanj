@@ -7,19 +7,19 @@ public class Pawn extends Piece{
    firstMove = true;
   }
   
-  void movement(int x, int y){
-   super.space = new ArrayList<float[]>(); 
-   if(row != 6){
-     firstMove = false;
-   }
-   if(firstMove){
-     super.space.add(new float[]{row-1, col});
-     super.space.add(new float[]{row-2, col});
-   }
-   else{
-     super.space.add(new float[]{row-1, col});
-   }
-  }
+  //void movement(int x, int y){
+  // super.space = new ArrayList<float[]>(); 
+  // if(row != 6){
+  //   firstMove = false;
+  // }
+  // if(firstMove){
+  //   super.space.add(new float[]{row-1, col});
+  //   super.space.add(new float[]{row-2, col});
+  // }
+  // else{
+  //   super.space.add(new float[]{row-1, col});
+  // }
+  //}
   
   void capture(){
     

@@ -1,16 +1,14 @@
 import java.util.ArrayList;
 public class Board{
 private Piece[][] chessBoard; //change to array of pieces when constructor is done
+private Piece[][] futureBoard;
 King BlKing = new King(0, 4, "King", 0);
 King WhKing = new King(7, 4, "King", 1);
   
   
   public Board(){
     chessBoard = new Piece[8][8];
-  }
-  
-  //place all the pieces
-  public void start(){
+    
     //black side
     chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
     chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
@@ -21,9 +19,9 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
     chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
     
-    for (int i = 0; i < 8; i +=1){
-      chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
-    }
+    //for (int i = 0; i < 8; i +=1){
+    //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
+    //}
     
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
@@ -35,9 +33,65 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
     chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
     
-    for (int i = 0; i < 8; i +=1){
-      chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
+    //for (int i = 0; i < 8; i +=1){
+    //  chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
+    //}
+  }
+  
+  
+  public void futureMove(Piece piece){
+    for (int i = 0; i < piece.space.size(); i +=1){
+      float[] coord = piece.space.get(i);
+      int xCoord = (int)coord[1];
+      int yCoord = (int)coord[0];
+      futureBoard = chessBoard;
+     //move that piece
+     int prevRow = piece.row;
+     int prevCol = piece.col;
+     move(yCoord, xCoord, prevRow, prevCol);
+     String board = toString(chessBoard);
+     System.out.println(board);
+       if (field.inCheck(turnCount % 2)){
+       piece.space.remove(i);
+       System.out.println("Y: "+yCoord + " X: "+xCoord);
+       i -=1;
+      }
+      chessBoard = futureBoard;
     }
+  }
+  
+  String toString(Piece[][] board){
+  String res = "(";
+  for (int r = 0; r < 8; r +=1){
+      for (int c = 0; c < 8; c +=1){
+        if (board[r][c] == null){
+          res = res + "empty ";
+        }else{
+        if (board[r][c].name.equals("Rook")){
+          res = res + "Rook ";
+        }
+        if (board[r][c].name.equals("Knight")){
+          res = res + "Knight ";
+        }
+        if (board[r][c].name.equals("Bishop")){
+          res = res + "Bishop ";
+        }
+        if (board[r][c].name.equals("Queen")){
+          res = res + "Queen ";
+        }
+        if (board[r][c].name.equals("King")){
+          res = res + "King ";
+        }
+        if (board[r][c].name.equals("Pawn")){
+          res = res + "Pawn ";
+        }
+      }
+      }
+      res = res + ")";
+      res = res + "\n";
+      res = res + "(";
+    }
+    return res;
   }
   
   //flip the board 
@@ -66,6 +120,8 @@ King WhKing = new King(7, 4, "King", 1);
      circles are not drawn
   */
   
+  
+  
   King getKing(int Color){
     if (Color == 1){
       return WhKing;
@@ -89,9 +145,6 @@ King WhKing = new King(7, 4, "King", 1);
                 int xCoord = (int)coord[1];
                 int yCoord = (int)coord[0];
                 if (xCoord == kingCol && yCoord == kingRow){
-                  System.out.println(current.name);
-                  System.out.println(yCoord);
-                  System.out.println(xCoord);
                   check = true;
                 }
               }
@@ -174,15 +227,15 @@ King WhKing = new King(7, 4, "King", 1);
      a.firstMove = false;
    }
    if(a.firstMove){
-     if (legalKnightMove(a, row - 1, col)){
+     if (legalMove(a, row - 1, col)){
      a.space.add(new float[]{row-1, col});
      }
-     if (legalKnightMove(a, row - 1, col)){
+     if (legalMove(a, row - 2, col)){
      a.space.add(new float[]{row-2, col});
      }
    }
    else{
-     if (legalKnightMove(a, row - 1, col)){
+     if (legalMove(a, row - 1, col)){
      a.space.add(new float[]{row-1, col});
      }
    }
@@ -197,6 +250,19 @@ King WhKing = new King(7, 4, "King", 1);
      if (chessBoard[r][c] == null){
        return true;
      }else{
+       System.out.println("a");
+       return chessBoard[r][c].Color != chessBoard[piece.row][piece.col].Color;
+     }
+   }
+   
+      boolean legalMove(Pawn piece, int r, int c){
+     if (!inBound(r, c)){
+       return false;
+     }
+     if (chessBoard[r][c] == null){
+       return true;
+     }else{
+       System.out.println("a");
        return chessBoard[r][c].Color != chessBoard[piece.row][piece.col].Color;
      }
    }
