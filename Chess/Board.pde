@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 public class Board{
 private Piece[][] chessBoard; //change to array of pieces when constructor is done
-private Piece[][] futureBoard = new Piece[8][8];
 King BlKing = new King(0, 4, "King", 0);
 King WhKing = new King(7, 4, "King", 1);
   
@@ -38,33 +37,20 @@ King WhKing = new King(7, 4, "King", 1);
     //}
   }
   
-  void copy(Piece[][] one, Piece[][] two){
-    for (int r = 0; r < 8; r +=1){
-      for (int c = 0; c < 8; c +=1){
-        if (one[r][c] != null){
-        two[r][c] = one[r][c];
-        }
-      }
-    }
-  }
-  
   public void futureMove(Piece piece){
-     futureBoard = chessBoard;
+     int prevRow = piece.row;
+     int prevCol = piece.col;
     for (int i = 0; i < piece.space.size(); i +=1){
       float[] coord = piece.space.get(i);
       int xCoord = (int)coord[1];
       int yCoord = (int)coord[0];
-     //move that piece
-     int prevRow = piece.row;
-     int prevCol = piece.col;
-     move(yCoord, xCoord, prevRow, prevCol);
+      move(yCoord, xCoord, prevRow, prevCol);
        if (field.inCheck(turnCount % 2)){
        piece.space.remove(i);
        i -=1;
       }
-      chessBoard = futureBoard;
+      move(prevRow, prevCol, yCoord, xCoord);
     }
-    chessBoard = futureBoard;
   }
   
   String toString(Piece[][] board){
@@ -154,9 +140,6 @@ King WhKing = new King(7, 4, "King", 1);
                 int yCoord = (int)coord[0];
                 if (xCoord == kingCol && yCoord == kingRow){
                   check = true;
-                  System.out.println("X: "+xCoord);
-                  System.out.println("Y: "+yCoord);
-                  System.out.println("Piece: "+current.name);
                 }
               }
             }
