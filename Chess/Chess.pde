@@ -42,22 +42,19 @@ void setup(){
   loadPieces();  //draw out all the pieces
 }
 
-//void setup(String x){
-//  size(950, 800);
-//  loadImages();
-  
-//  prevTurnCount = 1;
-//  turnCount = 1;
-  
-//  field = new Board(x);
-//  phase = 1;
-  
-//  background(255);
-//  image(board, 0, 0);
-//  loadPieces();  //draw out all the pieces
-//}
 
 void draw(){
+  if (keyPressed){
+    if (key == '0'){
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.pieces();
+    image(board, 0, 0);
+    loadPieces();
+    }
+  }
+  
   if (keyPressed){
     if (key == '1'){
       castle = true;

@@ -114,6 +114,24 @@ King WhKing = new King(7, 4, "King", 1);
  
  //DEMO SHOWCASES
  
+ public void pieces(){
+   chessBoard = new Piece[8][8];
+   chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
+   chessBoard[0][4] = BlKing;
+   chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
+   chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
+   chessBoard[4][4] = new Pawn(4, 4, "Pawn", 0);
+   chessBoard[4][3] = new Pawn(4, 3, "Pawn", 0);
+   
+   chessBoard[4][5] = new Piece(4, 5, "Rook", 1);
+   chessBoard[3][4] = new Piece(3, 4, "Bishop", 1);
+   chessBoard[7][4] = WhKing;
+   chessBoard[5][2] = new Piece(5, 2, "Knight", 1);
+   chessBoard[5][3] = new Pawn(5, 3, "Pawn", 1);
+   chessBoard[6][4] = new Pawn(6, 4, "Pawn", 1);
+   chessBoard[1][1] = new Piece(1, 1, "Queen", 1);
+ }
+ 
  public void castle(){
    chessBoard = new Piece[8][8];
    //black side
