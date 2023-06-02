@@ -44,6 +44,10 @@ Victor Fang
 * Knight, bishop, rook, queen no longer capture player's own pieces.
 * Updated UML diagram.
 
+5/30/23
+
+* Began work on implementing check.
+
 Junxi Tan
 
 5/22/23
@@ -71,4 +75,10 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 5/26/23
 - king can move too
 - movementdraw is now in piece class
-- i hate sam
+
+5/30/23
+-red square on capturable pieces
+
+-moved movement from the Board class to the Piece class and its subclasses so Board doesn't do everything
+
+-Pawn and King doesn't go through pieces

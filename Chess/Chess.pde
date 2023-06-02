@@ -19,7 +19,7 @@ int turnCount;
 int prevTurnCount;
 
 Board field;
-int[][]circles;
+int[][]moveable;
 
 int phase;
 
@@ -51,7 +51,7 @@ void draw(){
 
 int[][] movementDraw(int x, int y){
   
-  int[][] circles = new int[8][8];
+  int[][] moveable = new int[8][8];
   
   
   if (field.chessBoard[y][x] != null){
@@ -65,15 +65,12 @@ int[][] movementDraw(int x, int y){
     
     square(x * 100, y * 100, 100);
     loadPieces();
-    
-    
+  
     Piece held = field.chessBoard[y][x];
-    field.movement(held);
-  
-    field.futureMove(held);     
-  
-  
+    held.movement(field.chessBoard);
+    field.futureMove(held);  
     int spaces = held.space.size();
+      
     for (int i = 0; i < spaces; i +=1){
     
       float[] coord = held.space.get(i);
@@ -81,15 +78,23 @@ int[][] movementDraw(int x, int y){
       int yCoord = (int)coord[0];
     
       //draw a circle where the piece can move
+     
       if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
-      fill(211, 211, 211);
-      circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
-    
-      circles[yCoord][xCoord] = 1;
+        if(field.chessBoard[yCoord][xCoord] != null && field.chessBoard[yCoord][xCoord].Color != held.Color){
+          fill(200, 0, 0);
+          square(xCoord * 100, yCoord * 100, 100);  
+          loadPieces();
+          moveable[yCoord][xCoord] = 1;
+        }
+        else{
+          fill(211, 211, 211);
+          circle(xCoord * 100 + 50, yCoord * 100 + 50, 30);
+          moveable[yCoord][xCoord] = 1;
+        }
       }
     }
   }
-  return circles;
+  return moveable;
 }
 
 void mouseClicked(){
@@ -99,11 +104,6 @@ void mouseClicked(){
   textSize(40);
   fill(0);
   text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
-  
-  
-  //if (field.chessBoard[y][x] != null){
-  //  System.out.println(field.chessBoard[y][x].toString());
-  //}
   
   
   //phase 1 "neutral phase"
@@ -122,13 +122,15 @@ void mouseClicked(){
       lastX = x;
       lastY = y;
       int[][]temp = movementDraw(x, y);
-      circles = temp;
-    }
          
+      moveable = temp;
+  }
   
-  if (phase == 2 && circles[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
+          
+  
+  if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
-    field.movement(field.chessBoard[y][x]);
+    field.chessBoard[y][x].movement(field.chessBoard);
     
     
       //return to neutral phaase

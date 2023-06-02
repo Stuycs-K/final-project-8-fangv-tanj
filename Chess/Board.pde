@@ -18,9 +18,9 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
     chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
     
-    //for (int i = 0; i < 8; i +=1){
-    //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
-    //}
+    for (int i = 0; i < 8; i +=1){
+      chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
+    }
     
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
@@ -32,9 +32,9 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
     chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
     
-    //for (int i = 0; i < 8; i +=1){
-    //  chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
-    //}
+    for (int i = 0; i < 8; i +=1){
+      chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
+    }
   }
   
   void futureMove(Piece piece){
@@ -66,40 +66,6 @@ King WhKing = new King(7, 4, "King", 1);
           move(prevRow, prevCol, yCoord, xCoord);
       }
     }
-  }
-  
-  String toString(Piece[][] board){
-  String res = "(";
-  for (int r = 0; r < 8; r +=1){
-      for (int c = 0; c < 8; c +=1){
-        if (board[r][c] == null){
-          res = res + "empty ";
-        }else{
-        if (board[r][c].name.equals("Rook")){
-          res = res + "Rook ";
-        }
-        if (board[r][c].name.equals("Knight")){
-          res = res + "Knight ";
-        }
-        if (board[r][c].name.equals("Bishop")){
-          res = res + "Bishop ";
-        }
-        if (board[r][c].name.equals("Queen")){
-          res = res + "Queen ";
-        }
-        if (board[r][c].name.equals("King")){
-          res = res + "King ";
-        }
-        if (board[r][c].name.equals("Pawn")){
-          res = res + "Pawn ";
-        }
-      }
-      }
-      res = res + ")";
-      res = res + "\n";
-      res = res + "(";
-    }
-    return res;
   }
   
   //flip the board 
@@ -138,12 +104,16 @@ King WhKing = new King(7, 4, "King", 1);
             Piece current = chessBoard[r][c];
             if (current.Color != Color){
               for (int i = 0; i < current.space.size(); i +=1){
-                movement(current);
+                current.movement(chessBoard);
+                System.out.println("r "+r);
+                System.out.println("c "+c);
+                if (current.space.size() > 0){
                 float[] coord = current.space.get(i);
                 int xCoord = (int)coord[1];
                 int yCoord = (int)coord[0];
-                if (xCoord == kingCol && yCoord == kingRow){
-                  check = true;
+                  if (xCoord == kingCol && yCoord == kingRow){
+                    check = true;
+                  }
                 }
               }
             }
@@ -161,152 +131,4 @@ King WhKing = new King(7, 4, "King", 1);
     //remove the old piece
     chessBoard[lastY][lastX] = null;
  }
- 
- boolean inBound(int r, int c){
-   return ((r >= 0) && (r < 8) && (c >= 0) && (c < 8)); 
- }
- 
- void movement(Piece piece){
-   piece.space = new ArrayList<float[]>();
-   int row = piece.row;
-   int col = piece.col;
-    if(piece.name == "Queen"){
-      direction(piece, "UP", "LEFT");
-      direction(piece, "UP", "RIGHT");
-      direction(piece, "DOWN", "LEFT");
-      direction(piece, "DOWN", "RIGHT");
-      direction(piece, "UP", "NONE");
-      direction(piece, "DOWN", "NONE");
-      direction(piece, "NONE", "RIGHT");
-      direction(piece, "NONE", "LEFT");
-   }
-   if (piece.name == "Rook"){
-      direction(piece, "UP", "NONE");
-      direction(piece, "DOWN", "NONE");
-      direction(piece, "NONE", "RIGHT");
-      direction(piece, "NONE", "LEFT");
-   }
-   if (piece.name == "Bishop"){
-      direction(piece, "UP", "LEFT");
-      direction(piece, "UP", "RIGHT");
-      direction(piece, "DOWN", "LEFT");
-      direction(piece, "DOWN", "RIGHT");
-   } 
-   if (piece.name == "Knight"){
-      if (legalKnightMove(piece, row - 2, col -1)){
-        piece.space.add(new float[]{row - 2, col - 1});
-      }
-      if (legalKnightMove(piece, row - 1, col - 2)){
-        piece.space.add(new float[]{row - 1, col - 2}); 
-      }
-      if (legalKnightMove(piece, row - 2, col + 1)){
-        piece.space.add(new float[]{row - 2, col + 1});
-      }
-      if (legalKnightMove(piece, row - 1, col + 2)){
-        piece.space.add(new float[]{row - 1, col + 2});
-      }
-      if (legalKnightMove(piece, row + 2, col + 1)){
-        piece.space.add(new float[]{row + 2, col + 1});
-      }
-      if (legalKnightMove(piece, row + 1, col + 2)){
-        piece.space.add(new float[]{row + 1, col + 2});
-      }
-      if (legalKnightMove(piece, row + 2, col - 1)){
-        piece.space.add(new float[]{row + 2, col - 1});
-      }
-      if (legalKnightMove(piece, row + 1, col - 2)){
-        piece.space.add(new float[]{row + 1, col - 2});
-      }
-   }
-     if (piece.name.equals("Pawn")){
-       Pawn a = (Pawn)piece;
-          if(row != 6){
-     a.firstMove = false;
-   }
-   if(a.firstMove){
-     if (legalMove(a, row - 1, col)){
-     a.space.add(new float[]{row-1, col});
-     }
-     if (legalMove(a, row - 2, col)){
-     a.space.add(new float[]{row-2, col});
-     }
-   }
-   else{
-     if (legalMove(a, row - 1, col)){
-     a.space.add(new float[]{row-1, col});
-     }
-   }
-     }
-     }
-     
-   boolean legalKnightMove(Piece piece, int r, int c){
-     if (!inBound(r, c)){
-       return false;
-     }
-     if (chessBoard[r][c] == null){
-       return true;
-     }else{
-       System.out.println("a");
-       return chessBoard[r][c].Color != chessBoard[piece.row][piece.col].Color;
-     }
-   }
-   
-      boolean legalMove(Pawn piece, int r, int c){
-     if (!inBound(r, c)){
-       return false;
-     }
-     if (chessBoard[r][c] == null){
-       return true;
-     }else{
-       System.out.println("a");
-       return chessBoard[r][c].Color != chessBoard[piece.row][piece.col].Color;
-     }
-   }
-     
-     
-   void direction(Piece piece, String dirOne, String dirTwo){
-     boolean cont = true;
-     int r = 0;
-     int c = 0;
-     if (dirOne.equals("UP")){
-       r = -1;
-     }
-     if (dirOne.equals("DOWN")){
-       r = 1;
-     }
-     if (dirTwo.equals("RIGHT")){
-       c = 1;
-     }
-     if (dirTwo.equals("LEFT")){
-       c = -1;
-     }
-     while (cont && inBound(piece.row + r, piece.col + c)){
-       boolean empty = chessBoard[piece.row + r][piece.col + c] == null;
-       boolean capturable = false;
-       if (!empty){
-       capturable = chessBoard[piece.row + r][piece.col + c].Color != chessBoard[piece.row][piece.col].Color;
-       }
-      if (empty || capturable){
-          piece.space.add(new float[]{piece.row + r, piece.col + c});
-          if (r < 0){
-          r -=1;
-          }
-          if (r > 0){
-          r +=1;
-          }
-          if (c < 0){
-          c -=1;
-          }
-          if (c > 0){
-          c +=1;
-          }
-          if (capturable){
-          cont = false;
-          }
-       }else{
-       cont = false;
-       }
-      }
-   }
-  
 }
