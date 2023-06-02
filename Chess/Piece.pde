@@ -74,12 +74,17 @@ public class Piece{
   }
      
    boolean legalMove(Piece[][] cboard, int r, int c){
+     if (cboard[row][col] == null){
+     return false;
+     }
      if (!inBound(r, c)){
        return false;
      }
      if (cboard[r][c] == null){
        return true;
      }else{
+       System.out.println(r);
+       System.out.println(c);
        return cboard[r][c].Color != cboard[row][col].Color;
      }
    }

@@ -134,7 +134,6 @@ King WhKing = new King(7, 4, "King", 1);
  //DEMO SHOWCASES
  
  public void castle(){
-   System.out.println("a");
    chessBoard = new Piece[8][8];
    //black side
     chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
@@ -159,4 +158,31 @@ King WhKing = new King(7, 4, "King", 1);
       chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
     }
  }
+ 
+ public void enpassant(){
+   chessBoard = new Piece[8][8];
+   
+   chessBoard[0][4] = BlKing;
+   chessBoard[4][5] = new Pawn(4, 5, "Pawn", 0);
+   
+   chessBoard[7][4] = WhKing;
+   chessBoard[6][6] = new Pawn(6, 6, "Pawn", 1);
+ }
+ 
+ public void check(){
+  chessBoard = new Piece[8][8];
+  chessBoard[0][4] = BlKing;
+  chessBoard[0][5] = new Piece(0, 5, "Queen", 0);
+  chessBoard[7][4] = WhKing;
+  chessBoard[7][7] = new Piece(7, 7, "Queen", 1);
+  chessBoard[7][6] = new Piece(7, 6, "Queen", 1);
+ }
+ 
+ public void promote(){
+  chessBoard = new Piece[8][8];
+  chessBoard[0][4] = BlKing;
+  chessBoard[7][4] = WhKing;
+  chessBoard[1][7] = new Pawn(1, 7, "Pawn", 1);
+ }
+ 
 }

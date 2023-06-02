@@ -22,6 +22,9 @@ Board field;
 int[][]moveable;
 
 int phase;
+boolean castle;
+
+boolean enpassant;
 
 
 void setup(){
@@ -40,11 +43,44 @@ void setup(){
 }
 void draw(){
   if (keyPressed){
-    if (key == 'c'){
+    if (key == '1'){
+      castle = true;
       turnCount = 1;
       prevTurnCount = 1;
     background(255);
     field.castle();
+    image(board, 0, 0);
+    loadPieces();
+    }else{
+    castle = false;
+    }
+    
+   if (key == '2'){
+      enpassant = true;
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.enpassant();
+    image(board, 0, 0);
+    loadPieces();
+    }else{
+      enpassant = false;
+    }
+    
+    if (key == '3'){
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.check();
+    image(board, 0, 0);
+    loadPieces();
+    }
+    
+    if (key == '4'){
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.promote();
     image(board, 0, 0);
     loadPieces();
     }
@@ -113,6 +149,8 @@ void mouseClicked(){
   int y = mouseY/100;
   
   //DEMO TEXT
+  
+  if (castle){
   if (y == 7 && x == 6 && turnCount % 2 == 1){
   textSize(20);
   fill(0);
@@ -135,6 +173,14 @@ void mouseClicked(){
   textSize(20);
   fill(0);
   text("Rook here", mouseX, mouseY); 
+  }
+  }
+  
+  if (enpassant){
+  if (y == 2 && x == 1){
+     fill(200, 0, 0);
+     square(x * 100, y * 100, 100);  
+  }
   }
   
   //phase 1 "neutral phase"
