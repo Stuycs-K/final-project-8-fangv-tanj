@@ -37,34 +37,15 @@ King WhKing = new King(7, 4, "King", 1);
     }
   }
   
-  void futureMove(Piece piece){
-     int prevRow = piece.row;
-     int prevCol = piece.col;
-     Piece temp;
-    for (int i = 0; i < piece.space.size(); i +=1){
-      float[] coord = piece.space.get(i);
-      int xCoord = (int)coord[1];
-      int yCoord = (int)coord[0];
-      if (chessBoard[yCoord][xCoord] != null){
-        temp = chessBoard[yCoord][xCoord];
-          
-          move(yCoord, xCoord, prevRow, prevCol);
-          
-           if (field.inCheck(turnCount % 2)){
-             piece.space.remove(i);
-             i -=1;
-          }
-           move(prevRow, prevCol, yCoord, xCoord);
-            chessBoard[yCoord][xCoord] = temp;
-      }else{
-      
-         move(yCoord, xCoord, prevRow, prevCol);
-           if (field.inCheck(turnCount % 2)){
-           piece.space.remove(i);
-           i -=1;
-          }
-          move(prevRow, prevCol, yCoord, xCoord);
-      }
+  public Board(String x){
+    if(x.equals("check")){
+      //black side
+      field.chessBoard[0][7] = new King(0, 4, "King", 0);
+    
+      //white side
+      field.chessBoard[1][1] = new Piece(7, 0, "Rook", 1);
+      field.chessBoard[2][0] = new Piece(7, 0, "Rook", 1);
+      field.chessBoard[7][3] = new King(0, 4, "King", 1);
     }
   }
   
