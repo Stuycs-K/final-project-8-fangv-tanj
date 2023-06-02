@@ -35,30 +35,24 @@ void setup(){
   phase = 1;
   
   background(255);
-  field.start(); //add all the pieces to the board
   image(board, 0, 0);
   loadPieces();  //draw out all the pieces
 }
 void draw(){
-  
-   textSize(40);
-  fill(0);
-  text("turnCount: "+turnCount, 600, 400); //sake of testing
-  text("prevTurn: "+prevTurnCount, 600, 500); //sake of testing
-  
+   
   if (prevTurnCount < turnCount){
     background(255);
     field.flip(); //after each turn flip the board
     image(board, 0, 0);
     loadPieces();
-    prevTurnCount = turnCount;
-  }
-  
+    prevTurnCount = turnCount;  
+  } 
 }
 
 int[][] movementDraw(int x, int y){
   
   int[][] moveable = new int[8][8];
+  
   
   if (field.chessBoard[y][x] != null){
     //highlight the piece that was clicked
@@ -72,13 +66,9 @@ int[][] movementDraw(int x, int y){
     square(x * 100, y * 100, 100);
     loadPieces();
   
-    
     Piece held = field.chessBoard[y][x];
-
-
     held.movement(field.chessBoard);
-
-
+    field.futureMove(held);  
     int spaces = held.space.size();
       
     for (int i = 0; i < spaces; i +=1){
@@ -115,13 +105,10 @@ void mouseClicked(){
   fill(0);
   text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
   
-  if (field.chessBoard[y][x] != null){
-    System.out.println(field.chessBoard[y][x].toString());
-  }
-  
   
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
+  if (x < 8 && y < 8){
     Piece clicked = field.chessBoard[y][x];
     int playerTurn = turnCount % 2;
 
@@ -135,6 +122,7 @@ void mouseClicked(){
       lastX = x;
       lastY = y;
       int[][]temp = movementDraw(x, y);
+         
       moveable = temp;
   }
   
@@ -142,16 +130,17 @@ void mouseClicked(){
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
+    field.chessBoard[y][x].movement(field.chessBoard);
     
     
-    //return to neutral phaase
-    phase = 1;
+      //return to neutral phaase
+      phase = 1;
     
-    //increase turn count
-    turnCount +=1;
+      //increase turn count
+      turnCount +=1;
+    }
   }
 }
-
 
 void loadImages(){
   board = loadImage("board.png");
