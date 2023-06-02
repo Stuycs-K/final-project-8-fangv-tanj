@@ -39,7 +39,17 @@ void setup(){
   loadPieces();  //draw out all the pieces
 }
 void draw(){
-   
+  if (keyPressed){
+    if (key == 'c'){
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.castle();
+    image(board, 0, 0);
+    loadPieces();
+    }
+  } 
+  
   if (prevTurnCount < turnCount){
     background(255);
     field.flip(); //after each turn flip the board
@@ -101,10 +111,31 @@ void mouseClicked(){
   
   int x = mouseX/100;
   int y = mouseY/100;
-  textSize(40);
-  fill(0);
-  text("(" + y + " " + x + ")", mouseX, mouseY); //sake of testing
   
+  //DEMO TEXT
+  if (y == 7 && x == 6 && turnCount % 2 == 1){
+  textSize(20);
+  fill(0);
+  text("King here", mouseX, mouseY); 
+  }
+  
+  if (y == 7 && x == 5 && turnCount % 2 == 1){
+  textSize(20);
+  fill(0);
+  text("Rook here", mouseX, mouseY); 
+  }
+  
+  if (y == 7 && x == 5 && turnCount % 2 == 0){
+  textSize(20);
+  fill(0);
+  text("King here", mouseX, mouseY); 
+  }
+  
+  if (y == 7 && x == 4 && turnCount % 2 == 0){
+  textSize(20);
+  fill(0);
+  text("Rook here", mouseX, mouseY); 
+  }
   
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
