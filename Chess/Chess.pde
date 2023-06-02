@@ -28,7 +28,7 @@ boolean enpassant;
 
 
 void setup(){
-  size(900, 800);
+  size(950, 800);
   loadImages();
   
   prevTurnCount = 1;
@@ -92,8 +92,11 @@ void draw(){
     image(board, 0, 0);
     loadPieces();
     prevTurnCount = turnCount;  
-  } 
+  }
+  fill(211, 211, 211);
+  rect(825,100,100,50);
 }
+
 
 int[][] movementDraw(int x, int y){
   
@@ -114,7 +117,7 @@ int[][] movementDraw(int x, int y){
   
     Piece held = field.chessBoard[y][x];
     held.movement(field.chessBoard);
-    field.futureMove(held);  
+    held.futureMove(field.chessBoard);  
     int spaces = held.space.size();
       
     for (int i = 0; i < spaces; i +=1){
@@ -143,7 +146,21 @@ int[][] movementDraw(int x, int y){
   return moveable;
 }
 
-void mouseClicked(){
+boolean isMouseOver(int x, int y, int w, int h){
+  if(mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h){
+    return  true;
+  }
+  return false;
+}
+
+void mouseClicked(){ 
+  if(isMouseOver(825,100,100,50)){
+    field = new Board("check");
+    loadPieces();
+    
+    println("pressed");
+  }
+
   
   int x = mouseX/100;
   int y = mouseY/100;
@@ -260,12 +277,10 @@ void loadImages(){
   BlKing.resize(80, 0);
 }
 
-void loadPieces(){
+void loadPieces(){    
   for (int r = 0; r < 8; r +=1){
     for (int c = 0; c < 8; c +=1){
-      if (field.chessBoard[r][c] != null){
-        
-        
+      if (field.chessBoard[r][c] != null){        
           if (field.chessBoard[r][c].name.equals("Bishop") && field.chessBoard[r][c].Color == 1){
             image(WhBishop, c * 100, r * 100);
           }
@@ -302,9 +317,10 @@ void loadPieces(){
           }
           if (field.chessBoard[r][c].name.equals("King") && field.chessBoard[r][c].Color == 0){
             image(BlKing, c * 100, r * 100);
-          }
-          
+          }         
       }
     }
   }
+  
+
 }

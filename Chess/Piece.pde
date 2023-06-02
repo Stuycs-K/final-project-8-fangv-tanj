@@ -134,6 +134,47 @@ public class Piece{
        }
       }
    }
+   
+   void futureMove(Piece[][] chessBoard){
+     int prevRow = row;
+     int prevCol = col;
+     Piece temp;
+    for (int i = 0; i < space.size(); i +=1){
+      float[] coord = space.get(i);
+      int xCoord = (int)coord[1];
+      int yCoord = (int)coord[0];
+      if (chessBoard[yCoord][xCoord] != null){
+        temp = chessBoard[yCoord][xCoord];
+          
+          move(yCoord, xCoord, prevRow, prevCol, chessBoard);
+          
+           if (field.inCheck(turnCount % 2)){
+             space.remove(i);
+             i -=1;
+          }
+           move(prevRow, prevCol, yCoord, xCoord, chessBoard);
+            chessBoard[yCoord][xCoord] = temp;
+      }else{
+      
+         move(yCoord, xCoord, prevRow, prevCol, chessBoard);
+           if (field.inCheck(turnCount % 2)){
+           space.remove(i);
+           i -=1;
+          }
+          move(prevRow, prevCol, yCoord, xCoord, chessBoard);
+      }
+    }
+  }
+ 
+  public void move(int y, int x, int lastY, int lastX, Piece[][] chessBoard){
+     chessBoard[y][x] = chessBoard[lastY][lastX];
+     chessBoard[y][x].setRow(y);
+     chessBoard[y][x].setCol(x);
+     
+    //remove the old piece
+    chessBoard[lastY][lastX] = null;
+ }
+  
   
   void setRow(int r){
   row = r;
