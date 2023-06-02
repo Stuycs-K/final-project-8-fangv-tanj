@@ -25,6 +25,7 @@ boolean legalMove(Piece[][] cboard, int r, int c){
  void movement(Piece[][] cboard){
    space = new ArrayList<float[]>();
    boolean x = true;
+   firstMove = true;
    if(row != 6){
      firstMove = false;
    }
@@ -35,8 +36,8 @@ boolean legalMove(Piece[][] cboard, int r, int c){
      else{
        x = false;
      }
-     if (legalMove(cboard, row - 2, col)){
-       if(x){
+     if (x){
+       if(legalMove(cboard, row - 2, col)){
          super.space.add(new float[]{row-2, col});
        }
      }

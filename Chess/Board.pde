@@ -105,8 +105,6 @@ King WhKing = new King(7, 4, "King", 1);
             if (current.Color != Color){
               for (int i = 0; i < current.space.size(); i +=1){
                 current.movement(chessBoard);
-                System.out.println("r "+r);
-                System.out.println("c "+c);
                 if (current.space.size() > 0){
                 float[] coord = current.space.get(i);
                 int xCoord = (int)coord[1];
