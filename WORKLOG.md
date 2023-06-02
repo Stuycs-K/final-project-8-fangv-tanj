@@ -48,6 +48,25 @@ Victor Fang
 
 * Began work on implementing check.
 
+5/31/23
+
+* Fixed pawn going through pieces but the issue is still present for the first move, Junxi went to fix that.
+
+6/1/23
+
+* Check implementation completed and conducted testing
+  * inCheck checks if the king is on a tile the other player can move on
+  * futureMove checks futureMoves of a piece and removes any moves that would keep a player in check
+  * futureMove is now called each time in movementDraw to prevent player from moving a piece that would result in them being
+    put into check.
+* Fixed a bug with the firstMove of a pawn incorrectly being set to false as a result of futureMove.
+
+* Created the demo branch to showcase missing features
+ * Press 1 for castle demo
+ * Press 2 for en passant demo
+ * Press 3 for check/checkmate demo (check is implemented but not checkmate)
+ * Press 4 for pawn promotion demo
+
 Junxi Tan
 
 5/22/23
