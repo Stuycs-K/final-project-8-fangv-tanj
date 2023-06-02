@@ -101,3 +101,8 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 -moved movement from the Board class to the Piece class and its subclasses so Board doesn't do everything
 
 -Pawn and King doesn't go through pieces
+
+6/1/23
+-moved some more code around
+
+-button for resetting the board
