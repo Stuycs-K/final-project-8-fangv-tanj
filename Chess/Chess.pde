@@ -41,6 +41,22 @@ void setup(){
   image(board, 0, 0);
   loadPieces();  //draw out all the pieces
 }
+
+//void setup(String x){
+//  size(950, 800);
+//  loadImages();
+  
+//  prevTurnCount = 1;
+//  turnCount = 1;
+  
+//  field = new Board(x);
+//  phase = 1;
+  
+//  background(255);
+//  image(board, 0, 0);
+//  loadPieces();  //draw out all the pieces
+//}
+
 void draw(){
   if (keyPressed){
     if (key == '1'){
@@ -155,9 +171,8 @@ boolean isMouseOver(int x, int y, int w, int h){
 
 void mouseClicked(){ 
   if(isMouseOver(825,100,100,50)){
-    field = new Board("check");
-    loadPieces();
-    
+    //setup("check");  
+    setup();
     println("pressed");
   }
 

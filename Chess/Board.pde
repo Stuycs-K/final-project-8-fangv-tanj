@@ -37,17 +37,17 @@ King WhKing = new King(7, 4, "King", 1);
     }
   }
   
-  public Board(String x){
-    if(x.equals("check")){
-      //black side
-      field.chessBoard[0][7] = new King(0, 4, "King", 0);
+  //public Board(String x){
+  //  if(x.equals("check")){
+  //    //black side
+  //    field.chessBoard[0][7] = new King(0, 7, "King", 0);
     
-      //white side
-      field.chessBoard[1][1] = new Piece(7, 0, "Rook", 1);
-      field.chessBoard[2][0] = new Piece(7, 0, "Rook", 1);
-      field.chessBoard[7][3] = new King(0, 4, "King", 1);
-    }
-  }
+  //    //white side
+  //    field.chessBoard[1][1] = new Piece(1, 1, "Rook", 1);
+  //    field.chessBoard[2][0] = new Piece(2, 0, "Rook", 1);
+  //    field.chessBoard[7][3] = new King(7, 3, "King", 1);
+  //  }
+  //}
   
   //flip the board 
   public void flip(){
