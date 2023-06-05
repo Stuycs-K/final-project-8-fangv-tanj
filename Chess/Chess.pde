@@ -138,6 +138,10 @@ void mouseClicked(){
   if (x < 8 && y < 8){
     Piece clicked = field.chessBoard[y][x];
     int playerTurn = turnCount % 2;
+    if (phase != 2){
+    println(clicked.row);
+    println(clicked.col);
+    }
 
   if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
       //reset screen
@@ -152,9 +156,6 @@ void mouseClicked(){
          
       moveable = temp;
       
-    if (field.movesLeft(turnCount - 1 % 2)){
-    println("a");
-    }
   }
   
           
@@ -169,6 +170,8 @@ void mouseClicked(){
     
       //increase turn count
       turnCount +=1;
+      
+      println(field.movesLeft(turnCount % 2));
     }
   }
 }
