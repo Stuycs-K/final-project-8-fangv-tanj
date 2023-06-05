@@ -46,6 +46,8 @@ void draw(){
     image(board, 0, 0);
     loadPieces();
     prevTurnCount = turnCount;  
+    
+          println(field.movesLeft(turnCount % 2));
   }
 
   fill(211, 211, 211);
@@ -171,7 +173,6 @@ void mouseClicked(){
       //increase turn count
       turnCount +=1;
       
-      println(field.movesLeft(turnCount % 2));
     }
   }
 }
