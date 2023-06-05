@@ -71,7 +71,8 @@ Victor Fang
 
  * Fixed nullpointerexception with reset button.
  * Added text over reset button.
- * Began implementation on ending the game (checkmate + stalemate).
+ * Wrote method to check if any moves are available, necessary for checkmate and stalemate
+  * Checkmate and stalemate are properly detected, need to add end screen
 
 Junxi Tan
 
