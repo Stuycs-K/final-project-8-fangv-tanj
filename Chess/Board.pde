@@ -37,18 +37,6 @@ King WhKing = new King(7, 4, "King", 1);
     }
   }
   
-  public Board(String x){
-    if(x.equals("check")){
-      //black side
-      field.chessBoard[0][7] = new King(0, 7, "King", 0);
-    
-      //white side
-      field.chessBoard[1][1] = new Piece(1, 1, "Rook", 1);
-      field.chessBoard[2][0] = new Piece(2, 0, "Rook", 1);
-      field.chessBoard[7][3] = new King(7, 3, "King", 1);
-    }
-  }
-  
   //flip the board 
   public void flip(){
     
@@ -84,22 +72,40 @@ King WhKing = new King(7, 4, "King", 1);
           if (chessBoard[r][c] != null){
             Piece current = chessBoard[r][c];
             if (current.Color != Color){
+              current.movement(chessBoard);
               for (int i = 0; i < current.space.size(); i +=1){
-                current.movement(chessBoard);
-                if (current.space.size() > 0){
                 float[] coord = current.space.get(i);
                 int xCoord = (int)coord[1];
                 int yCoord = (int)coord[0];
                   if (xCoord == kingCol && yCoord == kingRow){
                     check = true;
                   }
-                }
+                
               }
             }
           }
         }
       }
     return check;
+  }
+  
+    boolean movesLeft(int Color){
+    boolean endGame = true;
+      for (int r = 0; r < 8; r +=1){
+        for (int c = 0; c < 8; c +=1){
+          if (chessBoard[r][c] != null){
+            Piece current = chessBoard[r][c];
+            if (current.Color == Color){
+              current.movement(chessBoard);
+              current.futureMove(chessBoard);
+            for (int i = 0; i < current.space.size(); i +=1){
+              endGame = false;
+            }
+          }
+        }
+      }
+     }
+    return endGame;
   }
   
  public void move(int y, int x, int lastY, int lastX){

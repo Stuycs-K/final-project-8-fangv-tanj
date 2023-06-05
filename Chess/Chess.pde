@@ -40,18 +40,34 @@ void setup(){
 }
 void draw(){
    
+  //Reset Button
+  fill(211, 211, 211);
+  rect(825,100,100,50);
+  textSize(40);
+  fill(0, 0, 0);
+  text("Reset", 825, 140);
+  
+  //Board and Pieces
   if (prevTurnCount < turnCount){
     background(255);
     field.flip(); //after each turn flip the board
     image(board, 0, 0);
     loadPieces();
     prevTurnCount = turnCount;  
+    
+    //Checkmate
+    if (field.movesLeft(turnCount % 2)){
+      if (field.inCheck(turnCount % 2)){
+      textSize(100);
+      fill(0, 0, 0);
+      text("Checkmate", 400, 400);
+        }else{
+        textSize(100);
+        fill(0, 0, 0);
+        text("Stalemate", 400, 400); 
+      }
+    }
   }
-  fill(211, 211, 211);
-  rect(825,100,100,50);
-  textSize(40);
-  fill(0, 0, 0);
-  text("Reset", 825, 140);
 }
 
 
@@ -75,6 +91,7 @@ int[][] movementDraw(int x, int y){
     Piece held = field.chessBoard[y][x];
     held.movement(field.chessBoard);
     held.futureMove(field.chessBoard);  
+    
     int spaces = held.space.size();
       
     for (int i = 0; i < spaces; i +=1){
@@ -149,6 +166,7 @@ void mouseClicked(){
       int[][]temp = movementDraw(x, y);
          
       moveable = temp;
+      
   }
   
           
@@ -163,6 +181,7 @@ void mouseClicked(){
     
       //increase turn count
       turnCount +=1;
+      
     }
   }
 }
