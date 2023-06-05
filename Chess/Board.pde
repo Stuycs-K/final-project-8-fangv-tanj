@@ -96,16 +96,10 @@ King WhKing = new King(7, 4, "King", 1);
           if (chessBoard[r][c] != null){
             Piece current = chessBoard[r][c];
             if (current.Color == Color){
-              println(current.name);
               current.movement(chessBoard);
               current.futureMove(chessBoard);
             for (int i = 0; i < current.space.size(); i +=1){
               endGame = false;
-              float[] coord = current.space.get(i);
-              int xCoord = (int)coord[1];
-              int yCoord = (int)coord[0];
-              println("piece y: "+current.row + " piece x: "+current.col);
-              println("y: "+yCoord + " x: "+xCoord);
             }
           }
         }

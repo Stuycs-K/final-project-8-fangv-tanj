@@ -40,6 +40,14 @@ void setup(){
 }
 void draw(){
    
+  //Reset Button
+  fill(211, 211, 211);
+  rect(825,100,100,50);
+  textSize(40);
+  fill(0, 0, 0);
+  text("Reset", 825, 140);
+  
+  //Board and Pieces
   if (prevTurnCount < turnCount){
     background(255);
     field.flip(); //after each turn flip the board
@@ -47,14 +55,19 @@ void draw(){
     loadPieces();
     prevTurnCount = turnCount;  
     
-          println(field.movesLeft(turnCount % 2));
+    //Checkmate
+    if (field.movesLeft(turnCount % 2)){
+      if (field.inCheck(turnCount % 2)){
+      textSize(100);
+      fill(0, 0, 0);
+      text("Checkmate", 400, 400);
+        }else{
+        textSize(100);
+        fill(0, 0, 0);
+        text("Stalemate", 400, 400); 
+      }
+    }
   }
-
-  fill(211, 211, 211);
-  rect(825,100,100,50);
-  textSize(40);
-  fill(0, 0, 0);
-  text("Reset", 825, 140);
 }
 
 
@@ -140,10 +153,6 @@ void mouseClicked(){
   if (x < 8 && y < 8){
     Piece clicked = field.chessBoard[y][x];
     int playerTurn = turnCount % 2;
-    if (phase != 2){
-    println(clicked.row);
-    println(clicked.col);
-    }
 
   if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
       //reset screen
