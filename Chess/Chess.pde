@@ -49,6 +49,9 @@ void draw(){
   }
   fill(211, 211, 211);
   rect(825,100,100,50);
+  textSize(40);
+  fill(0, 0, 0);
+  text("Reset", 825, 140);
 }
 
 
@@ -109,10 +112,18 @@ boolean isMouseOver(int x, int y, int w, int h){
 
 void mouseClicked(){ 
   if(isMouseOver(825,100,100,50)){
-    field = new Board("check");
-    loadPieces();
+  
+  prevTurnCount = 1;
+  turnCount = 1;
+  
+  field = new Board();
+  phase = 1;
+  
+  background(255);
+  image(board, 0, 0);
+  loadPieces();  //draw out all the pieces
     
-    println("pressed");
+    println("Reset");
   }
 
   
