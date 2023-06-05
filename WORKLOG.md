@@ -67,6 +67,12 @@ Victor Fang
  * Press 3 for check/checkmate demo (check is implemented but not checkmate)
  * Press 4 for pawn promotion demo
 
+ 6/4/23
+
+ * Fixed nullpointerexception with reset button.
+ * Added text over reset button.
+ * Began implementation on ending the game (checkmate + stalemate).
+
 Junxi Tan
 
 5/22/23
