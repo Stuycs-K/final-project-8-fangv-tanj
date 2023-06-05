@@ -47,6 +47,7 @@ void draw(){
     loadPieces();
     prevTurnCount = turnCount;  
   }
+
   fill(211, 211, 211);
   rect(825,100,100,50);
   textSize(40);
@@ -75,6 +76,7 @@ int[][] movementDraw(int x, int y){
     Piece held = field.chessBoard[y][x];
     held.movement(field.chessBoard);
     held.futureMove(field.chessBoard);  
+    
     int spaces = held.space.size();
       
     for (int i = 0; i < spaces; i +=1){
@@ -149,6 +151,10 @@ void mouseClicked(){
       int[][]temp = movementDraw(x, y);
          
       moveable = temp;
+      
+    if (field.movesLeft(turnCount - 1 % 2)){
+    println("a");
+    }
   }
   
           

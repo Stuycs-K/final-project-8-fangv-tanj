@@ -9,18 +9,18 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard = new Piece[8][8];
     
     //black side
-    chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
-    chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
-    chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
-    chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
+    //chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
+    //chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
+    //chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
+    //chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
     chessBoard[0][4] = BlKing;
-    chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
-    chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
-    chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
+    //chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
+    //chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
+    //chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
     
-    for (int i = 0; i < 8; i +=1){
-      chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
-    }
+    //for (int i = 0; i < 8; i +=1){
+    //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
+    //}
     
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
@@ -32,21 +32,9 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
     chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
     
-    for (int i = 0; i < 8; i +=1){
-      chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
-    }
-  }
-  
-  public Board(String x){
-    if(x.equals("check")){
-      //black side
-      field.chessBoard[0][7] = new King(0, 7, "King", 0);
-    
-      //white side
-      field.chessBoard[1][1] = new Piece(1, 1, "Rook", 1);
-      field.chessBoard[2][0] = new Piece(2, 0, "Rook", 1);
-      field.chessBoard[7][3] = new King(7, 3, "King", 1);
-    }
+    //for (int i = 0; i < 8; i +=1){
+    //  chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
+    //}
   }
   
   //flip the board 
@@ -84,8 +72,8 @@ King WhKing = new King(7, 4, "King", 1);
           if (chessBoard[r][c] != null){
             Piece current = chessBoard[r][c];
             if (current.Color != Color){
+              current.movement(chessBoard);
               for (int i = 0; i < current.space.size(); i +=1){
-                current.movement(chessBoard);
                 if (current.space.size() > 0){
                 float[] coord = current.space.get(i);
                 int xCoord = (int)coord[1];
@@ -100,6 +88,24 @@ King WhKing = new King(7, 4, "King", 1);
         }
       }
     return check;
+  }
+  
+    boolean movesLeft(int Color){
+    boolean endGame = true;
+      for (int r = 0; r < 8; r +=1){
+        for (int c = 0; c < 8; c +=1){
+          if (chessBoard[r][c] != null){
+            Piece current = chessBoard[r][c];
+            if (current.Color == Color){
+            current.movement(chessBoard);
+            for (int i = 0; i < current.space.size(); i +=1){
+              endGame = false;
+            }
+          }
+        }
+      }
+     }
+    return endGame;
   }
   
  public void move(int y, int x, int lastY, int lastX){
