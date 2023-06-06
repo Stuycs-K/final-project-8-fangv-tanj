@@ -29,9 +29,6 @@ boolean legalMove(Piece[][] cboard, int r, int c){
    if(row != 6){
      firstMove = false;
    }
-   if(row == 0){
-    println("promote");
-   }
    if(firstMove){
      if (legalMove(cboard, row - 1, col)){
        super.space.add(new float[]{row-1, col});

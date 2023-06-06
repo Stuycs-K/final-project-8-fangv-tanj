@@ -110,6 +110,9 @@ int[][] movementDraw(int x, int y){
       //draw a circle where the piece can move
      
       if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
+        if(held == "Pawn" && held.row == 0){
+         field.promote(held.row, held.col, held.Color); 
+        }
         if(field.chessBoard[yCoord][xCoord] != null && field.chessBoard[yCoord][xCoord].Color != held.Color){
           fill(200, 0, 0);
           square(xCoord * 100, yCoord * 100, 100);  
