@@ -107,15 +107,18 @@ King WhKing = new King(7, 4, "King", 1);
      }
     return endGame;
   }
-
-  public void promote(int row, int col, int C){
-   chessBoard[row][col] = new Piece(row, col, "Queen", C); 
-  }
   
  public void move(int y, int x, int lastY, int lastX){
+   if(chessBoard[lastY][lastX].name == "Pawn" && chessBoard[lastY][lastX].row == 1){
+     chessBoard[lastY][lastX].setRow(y);
+     chessBoard[lastY][lastX].setCol(x);
+     chessBoard[y][x] = new Piece(chessBoard[lastY][lastX].row, chessBoard[lastY][lastX].col, "Queen", chessBoard[lastY][lastX].Color);
+   }
+   else{
      chessBoard[y][x] = chessBoard[lastY][lastX];
      chessBoard[y][x].setRow(y);
      chessBoard[y][x].setCol(x);
+   }
      
     //remove the old piece
     chessBoard[lastY][lastX] = null;
