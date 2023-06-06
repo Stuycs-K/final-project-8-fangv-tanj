@@ -69,7 +69,7 @@ Victor Fang
 
  6/4/23
 
- * Fixed nullpointerexception with reset button.
+ * Fixed nullpointerexception with reset button. (was actually fixed in another branch)
  * Added text over reset button.
  * Wrote method to check if any moves are available, necessary for checkmate and stalemate
   * Checkmate and stalemate are properly detected, need to add end screen
@@ -108,3 +108,10 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 -moved movement from the Board class to the Piece class and its subclasses so Board doesn't do everything
 
 -Pawn and King doesn't go through pieces
+
+6/6/23
+- removed reset button and made it a keypress
+
+- pawn promotion (only queen for now)
+
+-added sound when moving pawn
