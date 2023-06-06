@@ -47,6 +47,7 @@ void draw(){
   fill(0, 0, 0);
   text("Reset", 825, 140);
   
+  
   //Board and Pieces
   if (prevTurnCount < turnCount){
     background(255);
@@ -61,6 +62,7 @@ void draw(){
       textSize(100);
       fill(0, 0, 0);
       text("Checkmate", 400, 400);
+        gameEnd();
         }else{
         textSize(100);
         fill(0, 0, 0);
@@ -70,6 +72,21 @@ void draw(){
   }
 }
 
+void gameEnd(){
+  fill(255, 255, 255);
+  square(250, 200, 400);
+  
+  textSize(40);
+  fill(0, 0, 0);
+  int w = (turnCount - 1) % 2;
+  String winner;
+  if (w == 1){
+  winner = "White";
+  }else{
+  winner= "Black";
+  }
+  text(winner + " won by Checkmate", 250, 300);
+}
 
 int[][] movementDraw(int x, int y){
   
