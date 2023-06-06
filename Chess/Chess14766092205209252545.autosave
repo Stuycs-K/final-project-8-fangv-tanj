@@ -22,6 +22,9 @@ Board field;
 int[][]moveable;
 
 int phase;
+boolean castle;
+
+boolean enpassant;
 
 
 void setup(){
@@ -39,40 +42,71 @@ void setup(){
   loadPieces();  //draw out all the pieces
 }
 
-void keyPressed(){
-  
-}
-
 void draw(){
-   
-  //Reset Button
-  fill(211, 211, 211);
-  rect(825,100,100,50);
-  textSize(40);
-  fill(0, 0, 0);
-  text("Reset", 825, 140);
+  if (keyPressed){
+    if (key == '0'){
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.pieces();
+    image(board, 0, 0);
+    loadPieces();
+    }
+  }
   
-  //Board and Pieces
+  if (keyPressed){
+    if (key == '1'){
+      castle = true;
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.castle();
+    image(board, 0, 0);
+    loadPieces();
+    }else{
+    castle = false;
+    }
+    
+   if (key == '2'){
+      enpassant = true;
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.enpassant();
+    image(board, 0, 0);
+    loadPieces();
+    }else{
+      enpassant = false;
+    }
+    
+    if (key == '3'){
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.check();
+    image(board, 0, 0);
+    loadPieces();
+    }
+    
+    if (key == '4'){
+      turnCount = 1;
+      prevTurnCount = 1;
+    background(255);
+    field.promote();
+    image(board, 0, 0);
+    loadPieces();
+    }
+  } 
+  
   if (prevTurnCount < turnCount){
     background(255);
     field.flip(); //after each turn flip the board
     image(board, 0, 0);
     loadPieces();
     prevTurnCount = turnCount;  
-    
-    //Checkmate
-    if (field.movesLeft(turnCount % 2)){
-      if (field.inCheck(turnCount % 2)){
-      textSize(100);
-      fill(0, 0, 0);
-      text("Checkmate", 400, 400);
-        }else{
-        textSize(100);
-        fill(0, 0, 0);
-        text("Stalemate", 400, 400); 
-      }
-    }
   }
+  fill(211, 211, 211);
+  rect(825,100,100,50);
 }
 
 
@@ -96,7 +130,6 @@ int[][] movementDraw(int x, int y){
     Piece held = field.chessBoard[y][x];
     held.movement(field.chessBoard);
     held.futureMove(field.chessBoard);  
-    
     int spaces = held.space.size();
       
     for (int i = 0; i < spaces; i +=1){
@@ -125,25 +158,58 @@ int[][] movementDraw(int x, int y){
   return moveable;
 }
 
-//boolean isMouseOver(int x, int y, int w, int h){
-//  if(mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h){
-//    return  true;
-//  }
-//  return false;
-//}
+boolean isMouseOver(int x, int y, int w, int h){
+  if(mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h){
+    return  true;
+  }
+  return false;
+}
 
 void mouseClicked(){ 
-  //if(isMouseOver(825,100,100,50)){
-  
-  //setup();
-    
-  //  println("Reset");
-  //}
+  if(isMouseOver(825,100,100,50)){
+    //setup("check");  
+    setup();
+    println("pressed");
+  }
 
   
   int x = mouseX/100;
   int y = mouseY/100;
   
+  //DEMO TEXT
+  
+  if (castle){
+  if (y == 7 && x == 6 && turnCount % 2 == 1){
+  textSize(20);
+  fill(0);
+  text("King here", mouseX, mouseY); 
+  }
+  
+  if (y == 7 && x == 5 && turnCount % 2 == 1){
+  textSize(20);
+  fill(0);
+  text("Rook here", mouseX, mouseY); 
+  }
+  
+  if (y == 7 && x == 5 && turnCount % 2 == 0){
+  textSize(20);
+  fill(0);
+  text("King here", mouseX, mouseY); 
+  }
+  
+  if (y == 7 && x == 4 && turnCount % 2 == 0){
+  textSize(20);
+  fill(0);
+  text("Rook here", mouseX, mouseY); 
+  }
+  }
+  
+  if (enpassant){
+  if (y == 2 && x == 1){
+     fill(200, 0, 0);
+     square(x * 100, y * 100, 100);  
+  }
+  }
   
   //phase 1 "neutral phase"
   //phase 2 begins when player clicks on a piece, returns to phase 1 after player moves the piece
@@ -163,7 +229,6 @@ void mouseClicked(){
       int[][]temp = movementDraw(x, y);
          
       moveable = temp;
-      
   }
   
           
@@ -178,7 +243,6 @@ void mouseClicked(){
     
       //increase turn count
       turnCount +=1;
-      
     }
   }
 }
