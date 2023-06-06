@@ -73,11 +73,11 @@ void draw(){
 }
 
 void gameEnd(){
-  fill(255, 255, 255);
+  fill(0, 200, 0);
   square(250, 200, 400);
   
   textSize(40);
-  fill(0, 0, 0);
+  fill(255, 255, 255);
   int w = (turnCount - 1) % 2;
   String winner;
   if (w == 1){
@@ -85,7 +85,11 @@ void gameEnd(){
   }else{
   winner= "Black";
   }
-  text(winner + " won by Checkmate", 250, 300);
+  text(winner + " Won", 350, 300);
+  
+  textSize(30);
+  fill(211, 211, 211);
+  text("by Checkmate", 350, 350);
 }
 
 int[][] movementDraw(int x, int y){
