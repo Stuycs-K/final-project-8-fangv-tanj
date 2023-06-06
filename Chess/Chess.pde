@@ -25,7 +25,7 @@ int phase;
 
 
 void setup(){
-  size(950, 800);
+  size(800, 800);
   loadImages();
   
   prevTurnCount = 1;
@@ -40,17 +40,19 @@ void setup(){
 }
 
 void keyPressed(){
-  
+  if(key==ENTER){
+    setup();
+  }
 }
 
 void draw(){
    
-  //Reset Button
-  fill(211, 211, 211);
-  rect(825,100,100,50);
-  textSize(40);
-  fill(0, 0, 0);
-  text("Reset", 825, 140);
+  ////Reset Button
+  //fill(211, 211, 211);
+  //rect(825,100,100,50);
+  //textSize(40);
+  //fill(0, 0, 0);
+  //text("Reset", 825, 140);
   
   //Board and Pieces
   if (prevTurnCount < turnCount){
