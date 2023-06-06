@@ -114,4 +114,3 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 
 - pawn promotion (only queen for now)
 
-- added sound when moving pawn
