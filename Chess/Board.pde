@@ -18,9 +18,11 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
     chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
     
-    for (int i = 0; i < 8; i +=1){
-      chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
-    }
+    //for (int i = 0; i < 8; i +=1){
+    //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
+    //}
+    chessBoard[3][3] = new Pawn(3, 3, "Pawn", 0);
+    chessBoard[3][4] = new Pawn(3, 4, "Pawn", 1);
     
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
@@ -32,9 +34,9 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
     chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
     
-    for (int i = 0; i < 8; i +=1){
-      chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
-    }
+    //for (int i = 0; i < 8; i +=1){
+    //  chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
+    //}
   }
   
   //flip the board 
