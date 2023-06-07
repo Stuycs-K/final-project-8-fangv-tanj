@@ -62,25 +62,26 @@ void draw(){
     //Checkmate
     if (field.movesLeft(turnCount % 2)){
       if (field.inCheck(turnCount % 2)){
-        gameEnd();
+        gameEnd("checkmate");
         }else{
-        textSize(100);
-        fill(0, 0, 0);
-        text("Stalemate", 400, 400); 
+        gameEnd("stalemate");
       }
     }
   }
 }
 
-void gameEnd(){
+void gameEnd(String result){
   gameEnd = true;
   fill(255);
   square(250, 200, 400);
   textFont(monsterrat);
-  
-  fill(115, 152, 80);
-  arc(450, 200, 400, 300, 0, PI);  
 
+  if (result.equals("checkmate")){
+      
+    fill(115, 152, 80);
+    rect(250, 200, 400, 30);
+    arc(450, 230, 400, 300, 0, PI);  
+    
   int w = (turnCount - 1) % 2;
   String winner;
   if (w == 1){
@@ -95,6 +96,22 @@ void gameEnd(){
   textSize(20);
   fill(211, 211, 211);
   text("by Checkmate", 380, 290);
+  }
+  
+  if (result.equals("stalemate")){
+    
+    fill(102, 100, 90);
+    rect(250, 200, 400, 30);
+    arc(450, 230, 400, 300, 0, PI); 
+    
+  textSize(40);
+  fill(255, 255, 255);
+  text("Draw", 390, 250);
+  
+  textSize(20);
+  fill(211, 211, 211);
+  text("by Stalemate", 380, 290);
+  }
   
   fill(211, 211, 211);
   rect(350,400,200,80);
