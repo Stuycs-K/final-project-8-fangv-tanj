@@ -23,7 +23,7 @@ King WhKing = new King(7, 4, "King", 1);
     //}
     
     //white side
-    chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
+    chessBoard[1][0] = new Piece(1, 0, "Rook", 1);
     chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
     chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
     chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
