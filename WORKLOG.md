@@ -74,6 +74,12 @@ Victor Fang
  * Wrote method to check if any moves are available, necessary for checkmate and stalemate
   * Checkmate and stalemate are properly detected, need to add end screen
 
+  6/6/23
+
+  * Created end game screen with a button that starts a new game.
+    * Version for Checkmate
+    * Version for Stalemate
+
 Junxi Tan
 
 5/22/23
@@ -113,4 +119,3 @@ Finished the movement for Queen, Knight, Rook and Bishop.
 - removed reset button and made it a keypress
 
 - pawn promotion (only queen for now)
-
