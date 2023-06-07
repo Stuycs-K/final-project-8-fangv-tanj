@@ -1,10 +1,8 @@
 public class Pawn extends Piece{
-  boolean firstMove;
   boolean canPassant;
   
   public Pawn(int r, int c, String n, int co){
    super(r, c, n, co);
-   firstMove = true;
   }
   
 boolean inBound(int r, int c){

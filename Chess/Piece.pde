@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 public class Piece{
   int row;
+  boolean firstMove;
   int col;
   String name;
   int Color;
