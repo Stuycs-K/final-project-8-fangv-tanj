@@ -22,9 +22,12 @@ Board field;
 int[][]moveable;
 
 int phase;
+boolean gameEnd;
+PFont monsterrat;
 
 
 void setup(){
+  monsterrat = createFont("Montserrat-Bold.ttf", 128);
   size(950, 800);
   loadImages();
   
@@ -43,9 +46,10 @@ void draw(){
   //Reset Button
   fill(211, 211, 211);
   rect(825,100,100,50);
-  textSize(40);
+  textSize(30);
   fill(0, 0, 0);
   text("Reset", 825, 140);
+  
   
   //Board and Pieces
   if (prevTurnCount < turnCount){
@@ -58,18 +62,63 @@ void draw(){
     //Checkmate
     if (field.movesLeft(turnCount % 2)){
       if (field.inCheck(turnCount % 2)){
-      textSize(100);
-      fill(0, 0, 0);
-      text("Checkmate", 400, 400);
+        gameEnd("checkmate");
         }else{
-        textSize(100);
-        fill(0, 0, 0);
-        text("Stalemate", 400, 400); 
+        gameEnd("stalemate");
       }
     }
   }
 }
 
+void gameEnd(String result){
+  gameEnd = true;
+  fill(255);
+  square(250, 200, 400);
+  textFont(monsterrat);
+
+  if (result.equals("checkmate")){
+      
+    fill(115, 152, 80);
+    rect(250, 200, 400, 30);
+    arc(450, 230, 400, 300, 0, PI);  
+    
+  int w = (turnCount - 1) % 2;
+  String winner;
+  if (w == 1){
+  winner = "White";
+  }else{
+  winner= "Black";
+  }
+  textSize(40);
+  fill(255, 255, 255);
+  text(winner + " Won!", 330, 250);
+  
+  textSize(20);
+  fill(211, 211, 211);
+  text("by Checkmate", 380, 290);
+  }
+  
+  if (result.equals("stalemate")){
+    
+    fill(102, 100, 90);
+    rect(250, 200, 400, 30);
+    arc(450, 230, 400, 300, 0, PI); 
+    
+  textSize(40);
+  fill(255, 255, 255);
+  text("Draw", 390, 250);
+  
+  textSize(20);
+  fill(211, 211, 211);
+  text("by Stalemate", 380, 290);
+  }
+  
+  fill(211, 211, 211);
+  rect(350,400,200,80);
+  textSize(30);
+  fill(0, 0, 0);
+  text("New Game", 370, 450);
+}
 
 int[][] movementDraw(int x, int y){
   
@@ -141,6 +190,18 @@ void mouseClicked(){
   loadPieces();  //draw out all the pieces
     
     println("Reset");
+  }
+  
+  if (gameEnd && isMouseOver(350, 400, 200, 80)){
+    prevTurnCount = 1;
+    turnCount = 1;
+  
+    field = new Board();
+    phase = 1;
+  
+    background(255);
+    image(board, 0, 0);
+    loadPieces();  //draw out all the pieces
   }
 
   
