@@ -122,4 +122,15 @@ King WhKing = new King(7, 4, "King", 1);
     //remove the old piece
     chessBoard[lastY][lastX] = null;
  }
+ 
+ public void passantMove(int y, int x, int lastY, int lastX){
+   chessBoard[y][x] = chessBoard[lastY][lastX];
+   chessBoard[y][x].setRow(y);
+   chessBoard[y][x].setCol(x);
+   
+   //remove the old piece
+   chessBoard[lastY][lastX] = null;
+   chessBoard[lastY][x] = null;
+ }
+ 
 }

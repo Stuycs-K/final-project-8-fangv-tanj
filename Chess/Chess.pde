@@ -142,6 +142,10 @@ int[][] movementDraw(int x, int y){
     held.futureMove(field.chessBoard);  
     
     int spaces = held.space.size();
+    
+     if (held.name.equals("Pawn")){
+      passantDraw(x, y, moveable);
+    }
       
     for (int i = 0; i < spaces; i +=1){
     
@@ -165,8 +169,27 @@ int[][] movementDraw(int x, int y){
         }
       }
     }
+    
   }
   return moveable;
+}
+
+int[][] passantDraw(int x, int y, int[][]moveable){
+ Pawn pawn = (Pawn)field.chessBoard[y][x];
+ int extra = pawn.extraSpace.size();
+ for (int i = 0; i < extra; i +=1){
+   float[] coord = pawn.extraSpace.get(i);
+   int xCoord = (int)coord[1];
+   int yCoord = (int)coord[0];
+   
+    if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
+        fill(200, 0, 0);
+        square(xCoord * 100, yCoord * 100, 100);  
+        loadPieces();
+        moveable[yCoord][xCoord] = -1;
+       }
+ }
+ return moveable;
 }
 
 boolean isMouseOver(int x, int y, int w, int h){
@@ -230,8 +253,6 @@ void mouseClicked(){
       
   }
   
-          
-  
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
     
@@ -242,6 +263,17 @@ void mouseClicked(){
       turnCount +=1;
       
     }
+    
+    if (phase == 2 && field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
+      field.passantMove(y, x, lastY, lastX);
+      
+      //return to neutral phaase
+      phase = 1;
+    
+      //increase turn count
+      turnCount +=1;
+    }
+    
   }
 }
 
