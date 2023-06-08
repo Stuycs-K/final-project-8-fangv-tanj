@@ -1,10 +1,12 @@
 public class Pawn extends Piece{
+  ArrayList<float[]> extraSpace;
   boolean firstMove;
   boolean canPassant;
   
   public Pawn(int r, int c, String n, int co){
    super(r, c, n, co);
    firstMove = true;
+   canPassant = false;
   }
   
 boolean inBound(int r, int c){
@@ -19,6 +21,32 @@ boolean legalMove(Piece[][] cboard, int r, int c){
       return true;
     }else{
       return false;
+    }
+  }
+  
+  void passant(Piece[][] cboard){
+       extraSpace = new ArrayList<float[]>();
+   if (inBound(row - 1, col - 1)){
+     if (cboard[row][col - 1] != null){
+       Piece other = cboard[row][col - 1];
+       if (other.Color != Color && other.name.equals("Pawn")){
+         Pawn pawn = (Pawn)other;
+         if (pawn.canPassant){
+           extraSpace.add(new float[]{row - 1, col - 1});
+         }
+        }
+      }
+    }
+    if (inBound(row -1, col + 1)){
+      if (cboard[row][col + 1] != null){
+        Piece other = cboard[row][col + 1];
+        if (other.Color != Color && other.name.equals("Pawn")){
+          Pawn pawn = (Pawn)other;
+          if (pawn.canPassant){
+            extraSpace.add(new float[]{row - 1, col + 1});
+          }
+        }
+      }
     }
   }
  
@@ -63,23 +91,6 @@ boolean legalMove(Piece[][] cboard, int r, int c){
        }
      }
     }
-    if (inBound(row - 1, col - 1)){
-      if (cboard[row][col - 1] != null){
-        Piece other = cboard[row][col - 1];
-        if (other.Color != Color && other.name.equals("Pawn")){
-        super.space.add(new float[]{row - 1, col - 1});
-        cboard[row][col - 1] = null;
-        }
-      }
-    }
-    if (inBound(row -1, col + 1)){
-      if (cboard[row][col + 1] != null){
-        Piece other = cboard[row][col + 1];
-        if (other.Color != Color && other.name.equals("Pawn")){
-        super.space.add(new float[]{row - 1, col + 1});
-        cboard[row][col + 1] = null;
-        }
-      }
-    }
+    passant(cboard);
    }
  }

@@ -234,8 +234,6 @@ void mouseClicked(){
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
-    field.chessBoard[y][x].movement(field.chessBoard);
-    
     
       //return to neutral phaase
       phase = 1;
