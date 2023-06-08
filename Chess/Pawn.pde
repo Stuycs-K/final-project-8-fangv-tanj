@@ -72,5 +72,14 @@ boolean legalMove(Piece[][] cboard, int r, int c){
         }
       }
     }
+    if (inBound(row -1, col + 1)){
+      if (cboard[row][col + 1] != null){
+        Piece other = cboard[row][col + 1];
+        if (other.Color != Color && other.name.equals("Pawn")){
+        super.space.add(new float[]{row - 1, col + 1});
+        cboard[row][col + 1] = null;
+        }
+      }
+    }
    }
  }
