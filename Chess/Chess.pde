@@ -17,6 +17,7 @@ int lastX;
 int lastY;
 int turnCount;
 int prevTurnCount;
+int tempCount;
 
 Board field;
 int[][]moveable;
@@ -255,6 +256,15 @@ void mouseClicked(){
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
+      if (field.chessBoard[y][x].name.equals("Pawn")){
+        Pawn pawn = (Pawn)field.chessBoard[y][x];
+        if (y - lastY == -2){
+          pawn.canPassant = true;
+          tempCount = turnCount;
+        }else{
+        pawn.canPassant = false;
+        }
+      }
     
       //return to neutral phaase
       phase = 1;

@@ -21,8 +21,8 @@ King WhKing = new King(7, 4, "King", 1);
     //for (int i = 0; i < 8; i +=1){
     //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
     //}
-    chessBoard[3][3] = new Pawn(3, 3, "Pawn", 0);
-    chessBoard[3][5] = new Pawn(3, 5, "Pawn", 0);
+    chessBoard[1][3] = new Pawn(1, 3, "Pawn", 0);
+    chessBoard[1][5] = new Pawn(1, 5, "Pawn", 0);
     //chessBoard[2][3] = new Piece(2, 3, "Knight", 0);
     //chessBoard[2][5] = new Piece(2, 5, "Knight", 0);
     
