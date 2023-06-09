@@ -59,6 +59,14 @@ void draw(){
     loadPieces();
     prevTurnCount = turnCount;  
     
+    King king = field.getKing(turnCount % 2);
+    
+    if (field.inCheck(turnCount % 2)){
+      king.inCheck = true;
+    }else{
+      king.inCheck = false;
+    }
+    
     //Checkmate
     if (field.movesLeft(turnCount % 2)){
       if (field.inCheck(turnCount % 2)){
@@ -222,7 +230,10 @@ void mouseClicked(){
       image(board, 0, 0);
       loadPieces();
       
-        println(clicked.name);
+        if (clicked.name.equals("King")){
+          King king = (King)clicked;
+          println(king.inCheck);
+        }
       
       phase = 2;
       lastX = x;

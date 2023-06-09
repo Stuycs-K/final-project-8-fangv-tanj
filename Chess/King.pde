@@ -1,8 +1,10 @@
 public class King extends Piece{
+  boolean inCheck;
   
   public King(int r, int c, String n, int co){
    super(r, c, n, co);
    firstMove = true;
+   inCheck = false;
   }
    
    boolean isEmpty(Piece[][] cboard, String side){
@@ -27,17 +29,19 @@ public class King extends Piece{
    void movement(Piece[][] cboard){
      space = new ArrayList<float[]>();
      
-     if (firstMove && isEmpty(cboard, "left")){
-       if (cboard[row][0] != null){
-         if (cboard[row][0].name.equals("Rook") && cboard[row][0].firstMove){
-           space.add(new float[]{row, col - 2});
+     if (!inCheck){
+       if (firstMove && isEmpty(cboard, "left")){
+         if (cboard[row][0] != null){
+           if (cboard[row][0].name.equals("Rook") && cboard[row][0].firstMove){
+             space.add(new float[]{row, col - 2});
+           }
          }
        }
-     }
-     if (firstMove && isEmpty(cboard, "right")){
-       if (cboard[row][7] != null){
-         if (cboard[row][7].name.equals("Rook") && cboard[row][7].firstMove){
-           space.add(new float[]{row, col + 2});
+       if (firstMove && isEmpty(cboard, "right")){
+         if (cboard[row][7] != null){
+           if (cboard[row][7].name.equals("Rook") && cboard[row][7].firstMove){
+             space.add(new float[]{row, col + 2});
+           }
          }
        }
      }
