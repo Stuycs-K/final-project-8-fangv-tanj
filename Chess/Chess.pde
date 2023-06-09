@@ -17,6 +17,7 @@ int lastX;
 int lastY;
 int turnCount;
 int prevTurnCount;
+int tempCount;
 
 Board field;
 int[][]moveable;
@@ -150,6 +151,10 @@ int[][] movementDraw(int x, int y){
     field.futureMove(held);  
     
     int spaces = held.space.size();
+    
+     if (held.name.equals("Pawn")){
+      passantDraw(x, y, moveable);
+    }
       
     for (int i = 0; i < spaces; i +=1){
     
@@ -173,8 +178,27 @@ int[][] movementDraw(int x, int y){
         }
       }
     }
+    
   }
   return moveable;
+}
+
+int[][] passantDraw(int x, int y, int[][]moveable){
+ Pawn pawn = (Pawn)field.chessBoard[y][x];
+ int extra = pawn.extraSpace.size();
+ for (int i = 0; i < extra; i +=1){
+   float[] coord = pawn.extraSpace.get(i);
+   int xCoord = (int)coord[1];
+   int yCoord = (int)coord[0];
+   
+    if (xCoord < 8 && xCoord >= 0 && yCoord < 8 && yCoord >= 0){
+        fill(200, 0, 0);
+        square(xCoord * 100, yCoord * 100, 100);  
+        loadPieces();
+        moveable[yCoord][xCoord] = -1;
+       }
+ }
+ return moveable;
 }
 
 boolean isMouseOver(int x, int y, int w, int h){
@@ -236,14 +260,30 @@ void mouseClicked(){
       int[][]temp = movementDraw(x, y);
          
       moveable = temp;
+    
   }
-  
-          
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
+      if (field.chessBoard[y][x].name.equals("Pawn")){
+        Pawn pawn = (Pawn)field.chessBoard[y][x];
+        if (y - lastY == -2){
+          pawn.canPassant = true;
+          tempCount = turnCount;
+        }else{
+        pawn.canPassant = false;
+        }
+      }
     field.chessBoard[y][x].movement(field.chessBoard);
     field.chessBoard[y][x].firstMove = false;
+    
+    
+    //queen promotion
+   if(field.chessBoard[y][x].name == "Pawn" && field.chessBoard[y][x].row == 0){
+     field.chessBoard[y][x].setRow(y);
+     field.chessBoard[y][x].setCol(x);
+     field.chessBoard[y][x] = new Piece(field.chessBoard[y][x].row, field.chessBoard[y][x].col, "Queen", field.chessBoard[y][x].Color);
+   }
     
     
     //Moving rook over for castling
@@ -265,6 +305,17 @@ void mouseClicked(){
       turnCount +=1;
       
     }
+    
+    if (phase == 2 && field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
+      field.passantMove(y, x, lastY, lastX);
+      
+      //return to neutral phaase
+      phase = 1;
+    
+      //increase turn count
+      turnCount +=1;
+    }
+    
   }
 }
 
