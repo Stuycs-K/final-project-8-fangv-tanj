@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 public class Board{
 private Piece[][] chessBoard; //change to array of pieces when constructor is done
+boolean donePromote = true;
 King BlKing = new King(0, 4, "King", 0);
 King WhKing = new King(7, 4, "King", 1);
   
@@ -24,17 +25,17 @@ King WhKing = new King(7, 4, "King", 1);
     
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
-    //chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
-    //chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
-    //chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
+    chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
+    chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
+    chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
     chessBoard[7][4] = WhKing;
-    //chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
-    //chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
+    chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
+    chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
     chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
     
-    //for (int i = 0; i < 8; i +=1){
-    //  chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
-    //}
+    for (int i = 0; i < 8; i +=1){
+      chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
+    }
   }
   
   //flip the board 
@@ -97,7 +98,7 @@ King WhKing = new King(7, 4, "King", 1);
             Piece current = chessBoard[r][c];
             if (current.Color == Color){
               current.movement(chessBoard);
-              current.futureMove(chessBoard);
+              futureMove(current);
             for (int i = 0; i < current.space.size(); i +=1){
               endGame = false;
             }
@@ -108,6 +109,37 @@ King WhKing = new King(7, 4, "King", 1);
     return endGame;
   }
   
+     void futureMove(Piece piece){
+     int prevRow = piece.row;
+     int prevCol = piece.col;
+     Piece temp;
+    for (int i = 0; i < piece.space.size(); i +=1){
+      float[] coord = piece.space.get(i);
+      int xCoord = (int)coord[1];
+      int yCoord = (int)coord[0];
+      if (chessBoard[yCoord][xCoord] != null){
+        temp = chessBoard[yCoord][xCoord];
+          
+          move(yCoord, xCoord, prevRow, prevCol);
+          
+           if (field.inCheck(turnCount % 2)){
+             piece.space.remove(i);
+             i -=1;
+          }
+           move(prevRow, prevCol, yCoord, xCoord);
+            chessBoard[yCoord][xCoord] = temp;
+      }else{
+      
+         move(yCoord, xCoord, prevRow, prevCol);
+           if (field.inCheck(turnCount % 2)){
+           piece.space.remove(i);
+           i -=1;
+          }
+          move(prevRow, prevCol, yCoord, xCoord);
+      }
+    }
+  }
+  
  public void move(int y, int x, int lastY, int lastX){
       //queen promotion
    if(chessBoard[lastY][lastX].name == "Pawn" && chessBoard[lastY][lastX].row == 1){
@@ -115,12 +147,19 @@ King WhKing = new King(7, 4, "King", 1);
      chessBoard[lastY][lastX].setCol(x);
      chessBoard[y][x] = new Piece(chessBoard[lastY][lastX].row, chessBoard[lastY][lastX].col, "Queen", chessBoard[lastY][lastX].Color);
    }
+   else{
      chessBoard[y][x] = chessBoard[lastY][lastX];
      chessBoard[y][x].setRow(y);
      chessBoard[y][x].setCol(x);
+   }
      
     //remove the old piece
     chessBoard[lastY][lastX] = null;
-    chessBoard[y][x].firstMove = false;
  }
+ 
+  public Piece promotion(int y, int x){
+   return new Piece(y, x, "Queen", 1);
+  }
+  
+  
 }

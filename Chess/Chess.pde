@@ -59,6 +59,14 @@ void draw(){
     loadPieces();
     prevTurnCount = turnCount;  
     
+    King king = field.getKing(turnCount % 2);
+    
+    if (field.inCheck(turnCount % 2)){
+      king.inCheck = true;
+    }else{
+      king.inCheck = false;
+    }
+    
     //Checkmate
     if (field.movesLeft(turnCount % 2)){
       if (field.inCheck(turnCount % 2)){
@@ -139,7 +147,7 @@ int[][] movementDraw(int x, int y){
   
     Piece held = field.chessBoard[y][x];
     held.movement(field.chessBoard);
-    held.futureMove(field.chessBoard);  
+    field.futureMove(held);  
     
     int spaces = held.space.size();
       
@@ -215,6 +223,7 @@ void mouseClicked(){
     Piece clicked = field.chessBoard[y][x];
     int playerTurn = turnCount % 2;
 
+
   if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
       //reset screen
       background(255);
@@ -227,7 +236,6 @@ void mouseClicked(){
       int[][]temp = movementDraw(x, y);
          
       moveable = temp;
-      
   }
   
           
@@ -235,7 +243,20 @@ void mouseClicked(){
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
     field.move(y, x, lastY, lastX);
     field.chessBoard[y][x].movement(field.chessBoard);
+    field.chessBoard[y][x].firstMove = false;
     
+    
+    //Moving rook over for castling
+    if (field.chessBoard[y][x].name.equals("King")){
+      if (x - lastX == 2){
+        field.chessBoard[y][x - 1] = field.chessBoard[y][7];
+        field.chessBoard[y][7] = null;
+      }
+      if (x - lastX == - 2){
+        field.chessBoard[y][x + 1] = field.chessBoard[y][0];
+        field.chessBoard[y][0] = null;
+      }
+    }
     
       //return to neutral phaase
       phase = 1;
