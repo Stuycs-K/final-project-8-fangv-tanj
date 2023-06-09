@@ -2,7 +2,7 @@ public class King extends Piece{
   
   public King(int r, int c, String n, int co){
    super(r, c, n, co);
-   firstMove = true;
+   super.firstMove = true;
   }
    
    void movement(Piece[][] cboard){
@@ -10,9 +10,9 @@ public class King extends Piece{
      
      //CHECK THIS:
      
-     //if(firstMove && cboard[row][col+1]==null && cboard[row][col+2]==null && cboard[row][col+3].firstMove){
+     //if(firstMove && cboard[row][col+1]==null && cboard[row][col+2]==null){
      // if (legalMove(cboard, row, col+2)){
-     //  println(cboard[row][col+3].firstMove);
+     //  println(cboard[row][col+3]);
      //  space.add(new float[]{row, col+2});
      // }
      //}
@@ -42,11 +42,6 @@ public class King extends Piece{
      }
      if (legalMove(cboard, row+1, col+1)){
        space.add(new float[]{row+1, col+1}); 
-     }
-     if(firstMove && cboard[row][5]==null && cboard[row][6]==null){ 
-       if (legalMove(cboard, row, col+2)){
-         space.add(new float[]{row, col+2}); 
-       }
      }
   }
   
