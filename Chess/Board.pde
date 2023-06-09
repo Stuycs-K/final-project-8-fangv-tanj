@@ -97,7 +97,7 @@ King WhKing = new King(7, 4, "King", 1);
             Piece current = chessBoard[r][c];
             if (current.Color == Color){
               current.movement(chessBoard);
-              current.futureMove(chessBoard);
+              futureMove(current);
             for (int i = 0; i < current.space.size(); i +=1){
               endGame = false;
             }
@@ -106,6 +106,35 @@ King WhKing = new King(7, 4, "King", 1);
       }
      }
     return endGame;
+  }
+  
+     void futureMove(Piece current){
+     int prevRow = current.row;
+     int prevCol = current.col;
+    for (int i = 0; i < current.space.size(); i +=1){
+      float[] coord = current.space.get(i);
+      int xCoord = (int)coord[1];
+      int yCoord = (int)coord[0];
+      if (chessBoard[yCoord][xCoord] != null){
+          
+          move(yCoord, xCoord, prevRow, prevCol);
+          
+           if (field.inCheck(turnCount % 2)){
+             current.space.remove(i);
+             i -=1;
+          }
+           move(prevRow, prevCol, yCoord, xCoord);
+            chessBoard[yCoord][xCoord] = current;
+      }else{
+      
+         move(yCoord, xCoord, prevRow, prevCol);
+           if (field.inCheck(turnCount % 2)){
+           current.space.remove(i);
+           i -=1;
+          }
+          move(prevRow, prevCol, yCoord, xCoord);
+      }
+    }
   }
   
  public void move(int y, int x, int lastY, int lastX){

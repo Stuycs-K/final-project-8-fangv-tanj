@@ -9,14 +9,11 @@ public class King extends Piece{
      space = new ArrayList<float[]>();
      
      //CHECK THIS:
-     
-     //if(firstMove && cboard[row][col+1]==null && cboard[row][col+2]==null && cboard[row][col+3].firstMove){
-     // if (legalMove(cboard, row, col+2)){
-     //  println(cboard[row][col+3].firstMove);
-     //  space.add(new float[]{row, col+2});
-     // }
-     //}
-     
+     if (firstMove && cboard[row][col + 1] == null && cboard[row][col + 2] == null && cboard[row][col + 3].name.equals("Rook")){
+       space.add(new float[]{row, col + 2});
+       cboard[row][col + 3] = null;
+     }
+
      
      
      if (legalMove(cboard, row-1, col-1)){

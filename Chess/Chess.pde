@@ -139,7 +139,7 @@ int[][] movementDraw(int x, int y){
   
     Piece held = field.chessBoard[y][x];
     held.movement(field.chessBoard);
-    held.futureMove(field.chessBoard);  
+    field.futureMove(held);  
     
     int spaces = held.space.size();
       
