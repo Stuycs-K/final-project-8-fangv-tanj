@@ -1,5 +1,4 @@
 public class Pawn extends Piece{
-  boolean firstMove;
   boolean canPassant;
   
   public Pawn(int r, int c, String n, int co){
@@ -25,10 +24,6 @@ boolean legalMove(Piece[][] cboard, int r, int c){
  void movement(Piece[][] cboard){
    space = new ArrayList<float[]>();
    boolean x = true;
-   firstMove = true;
-   if(row != 6){
-     firstMove = false;
-   }
    if(firstMove){
      if (legalMove(cboard, row - 1, col)){
        super.space.add(new float[]{row-1, col});
