@@ -1,11 +1,11 @@
 public class Pawn extends Piece{
-  ArrayList<float[]> extraSpace;;
+  ArrayList<float[]> extraSpace;
   boolean canPassant;
   
   public Pawn(int r, int c, String n, int co){
    super(r, c, n, co);
-   canPassant = false;
    super.firstMove = true;
+   canPassant = false;
   }
   
 boolean inBound(int r, int c){
