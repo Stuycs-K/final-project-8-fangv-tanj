@@ -28,7 +28,7 @@ King WhKing = new King(7, 4, "King", 1);
     //chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
     //chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
     chessBoard[7][4] = WhKing;
-    chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
+    //chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
     //chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
     chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
     

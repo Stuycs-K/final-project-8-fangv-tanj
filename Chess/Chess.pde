@@ -230,11 +230,6 @@ void mouseClicked(){
       image(board, 0, 0);
       loadPieces();
       
-        if (clicked.name.equals("King")){
-          King king = (King)clicked;
-          println(king.inCheck);
-        }
-      
       phase = 2;
       lastX = x;
       lastY = y;
@@ -251,6 +246,19 @@ void mouseClicked(){
     field.move(y, x, lastY, lastX);
     field.chessBoard[y][x].movement(field.chessBoard);
     field.chessBoard[y][x].firstMove = false;
+    
+    
+    //Moving rook over for castling
+    if (field.chessBoard[y][x].name.equals("King")){
+      if (x - lastX == 2){
+        field.chessBoard[y][x - 1] = field.chessBoard[y][7];
+        field.chessBoard[y][7] = null;
+      }
+      if (x - lastX == - 2){
+        field.chessBoard[y][x + 1] = field.chessBoard[y][0];
+        field.chessBoard[y][0] = null;
+      }
+    }
     
       //return to neutral phaase
       phase = 1;
