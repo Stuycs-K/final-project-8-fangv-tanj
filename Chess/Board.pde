@@ -108,28 +108,30 @@ King WhKing = new King(7, 4, "King", 1);
     return endGame;
   }
   
-     void futureMove(Piece current){
-     int prevRow = current.row;
-     int prevCol = current.col;
-    for (int i = 0; i < current.space.size(); i +=1){
-      float[] coord = current.space.get(i);
+     void futureMove(Piece piece){
+     int prevRow = piece.row;
+     int prevCol = piece.col;
+     Piece temp;
+    for (int i = 0; i < piece.space.size(); i +=1){
+      float[] coord = piece.space.get(i);
       int xCoord = (int)coord[1];
       int yCoord = (int)coord[0];
       if (chessBoard[yCoord][xCoord] != null){
+        temp = chessBoard[yCoord][xCoord];
           
           move(yCoord, xCoord, prevRow, prevCol);
           
            if (field.inCheck(turnCount % 2)){
-             current.space.remove(i);
+             piece.space.remove(i);
              i -=1;
           }
            move(prevRow, prevCol, yCoord, xCoord);
-            chessBoard[yCoord][xCoord] = current;
+            chessBoard[yCoord][xCoord] = temp;
       }else{
       
          move(yCoord, xCoord, prevRow, prevCol);
            if (field.inCheck(turnCount % 2)){
-           current.space.remove(i);
+           piece.space.remove(i);
            i -=1;
           }
           move(prevRow, prevCol, yCoord, xCoord);
@@ -150,6 +152,5 @@ King WhKing = new King(7, 4, "King", 1);
      
     //remove the old piece
     chessBoard[lastY][lastX] = null;
-    chessBoard[y][x].firstMove = false;
  }
 }
