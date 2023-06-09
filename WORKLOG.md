@@ -80,6 +80,18 @@ Victor Fang
     * Version for Checkmate
     * Version for Stalemate
 
+  6/7/23
+
+  * Created branch for en passant
+  * Started en passant
+
+  6/8/23
+
+  * Finished en passant
+    * Fixed bug with pawn deleting pieces even if a move isn't made.
+    * Added the rules for en passant, pawn can only capture another pawn to the left/right of it
+      if that pawn made an initial move of 2 tiles (only the turn right after).
+
 Junxi Tan
 
 5/22/23
