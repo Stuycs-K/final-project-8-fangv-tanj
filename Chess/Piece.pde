@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 public class Piece{
+  boolean firstMove;
   int row;
   int col;
   String name;
@@ -11,6 +12,7 @@ public class Piece{
    col = c;
    name = n;
    Color = co;
+   firstMove = true;
   }
   
   public Piece(String n){
@@ -32,6 +34,7 @@ public class Piece{
       direction(cboard, "DOWN", "NONE");
       direction(cboard, "NONE", "RIGHT");
       direction(cboard, "NONE", "LEFT");
+      
    }
    if (name == "Rook"){
       direction(cboard, "UP", "NONE");

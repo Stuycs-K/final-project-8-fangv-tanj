@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 public class Board{
 private Piece[][] chessBoard; //change to array of pieces when constructor is done
+boolean donePromote = true;
 King BlKing = new King(0, 4, "King", 0);
 King WhKing = new King(7, 4, "King", 1);
   
@@ -9,33 +10,36 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard = new Piece[8][8];
     
     //black side
-    chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
-    chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
-    chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
-    chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
+    //chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
+    //chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
+    //chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
+    //chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
     chessBoard[0][4] = BlKing;
-    chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
-    chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
-    chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
+    //chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
+    //chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
+    //chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
     
     //for (int i = 0; i < 8; i +=1){
     //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
     //}
+<<<<<<< HEAD
     chessBoard[1][3] = new Pawn(1, 3, "Pawn", 0);
     chessBoard[1][5] = new Pawn(1, 5, "Pawn", 0);
     //chessBoard[2][3] = new Piece(2, 3, "Knight", 0);
     //chessBoard[2][5] = new Piece(2, 5, "Knight", 0);
     
     chessBoard[3][4] = new Pawn(3, 4, "Pawn", 1);
+=======
+>>>>>>> 7184b99504942a909dce6acd3e854450cf2d6d0f
     
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
-    chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
-    chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
-    chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
+    //chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
+    //chessBoard[7][2] = new Piece(7, 2, "Bishop", 1);
+    //chessBoard[7][3] = new Piece(7, 3, "Queen", 1);
     chessBoard[7][4] = WhKing;
-    chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
-    chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
+    //chessBoard[7][5] = new Piece(7, 5, "Bishop", 1);
+    //chessBoard[7][6] = new Piece(7, 6, "Knight", 1);
     chessBoard[7][7] = new Piece(7, 7, "Rook", 1);
     
     //for (int i = 0; i < 8; i +=1){
@@ -115,14 +119,24 @@ King WhKing = new King(7, 4, "King", 1);
   }
   
  public void move(int y, int x, int lastY, int lastX){
+      //queen promotion
+   if(chessBoard[lastY][lastX].name == "Pawn" && chessBoard[lastY][lastX].row == 1){
+     chessBoard[lastY][lastX].setRow(y);
+     chessBoard[lastY][lastX].setCol(x);
+     chessBoard[y][x] = new Piece(chessBoard[lastY][lastX].row, chessBoard[lastY][lastX].col, "Queen", chessBoard[lastY][lastX].Color);
+   }
+   else{
      chessBoard[y][x] = chessBoard[lastY][lastX];
      chessBoard[y][x].setRow(y);
      chessBoard[y][x].setCol(x);
+   }
      
     //remove the old piece
     chessBoard[lastY][lastX] = null;
+    chessBoard[y][x].firstMove = false;
  }
  
+<<<<<<< HEAD
  public void passantMove(int y, int x, int lastY, int lastX){
    chessBoard[y][x] = chessBoard[lastY][lastX];
    chessBoard[y][x].setRow(y);
@@ -133,4 +147,11 @@ King WhKing = new King(7, 4, "King", 1);
    chessBoard[lastY][x] = null;
  }
  
+=======
+  public Piece promotion(int y, int x){
+   return new Piece(y, x, "Queen", 1);
+  }
+  
+  
+>>>>>>> 7184b99504942a909dce6acd3e854450cf2d6d0f
 }

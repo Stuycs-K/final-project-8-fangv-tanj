@@ -1,12 +1,19 @@
 public class Pawn extends Piece{
+<<<<<<< HEAD
   ArrayList<float[]> extraSpace;
   boolean firstMove;
+=======
+>>>>>>> 7184b99504942a909dce6acd3e854450cf2d6d0f
   boolean canPassant;
   
   public Pawn(int r, int c, String n, int co){
    super(r, c, n, co);
+<<<<<<< HEAD
    firstMove = true;
    canPassant = false;
+=======
+   super.firstMove = true;
+>>>>>>> 7184b99504942a909dce6acd3e854450cf2d6d0f
   }
   
 boolean inBound(int r, int c){
@@ -53,10 +60,6 @@ boolean legalMove(Piece[][] cboard, int r, int c){
  void movement(Piece[][] cboard){
    space = new ArrayList<float[]>();
    boolean x = true;
-   firstMove = true;
-   if(row != 6){
-     firstMove = false;
-   }
    if(firstMove){
      if (legalMove(cboard, row - 1, col)){
        super.space.add(new float[]{row-1, col});
