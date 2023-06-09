@@ -10,17 +10,17 @@ King WhKing = new King(7, 4, "King", 1);
     
     //black side
     chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
-    chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
-    chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
-    chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
+    //chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
+    //chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
+    //chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
     chessBoard[0][4] = BlKing;
-    chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
-    chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
+    //chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
+    //chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
     chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
     
-    for (int i = 0; i < 8; i +=1){
-      chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
-    }
+    //for (int i = 0; i < 8; i +=1){
+    //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
+    //}
     
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);

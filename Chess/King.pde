@@ -26,17 +26,20 @@ public class King extends Piece{
    
    void movement(Piece[][] cboard){
      space = new ArrayList<float[]>();
-     println(firstMove);
      
      if (firstMove && isEmpty(cboard, "left")){
-       if (cboard[row][col + 3] != null){
-         if (cboard[row][col + 3].name.equals("Rook") && cboard[row][col + 3].firstMove){
-           space.add(new float[]{row, col + 2});
+       if (cboard[row][0] != null){
+         if (cboard[row][0].name.equals("Rook") && cboard[row][0].firstMove){
+           space.add(new float[]{row, col - 2});
          }
        }
      }
      if (firstMove && isEmpty(cboard, "right")){
-       space.add(new float[]{row, col - 2});
+       if (cboard[row][7] != null){
+         if (cboard[row][7].name.equals("Rook") && cboard[row][7].firstMove){
+           space.add(new float[]{row, col + 2});
+         }
+       }
      }
 
      

@@ -215,11 +215,14 @@ void mouseClicked(){
     Piece clicked = field.chessBoard[y][x];
     int playerTurn = turnCount % 2;
 
+
   if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
       //reset screen
       background(255);
       image(board, 0, 0);
       loadPieces();
+      
+        println(clicked.name);
       
       phase = 2;
       lastX = x;
