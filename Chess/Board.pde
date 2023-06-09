@@ -109,8 +109,8 @@ King WhKing = new King(7, 4, "King", 1);
   }
   
  public void move(int y, int x, int lastY, int lastX){
+   //queen promotion
    if(chessBoard[lastY][lastX].name == "Pawn" && chessBoard[lastY][lastX].row == 1){
-     //queen promotion
      chessBoard[lastY][lastX].setRow(y);
      chessBoard[lastY][lastX].setCol(x);
      chessBoard[y][x] = new Piece(chessBoard[lastY][lastX].row, chessBoard[lastY][lastX].col, "Queen", chessBoard[lastY][lastX].Color);

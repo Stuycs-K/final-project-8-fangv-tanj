@@ -12,6 +12,7 @@ public class Piece{
    col = c;
    name = n;
    Color = co;
+   firstMove = true;
   }
   
   public Piece(String n){
@@ -72,6 +73,7 @@ public class Piece{
         space.add(new float[]{row + 1, col - 2});
       }
    }
+   firstMove = false;
   }
      
    boolean legalMove(Piece[][] cboard, int r, int c){

@@ -62,4 +62,5 @@ boolean legalMove(Piece[][] cboard, int r, int c){
      }
     }
    }
+  
  }
