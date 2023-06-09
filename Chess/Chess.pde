@@ -236,8 +236,6 @@ void mouseClicked(){
       int[][]temp = movementDraw(x, y);
          
       moveable = temp;
-      //println(clicked.firstMove);
-      
   }
   
           

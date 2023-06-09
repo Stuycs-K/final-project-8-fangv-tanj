@@ -29,6 +29,8 @@ public class King extends Piece{
    void movement(Piece[][] cboard){
      space = new ArrayList<float[]>();
      
+     
+     //Castle code
      if (!inCheck){
        if (firstMove && isEmpty(cboard, "left")){
          if (cboard[row][0] != null){
