@@ -92,6 +92,12 @@ Victor Fang
     * Added the rules for en passant, pawn can only capture another pawn to the left/right of it
       if that pawn made an initial move of 2 tiles (only the turn right after).
 
+  6/9/23
+
+  * Finished castle implementation, works for both sides and both players.
+    * Castle can only be done if king and the rook have not been moved. 
+    * Can't castle if in check.
+
 Junxi Tan
 
 5/22/23
