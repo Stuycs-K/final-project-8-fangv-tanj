@@ -299,8 +299,9 @@ void mouseClicked(){
   }
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
+  
   removeStates(states, currentState);
- states.add(new Board());
+  states.add(new Board());
   states.get(states.size() - 1).copyOver(field);
   currentState +=1;
 
@@ -337,26 +338,30 @@ void mouseClicked(){
         field.chessBoard[y][0] = null;
       }
     }
-    
-      //return to neutral phaase
-      phase = 1;
-    
-      //increase turn count
-      turnCount +=1;
+        //return to neutral phaase
+        phase = 1;
+      
+        //increase turn count
+        turnCount +=1;
       
     }
     
-    if (phase == 2 && field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){\
-     states.add(new Board());
-     states.get(states.size() - 1).copyOver(field);
-     currentState +=1;
-      field.passantMove(y, x, lastY, lastX);
+    if (phase == 2){
+      if(field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
+        
+        removeStates(states, currentState);
+        states.add(new Board());
+        states.get(states.size() - 1).copyOver(field);
+        currentState +=1;
+        
+        field.passantMove(y, x, lastY, lastX);
+        
+        //return to neutral phaase
+        phase = 1;
       
-      //return to neutral phaase
-      phase = 1;
-    
-      //increase turn count
-      turnCount +=1;
+        //increase turn count
+        turnCount +=1;
+      }
     }
     
   }
@@ -366,6 +371,12 @@ void removeStates(ArrayList<Board> states, int current){
   for (int i = current + 1; i < states.size(); i +=1){
     states.remove(i);
   }
+}
+
+void promote(int y, int x){
+ fill(255);
+ square(x * 100, y * 100, 100); 
+ println("YO");
 }
 
 void loadImages(){

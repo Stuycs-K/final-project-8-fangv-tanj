@@ -190,13 +190,18 @@ King WhKing = new King(7, 4, "King", 1);
   }
   
  public void move(int y, int x, int lastY, int lastX){
-
-     chessBoard[y][x] = chessBoard[lastY][lastX];
-     chessBoard[y][x].setRow(y);
-     chessBoard[y][x].setCol(x);
+       chessBoard[y][x] = chessBoard[lastY][lastX];
+       chessBoard[y][x].setRow(y);
+       chessBoard[y][x].setCol(x);
      
     //remove the old piece
     chessBoard[lastY][lastX] = null;
+ }
+ 
+  public void promote(int y, int x){
+    fill(255);
+   square(x * 100, y * 100, 100);
+   println("boon");
  }
  
  public void passantMove(int y, int x, int lastY, int lastX){
@@ -208,10 +213,6 @@ King WhKing = new King(7, 4, "King", 1);
    chessBoard[lastY][lastX] = null;
    chessBoard[lastY][x] = null;
  }
- 
-  public Piece promotion(int y, int x){
-   return new Piece(y, x, "Queen", 1);
-  }
   
   String toString(Piece[][] board){
   String res = "(";
