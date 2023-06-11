@@ -25,8 +25,8 @@ King WhKing = new King(7, 4, "King", 1);
     
         chessBoard[1][3] = new Pawn(1, 3, "Pawn", 0);
     chessBoard[1][5] = new Pawn(1, 5, "Pawn", 0);
-    //chessBoard[2][3] = new Piece(2, 3, "Knight", 0);
-    //chessBoard[2][5] = new Piece(2, 5, "Knight", 0);
+    chessBoard[2][3] = new Piece(2, 3, "Knight", 0);
+    chessBoard[2][5] = new Piece(2, 5, "Knight", 0);
     
     chessBoard[3][4] = new Pawn(3, 4, "Pawn", 1);
     

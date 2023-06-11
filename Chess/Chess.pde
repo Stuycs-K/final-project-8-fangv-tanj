@@ -255,7 +255,6 @@ void mouseClicked(){
     println("Undo");
     field.copyOver(states.get(currentState));
     currentState -=1;
-        println(currentState);
     turnCount -=1;
     prevTurnCount -=1;
     background(255);
@@ -304,6 +303,7 @@ void mouseClicked(){
   }
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
+  removeStates(states, currentState);
  states.add(new Board());
   states.get(states.size() - 1).copyOver(field);
   currentState +=1;
@@ -363,6 +363,12 @@ void mouseClicked(){
       turnCount +=1;
     }
     
+  }
+}
+
+void removeStates(ArrayList<Board> states, int current){
+  for (int i = current + 1; i < states.size(); i +=1){
+    states.remove(i);
   }
 }
 
