@@ -226,8 +226,8 @@ boolean isMouseOver(int x, int y, int w, int h){
 void mouseClicked(){
   
   if (isMouseOver(825, 500, 100, 50)){
-    println("prev: "+ prevField.toString());
-    println("current: "+ field.toString());
+    println("prev: "+ prevField.toString(prevField.chessBoard));
+    println("current: "+ field.toString(field.chessBoard));
   }
   
   
@@ -248,7 +248,6 @@ void mouseClicked(){
   
   if (isMouseOver(825, 300, 100, 50)){
     println("Undo");
-    field.chessBoard = new Piece[8][8];
     field.copyOver(prevField);
     turnCount -=1;
     prevTurnCount -=1;

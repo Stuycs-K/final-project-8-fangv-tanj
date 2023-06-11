@@ -41,10 +41,25 @@ King WhKing = new King(7, 4, "King", 1);
   void copyOver(Board template){
     for (int r = 0; r < 8; r +=1){
       for (int c = 0; c < 8; c +=1){
-        this.chessBoard[r][c] = template.chessBoard[r][c];
         if (template.chessBoard[r][c] != null){
-          this.chessBoard[r][c].setRow(template.chessBoard[r][c].row);
-          this.chessBoard[r][c].setCol(template.chessBoard[r][c].col);
+          int ro = template.chessBoard[r][c].row;
+          int co = template.chessBoard[r][c].col;
+          String n = template.chessBoard[r][c].name;
+          int colo = template.chessBoard[r][c].Color;
+          if (template.chessBoard[r][c].name.equals("Pawn")){
+            Pawn newPawn = new Pawn(ro, co, n, colo);
+            this.chessBoard[r][c] = newPawn;
+          }else{
+            if (template.chessBoard[r][c].name.equals("King")){
+              King newKing = new King(ro, co, n, colo);
+              this.chessBoard[r][c] = newKing;
+            }else{
+              Piece newCopy = new Piece(ro, co, n, colo);
+              this.chessBoard[r][c] = newCopy; 
+            }
+          }
+        }else{
+          this.chessBoard[r][c] = null;
         }
       }
     }
@@ -189,22 +204,22 @@ King WhKing = new King(7, 4, "King", 1);
           res = res + "empty ";
         }else{
         if (board[r][c].name.equals("Rook")){
-          res = res + "Rook ";
+          res = res + "Rook " + board[r][c].row + " " + board[r][c].col + " ";
         }
         if (board[r][c].name.equals("Knight")){
-          res = res + "Knight ";
+          res = res + "Knight " + board[r][c].row + " " + board[r][c].col + " ";
         }
         if (board[r][c].name.equals("Bishop")){
-          res = res + "Bishop ";
+          res = res + "Bishop " + board[r][c].row + " " + board[r][c].col + " ";
         }
         if (board[r][c].name.equals("Queen")){
-          res = res + "Queen ";
+          res = res + "Queen " + board[r][c].row + " " + board[r][c].col + " ";
         }
         if (board[r][c].name.equals("King")){
-          res = res + "King ";
+          res = res + "King " + board[r][c].row + " " + board[r][c].col + " ";
         }
         if (board[r][c].name.equals("Pawn")){
-          res = res + "Pawn ";
+          res = res + "Pawn " + board[r][c].row + " " + board[r][c].col + " ";
         }
       }
       }
