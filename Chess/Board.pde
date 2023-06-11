@@ -181,5 +181,38 @@ King WhKing = new King(7, 4, "King", 1);
    return new Piece(y, x, "Queen", 1);
   }
   
+  String toString(Piece[][] board){
+  String res = "(";
+  for (int r = 0; r < 8; r +=1){
+      for (int c = 0; c < 8; c +=1){
+        if (board[r][c] == null){
+          res = res + "empty ";
+        }else{
+        if (board[r][c].name.equals("Rook")){
+          res = res + "Rook ";
+        }
+        if (board[r][c].name.equals("Knight")){
+          res = res + "Knight ";
+        }
+        if (board[r][c].name.equals("Bishop")){
+          res = res + "Bishop ";
+        }
+        if (board[r][c].name.equals("Queen")){
+          res = res + "Queen ";
+        }
+        if (board[r][c].name.equals("King")){
+          res = res + "King ";
+        }
+        if (board[r][c].name.equals("Pawn")){
+          res = res + "Pawn ";
+        }
+      }
+      }
+      res = res + ")";
+      res = res + "\n";
+      res = res + "(";
+    }
+    return res;
+  }
   
 }

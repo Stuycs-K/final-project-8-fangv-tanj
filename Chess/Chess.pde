@@ -60,6 +60,12 @@ void draw(){
   fill(0, 0, 0);
   text("Undo", 825, 340);
   
+  //Temo boardstate Button
+  fill(211, 211, 211);
+  rect(825,500,100,50);
+  textSize(30);
+  fill(0, 0, 0);
+  text("Boards", 825, 540);
   
   //Board and Pieces
   if (prevTurnCount < turnCount){
@@ -217,7 +223,14 @@ boolean isMouseOver(int x, int y, int w, int h){
   return false;
 }
 
-void mouseClicked(){ 
+void mouseClicked(){
+  
+  if (isMouseOver(825, 500, 100, 50)){
+    println("prev: "+ prevField.toString());
+    println("current: "+ field.toString());
+  }
+  
+  
   if(isMouseOver(825,100,100,50)){
   
   prevTurnCount = 1;
@@ -231,6 +244,17 @@ void mouseClicked(){
   loadPieces();  //draw out all the pieces
     
     println("Reset");
+  }
+  
+  if (isMouseOver(825, 300, 100, 50)){
+    println("Undo");
+    field.chessBoard = new Piece[8][8];
+    field.copyOver(prevField);
+    turnCount -=1;
+    prevTurnCount -=1;
+    background(255);
+    image(board, 0, 0);
+    loadPieces();  //draw out all the pieces
   }
   
   if (gameEnd && isMouseOver(350, 400, 200, 80)){
@@ -273,6 +297,7 @@ void mouseClicked(){
   }
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
+  prevField.copyOver(field);
     field.move(y, x, lastY, lastX);
       if (field.chessBoard[y][x].name.equals("Pawn")){
         Pawn pawn = (Pawn)field.chessBoard[y][x];
