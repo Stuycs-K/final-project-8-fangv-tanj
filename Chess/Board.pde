@@ -38,6 +38,18 @@ King WhKing = new King(7, 4, "King", 1);
     }
   }
   
+  void copyOver(Board template){
+    for (int r = 0; r < 8; r +=1){
+      for (int c = 0; c < 8; c +=1){
+        this.chessBoard[r][c] = template.chessBoard[r][c];
+        if (template.chessBoard[r][c] != null){
+          this.chessBoard[r][c].setRow(template.chessBoard[r][c].row);
+          this.chessBoard[r][c].setCol(template.chessBoard[r][c].col);
+        }
+      }
+    }
+  }
+  
   //flip the board 
   public void flip(){
     

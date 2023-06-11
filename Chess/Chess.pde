@@ -20,6 +20,7 @@ int prevTurnCount;
 int tempCount;
 
 Board field;
+Board prevField;
 int[][]moveable;
 
 int phase;
@@ -36,6 +37,7 @@ void setup(){
   turnCount = 1;
   
   field = new Board();
+  prevField = new Board();
   phase = 1;
   
   background(255);
@@ -50,6 +52,13 @@ void draw(){
   textSize(30);
   fill(0, 0, 0);
   text("Reset", 825, 140);
+
+  //Undo Button
+  fill(211, 211, 211);
+  rect(825,300,100,50);
+  textSize(30);
+  fill(0, 0, 0);
+  text("Undo", 825, 340);
   
   
   //Board and Pieces
