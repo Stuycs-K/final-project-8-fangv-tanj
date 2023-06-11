@@ -226,8 +226,10 @@ void mouseClicked(){
   
   prevTurnCount = 1;
   turnCount = 1;
+  currentState = -1;
   
   field = new Board();
+  states = new ArrayList<Board>();
   phase = 1;
   
   background(255);
@@ -240,6 +242,8 @@ void mouseClicked(){
   if (isMouseOver(825, 300, 100, 50) && turnCount > 1){
     println("Undo");
     field.copyOver(states.get(currentState));
+    currentState -=1;
+        println(currentState);
     turnCount -=1;
     prevTurnCount -=1;
     background(255);
@@ -289,6 +293,9 @@ void mouseClicked(){
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
  states.add(new Board());
+  states.get(states.size() - 1).copyOver(field);
+  currentState +=1;
+  println(currentState);
     field.move(y, x, lastY, lastX);
       if (field.chessBoard[y][x].name.equals("Pawn")){
         Pawn pawn = (Pawn)field.chessBoard[y][x];
