@@ -55,7 +55,7 @@ void draw(){
   //Board and Pieces
   if (prevTurnCount < turnCount){
     background(255);
-    //field.flip(); //after each turn flip the board
+    field.flip(); //after each turn flip the board
     image(board, 0, 0);
     loadPieces();
     prevTurnCount = turnCount;  
