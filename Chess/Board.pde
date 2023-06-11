@@ -23,6 +23,13 @@ King WhKing = new King(7, 4, "King", 1);
     //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
     //}
     
+        chessBoard[1][3] = new Pawn(1, 3, "Pawn", 0);
+    chessBoard[1][5] = new Pawn(1, 5, "Pawn", 0);
+    //chessBoard[2][3] = new Piece(2, 3, "Knight", 0);
+    //chessBoard[2][5] = new Piece(2, 5, "Knight", 0);
+    
+    chessBoard[3][4] = new Pawn(3, 4, "Pawn", 1);
+    
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
     chessBoard[7][1] = new Piece(7, 1, "Knight", 1);
@@ -48,20 +55,26 @@ King WhKing = new King(7, 4, "King", 1);
           int colo = template.chessBoard[r][c].getColor();
           if (template.chessBoard[r][c].name.equals("Pawn")){
             Pawn newPawn = new Pawn(ro, co, n, colo);
+            Pawn ogPawn = (Pawn)template.chessBoard[r][c];
             this.chessBoard[r][c] = newPawn;
+            newPawn.firstMove = template.chessBoard[r][c].firstMove;
+            newPawn.canPassant = ogPawn.canPassant;
           }else{
             if (template.chessBoard[r][c].name.equals("King")){
               if (template.chessBoard[r][c].Color == 0){
                 BlKing = new King(ro, co, n, colo);
                 this.chessBoard[r][c] = BlKing;
+                BlKing.firstMove = template.chessBoard[r][c].firstMove;
                 }
                 if (template.chessBoard[r][c].Color == 1){
                 WhKing = new King(ro, co, n, colo);
                 this.chessBoard[r][c] = WhKing;
+                WhKing.firstMove = template.chessBoard[r][c].firstMove;
                 }
             }else{
               Piece newCopy = new Piece(ro, co, n, colo);
-              this.chessBoard[r][c] = newCopy; 
+              this.chessBoard[r][c] = newCopy;
+              newCopy.firstMove = template.chessBoard[r][c].firstMove;
             }
           }
         }else{

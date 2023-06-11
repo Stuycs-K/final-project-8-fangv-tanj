@@ -49,6 +49,13 @@ void setup(){
 
 }
 void draw(){
+  
+   //Temo boardstate Button
+  fill(211, 211, 211);
+  rect(825,500,100,50);
+  textSize(30);
+  fill(0, 0, 0);
+  text("Boards", 825, 540);
    
   //Reset Button
   fill(211, 211, 211);
@@ -222,6 +229,11 @@ boolean isMouseOver(int x, int y, int w, int h){
 
 void mouseClicked(){
   
+    if (isMouseOver(825, 500, 100, 50)){
+    println("prev: "+ states.get(currentState).toString(states.get(currentState).chessBoard));
+    println("current: "+ field.toString(field.chessBoard));
+  }
+  
   if(isMouseOver(825,100,100,50)){
   
   prevTurnCount = 1;
@@ -295,7 +307,7 @@ void mouseClicked(){
  states.add(new Board());
   states.get(states.size() - 1).copyOver(field);
   currentState +=1;
-  println(currentState);
+
     field.move(y, x, lastY, lastX);
       if (field.chessBoard[y][x].name.equals("Pawn")){
         Pawn pawn = (Pawn)field.chessBoard[y][x];
@@ -338,7 +350,10 @@ void mouseClicked(){
       
     }
     
-    if (phase == 2 && field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
+    if (phase == 2 && field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){\
+     states.add(new Board());
+     states.get(states.size() - 1).copyOver(field);
+     currentState +=1;
       field.passantMove(y, x, lastY, lastX);
       
       //return to neutral phaase
