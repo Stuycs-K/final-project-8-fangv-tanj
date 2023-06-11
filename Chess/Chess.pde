@@ -49,13 +49,6 @@ void setup(){
 
 }
 void draw(){
-  
-   //Temo boardstate Button
-  fill(211, 211, 211);
-  rect(825,500,100,50);
-  textSize(30);
-  fill(0, 0, 0);
-  text("Boards", 825, 540);
    
   //Reset Button
   fill(211, 211, 211);
@@ -66,10 +59,10 @@ void draw(){
 
   //Undo Button
   fill(211, 211, 211);
-  rect(825,300,100,50);
+  rect(825,200,100,50);
   textSize(30);
   fill(0, 0, 0);
-  text("Undo", 825, 340);
+  text("Undo", 825, 240);
   
   //Board and Pieces
   if (prevTurnCount < turnCount){
@@ -251,15 +244,18 @@ void mouseClicked(){
     println("Reset");
   }
   
-  if (isMouseOver(825, 300, 100, 50) && turnCount > 1){
-    println("Undo");
+  if (isMouseOver(825, 200, 100, 50) && turnCount > 1){
+
     field.copyOver(states.get(currentState));
     currentState -=1;
     turnCount -=1;
     prevTurnCount -=1;
+    
     background(255);
     image(board, 0, 0);
     loadPieces();  //draw out all the pieces
+    
+    println("Undo");
   }
   
   if (gameEnd && isMouseOver(350, 400, 200, 80)){

@@ -10,25 +10,19 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard = new Piece[8][8];
     
     //black side
-    //chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
+    chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
     chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
-    //chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
-    //chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
+    chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
+    chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
     chessBoard[0][4] = BlKing;
-    //chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
-    //chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
-    //chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
+    chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
+    chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
+    chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
     
-    //for (int i = 0; i < 8; i +=1){
-    //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
-    //}
+    for (int i = 0; i < 8; i +=1){
+      chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
+    }
     
-        chessBoard[1][3] = new Pawn(1, 3, "Pawn", 0);
-    chessBoard[1][5] = new Pawn(1, 5, "Pawn", 0);
-    chessBoard[2][3] = new Piece(2, 3, "Knight", 0);
-    chessBoard[2][5] = new Piece(2, 5, "Knight", 0);
-    
-    chessBoard[3][4] = new Pawn(3, 4, "Pawn", 1);
     
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
@@ -62,14 +56,18 @@ King WhKing = new King(7, 4, "King", 1);
           }else{
             if (template.chessBoard[r][c].name.equals("King")){
               if (template.chessBoard[r][c].Color == 0){
+                boolean check = BlKing.inCheck;
                 BlKing = new King(ro, co, n, colo);
                 this.chessBoard[r][c] = BlKing;
                 BlKing.firstMove = template.chessBoard[r][c].firstMove;
+                BlKing.inCheck = check;
                 }
                 if (template.chessBoard[r][c].Color == 1){
-                WhKing = new King(ro, co, n, colo);
-                this.chessBoard[r][c] = WhKing;
-                WhKing.firstMove = template.chessBoard[r][c].firstMove;
+                  boolean check = WhKing.inCheck;
+                  WhKing = new King(ro, co, n, colo);
+                  this.chessBoard[r][c] = WhKing;
+                  WhKing.firstMove = template.chessBoard[r][c].firstMove;
+                  WhKing.inCheck = check;
                 }
             }else{
               Piece newCopy = new Piece(ro, co, n, colo);
