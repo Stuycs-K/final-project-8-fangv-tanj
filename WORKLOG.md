@@ -95,8 +95,14 @@ Victor Fang
   6/9/23
 
   * Finished castle implementation, works for both sides and both players.
-    * Castle can only be done if king and the rook have not been moved. 
+    * Castle can only be done if king and the rook have not been moved.
     * Can't castle if in check.
+
+  6/10/23
+
+  * Fixed bug where pawns would not activate check correctly.
+  * Began work on an undo button.
+    * Currently debugging.
 
 Junxi Tan
 
