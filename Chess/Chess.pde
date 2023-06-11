@@ -20,14 +20,14 @@ int prevTurnCount;
 int tempCount;
 
 Board field;
-Board prevField;
 int[][]moveable;
 
 int phase;
 boolean gameEnd;
 PFont monsterrat;
 
-boolean tempa;
+ArrayList<Board> states;
+int currentState;
 
 
 void setup(){
@@ -39,13 +39,14 @@ void setup(){
   turnCount = 1;
   
   field = new Board();
-  prevField = new Board();
+  states = new ArrayList<Board>();
+  currentState = -1;
   phase = 1;
   
   background(255);
   image(board, 0, 0);
   loadPieces();  //draw out all the pieces
-  tempa = false;
+
 }
 void draw(){
    
@@ -62,13 +63,6 @@ void draw(){
   textSize(30);
   fill(0, 0, 0);
   text("Undo", 825, 340);
-  
-  //Temo boardstate Button
-  fill(211, 211, 211);
-  rect(825,500,100,50);
-  textSize(30);
-  fill(0, 0, 0);
-  text("Boards", 825, 540);
   
   //Board and Pieces
   if (prevTurnCount < turnCount){
@@ -228,12 +222,6 @@ boolean isMouseOver(int x, int y, int w, int h){
 
 void mouseClicked(){
   
-  if (isMouseOver(825, 500, 100, 50)){
-    println("prev: "+ prevField.toString(prevField.chessBoard));
-    println("current: "+ field.toString(field.chessBoard));
-  }
-  
-  
   if(isMouseOver(825,100,100,50)){
   
   prevTurnCount = 1;
@@ -249,9 +237,9 @@ void mouseClicked(){
     println("Reset");
   }
   
-  if (isMouseOver(825, 300, 100, 50)){
+  if (isMouseOver(825, 300, 100, 50) && turnCount > 1){
     println("Undo");
-    field.copyOver(prevField);
+    field.copyOver(states.get(currentState));
     turnCount -=1;
     prevTurnCount -=1;
     background(255);
@@ -300,7 +288,7 @@ void mouseClicked(){
   }
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
-  prevField.copyOver(field);
+ states.add(new Board());
     field.move(y, x, lastY, lastX);
       if (field.chessBoard[y][x].name.equals("Pawn")){
         Pawn pawn = (Pawn)field.chessBoard[y][x];
