@@ -10,10 +10,10 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard = new Piece[8][8];
     
     //black side
-    //chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
+    chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
     chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
-    //chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
-    //chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
+    chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
+    chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
     chessBoard[0][4] = BlKing;
     //chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
     //chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
@@ -74,11 +74,6 @@ King WhKing = new King(7, 4, "King", 1);
             Piece current = chessBoard[r][c];
             if (current.Color != Color){
               current.movement(chessBoard);
-              if (current.name.equals("Pawn")){
-                current.space.clear();
-                current.space.add(new float[]{current.row+ 1, current.col - 1});
-                current.space.add(new float[]{current.row+ 1, current.col + 1});
-              }
               for (int i = 0; i < current.space.size(); i +=1){
                 float[] coord = current.space.get(i);
                 int xCoord = (int)coord[1];
@@ -146,29 +141,23 @@ King WhKing = new King(7, 4, "King", 1);
   }
   
  public void move(int y, int x, int lastY, int lastX){
-       chessBoard[y][x] = chessBoard[lastY][lastX];
-       chessBoard[y][x].setRow(y);
-       chessBoard[y][x].setCol(x);
+      //queen promotion
+      println(chessBoard[lastY][lastX].name == "Pawn" && chessBoard[lastY][lastX].row == 0);
+   if(chessBoard[lastY][lastX].name == "Pawn" && chessBoard[lastY][lastX].row == 0){
+     chessBoard[lastY][lastX].setRow(y);
+     chessBoard[lastY][lastX].setCol(x);
+     chessBoard[y][x] = new Piece(chessBoard[lastY][lastX].row, chessBoard[lastY][lastX].col, "Queen", chessBoard[lastY][lastX].Color);
+   }
+   else{
+     chessBoard[y][x] = chessBoard[lastY][lastX];
+     chessBoard[y][x].setRow(y);
+     chessBoard[y][x].setCol(x);
+   }
      
     //remove the old piece
     chessBoard[lastY][lastX] = null;
  }
  
-  public void promote(int y, int x){
-    fill(255);
-   square(x * 100, y * 100, 100);
-   println("boon");
- }
- 
- public void passantMove(int y, int x, int lastY, int lastX){
-   chessBoard[y][x] = chessBoard[lastY][lastX];
-   chessBoard[y][x].setRow(y);
-   chessBoard[y][x].setCol(x);
-   
-   //remove the old piece
-   chessBoard[lastY][lastX] = null;
-   chessBoard[lastY][x] = null;
- }
   
   
 }

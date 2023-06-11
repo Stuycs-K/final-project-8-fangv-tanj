@@ -24,6 +24,7 @@ int[][]moveable;
 
 int phase;
 boolean gameEnd;
+boolean flip = true;
 PFont monsterrat;
 
 
@@ -280,9 +281,12 @@ void mouseClicked(){
     
     //queen promotion
    if(field.chessBoard[y][x].name == "Pawn" && field.chessBoard[y][x].row == 0){
+     flip = false;
      field.chessBoard[y][x].setRow(y);
      field.chessBoard[y][x].setCol(x);
      field.chessBoard[y][x] = new Piece(field.chessBoard[y][x].row, field.chessBoard[y][x].col, "Queen", field.chessBoard[y][x].Color);
+     promote(y,x);
+     println("promote");
    }
     
     
@@ -297,26 +301,35 @@ void mouseClicked(){
         field.chessBoard[y][0] = null;
       }
     }
-    
-      //return to neutral phaase
-      phase = 1;
-    
-      //increase turn count
-      turnCount +=1;
+      if(flip){
+        //return to neutral phaase
+        phase = 1;
+      
+        //increase turn count
+        turnCount +=1;
+      }
       
     }
     
-    if (phase == 2 && field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
-      field.passantMove(y, x, lastY, lastX);
+    if (phase == 2&&flip){
+      if(field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
+        field.passantMove(y, x, lastY, lastX);
+        
+        //return to neutral phaase
+        phase = 1;
       
-      //return to neutral phaase
-      phase = 1;
-    
-      //increase turn count
-      turnCount +=1;
+        //increase turn count
+        turnCount +=1;
+      }
     }
     
   }
+}
+
+void promote(int y, int x){
+ fill(255);
+ square(x * 100, y * 100, 100); 
+ println("YO");
 }
 
 void loadImages(){
