@@ -297,26 +297,33 @@ void mouseClicked(){
         field.chessBoard[y][0] = null;
       }
     }
-    
-      //return to neutral phaase
-      phase = 1;
-    
-      //increase turn count
-      turnCount +=1;
+        //return to neutral phaase
+        phase = 1;
+      
+        //increase turn count
+        turnCount +=1;
       
     }
     
-    if (phase == 2 && field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
-      field.passantMove(y, x, lastY, lastX);
+    if (phase == 2){
+      if(field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
+        field.passantMove(y, x, lastY, lastX);
+        
+        //return to neutral phaase
+        phase = 1;
       
-      //return to neutral phaase
-      phase = 1;
-    
-      //increase turn count
-      turnCount +=1;
+        //increase turn count
+        turnCount +=1;
+      }
     }
     
   }
+}
+
+void promote(int y, int x){
+ fill(255);
+ square(x * 100, y * 100, 100); 
+ println("YO");
 }
 
 void loadImages(){
