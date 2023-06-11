@@ -51,8 +51,14 @@ King WhKing = new King(7, 4, "King", 1);
             this.chessBoard[r][c] = newPawn;
           }else{
             if (template.chessBoard[r][c].name.equals("King")){
-              King newKing = new King(ro, co, n, colo);
-              this.chessBoard[r][c] = newKing;
+              if (template.chessBoard[r][c].Color == 0){
+                BlKing = new King(ro, co, n, colo);
+                this.chessBoard[r][c] = BlKing;
+                }
+                if (template.chessBoard[r][c].Color == 1){
+                WhKing = new King(ro, co, n, colo);
+                this.chessBoard[r][c] = WhKing;
+                }
             }else{
               Piece newCopy = new Piece(ro, co, n, colo);
               this.chessBoard[r][c] = newCopy; 
