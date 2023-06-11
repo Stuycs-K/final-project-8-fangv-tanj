@@ -42,10 +42,10 @@ King WhKing = new King(7, 4, "King", 1);
     for (int r = 0; r < 8; r +=1){
       for (int c = 0; c < 8; c +=1){
         if (template.chessBoard[r][c] != null){
-          int ro = template.chessBoard[r][c].row;
-          int co = template.chessBoard[r][c].col;
-          String n = template.chessBoard[r][c].name;
-          int colo = template.chessBoard[r][c].Color;
+          int ro = template.chessBoard[r][c].getRow();
+          int co = template.chessBoard[r][c].getCol();
+          String n = template.chessBoard[r][c].getName();
+          int colo = template.chessBoard[r][c].getColor();
           if (template.chessBoard[r][c].name.equals("Pawn")){
             Pawn newPawn = new Pawn(ro, co, n, colo);
             this.chessBoard[r][c] = newPawn;

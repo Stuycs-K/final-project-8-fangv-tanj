@@ -27,6 +27,8 @@ int phase;
 boolean gameEnd;
 PFont monsterrat;
 
+boolean tempa;
+
 
 void setup(){
   monsterrat = createFont("Montserrat-Bold.ttf", 128);
@@ -43,6 +45,7 @@ void setup(){
   background(255);
   image(board, 0, 0);
   loadPieces();  //draw out all the pieces
+  tempa = false;
 }
 void draw(){
    
@@ -254,6 +257,7 @@ void mouseClicked(){
     background(255);
     image(board, 0, 0);
     loadPieces();  //draw out all the pieces
+      tempa = true;
   }
   
   if (gameEnd && isMouseOver(350, 400, 200, 80)){
@@ -292,6 +296,14 @@ void mouseClicked(){
       int[][]temp = movementDraw(x, y);
          
       moveable = temp;
+      
+      if (tempa){
+        for (int r = 0; r < 8; r +=1){
+          for (int c = 0; c < 8; c +=1){
+            println(moveable[r][c]);
+          }
+        }
+        }
     
   }
   
