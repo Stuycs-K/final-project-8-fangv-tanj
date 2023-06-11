@@ -75,6 +75,7 @@ King WhKing = new King(7, 4, "King", 1);
             if (current.Color != Color){
               current.movement(chessBoard);
               if (current.name.equals("Pawn")){
+                current.space.clear();
                 current.space.add(new float[]{current.row+ 1, current.col - 1});
                 current.space.add(new float[]{current.row+ 1, current.col + 1});
               }
