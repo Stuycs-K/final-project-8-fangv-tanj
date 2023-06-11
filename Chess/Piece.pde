@@ -134,6 +134,21 @@ public class Piece{
    }
 
   
+  int getRow(){
+    return row;
+  }
+  
+  int getCol(){
+    return col;
+  }
+  
+  String getName(){
+    return name;
+  }
+  
+  int getColor(){
+    return Color;
+  }
   
   void setRow(int r){
   row = r;

@@ -10,18 +10,19 @@ King WhKing = new King(7, 4, "King", 1);
     chessBoard = new Piece[8][8];
     
     //black side
-    //chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
+    chessBoard[0][0] = new Piece(0, 0, "Rook", 0);
     chessBoard[0][1] = new Piece(0, 1, "Knight", 0);
-    //chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
-    //chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
+    chessBoard[0][2] = new Piece(0, 2, "Bishop", 0);
+    chessBoard[0][3] = new Piece(0, 3, "Queen", 0);
     chessBoard[0][4] = BlKing;
-    //chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
-    //chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
-    //chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
+    chessBoard[0][5] = new Piece(0, 5, "Bishop", 0);
+    chessBoard[0][6] = new Piece(0, 6, "Knight", 0);
+    chessBoard[0][7] = new Piece(0, 7, "Rook", 0);
     
-    //for (int i = 0; i < 8; i +=1){
-    //  chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
-    //}
+    for (int i = 0; i < 8; i +=1){
+      chessBoard[1][i] = new Pawn(1, i, "Pawn", 0);
+    }
+    
     
     //white side
     chessBoard[7][0] = new Piece(7, 0, "Rook", 1);
@@ -35,6 +36,49 @@ King WhKing = new King(7, 4, "King", 1);
     
     for (int i = 0; i < 8; i +=1){
       chessBoard[6][i] = new Pawn(6, i, "Pawn", 1);
+    }
+  }
+  
+  void copyOver(Board template){
+    for (int r = 0; r < 8; r +=1){
+      for (int c = 0; c < 8; c +=1){
+        if (template.chessBoard[r][c] != null){
+          int ro = template.chessBoard[r][c].getRow();
+          int co = template.chessBoard[r][c].getCol();
+          String n = template.chessBoard[r][c].getName();
+          int colo = template.chessBoard[r][c].getColor();
+          if (template.chessBoard[r][c].name.equals("Pawn")){
+            Pawn newPawn = new Pawn(ro, co, n, colo);
+            Pawn ogPawn = (Pawn)template.chessBoard[r][c];
+            this.chessBoard[r][c] = newPawn;
+            newPawn.firstMove = template.chessBoard[r][c].firstMove;
+            newPawn.canPassant = ogPawn.canPassant;
+          }else{
+            if (template.chessBoard[r][c].name.equals("King")){
+              if (template.chessBoard[r][c].Color == 0){
+                boolean check = BlKing.inCheck;
+                BlKing = new King(ro, co, n, colo);
+                this.chessBoard[r][c] = BlKing;
+                BlKing.firstMove = template.chessBoard[r][c].firstMove;
+                BlKing.inCheck = check;
+                }
+                if (template.chessBoard[r][c].Color == 1){
+                  boolean check = WhKing.inCheck;
+                  WhKing = new King(ro, co, n, colo);
+                  this.chessBoard[r][c] = WhKing;
+                  WhKing.firstMove = template.chessBoard[r][c].firstMove;
+                  WhKing.inCheck = check;
+                }
+            }else{
+              Piece newCopy = new Piece(ro, co, n, colo);
+              this.chessBoard[r][c] = newCopy;
+              newCopy.firstMove = template.chessBoard[r][c].firstMove;
+            }
+          }
+        }else{
+          this.chessBoard[r][c] = null;
+        }
+      }
     }
   }
   
@@ -170,5 +214,38 @@ King WhKing = new King(7, 4, "King", 1);
    chessBoard[lastY][x] = null;
  }
   
+  String toString(Piece[][] board){
+  String res = "(";
+  for (int r = 0; r < 8; r +=1){
+      for (int c = 0; c < 8; c +=1){
+        if (board[r][c] == null){
+          res = res + "empty ";
+        }else{
+        if (board[r][c].name.equals("Rook")){
+          res = res + "Rook " + board[r][c].row + " " + board[r][c].col + " ";
+        }
+        if (board[r][c].name.equals("Knight")){
+          res = res + "Knight " + board[r][c].row + " " + board[r][c].col + " ";
+        }
+        if (board[r][c].name.equals("Bishop")){
+          res = res + "Bishop " + board[r][c].row + " " + board[r][c].col + " ";
+        }
+        if (board[r][c].name.equals("Queen")){
+          res = res + "Queen " + board[r][c].row + " " + board[r][c].col + " ";
+        }
+        if (board[r][c].name.equals("King")){
+          res = res + "King " + board[r][c].row + " " + board[r][c].col + " ";
+        }
+        if (board[r][c].name.equals("Pawn")){
+          res = res + "Pawn " + board[r][c].row + " " + board[r][c].col + " ";
+        }
+      }
+      }
+      res = res + ")";
+      res = res + "\n";
+      res = res + "(";
+    }
+    return res;
+  }
   
 }

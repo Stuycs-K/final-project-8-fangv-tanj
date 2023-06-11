@@ -20,14 +20,14 @@ int prevTurnCount;
 int tempCount;
 
 Board field;
+Board prevField;
 int[][]moveable;
 
 int phase;
 boolean gameEnd;
 PFont monsterrat;
 
-ArrayList<Board> states;
-int currentState;
+boolean tempa;
 
 
 void setup(){
@@ -39,14 +39,13 @@ void setup(){
   turnCount = 1;
   
   field = new Board();
-  states = new ArrayList<Board>();
-  currentState = -1;
+  prevField = new Board();
   phase = 1;
   
   background(255);
   image(board, 0, 0);
   loadPieces();  //draw out all the pieces
-
+  tempa = false;
 }
 void draw(){
    
@@ -59,10 +58,17 @@ void draw(){
 
   //Undo Button
   fill(211, 211, 211);
-  rect(825,200,100,50);
+  rect(825,300,100,50);
   textSize(30);
   fill(0, 0, 0);
-  text("Undo", 825, 240);
+  text("Undo", 825, 340);
+  
+  //Temo boardstate Button
+  fill(211, 211, 211);
+  rect(825,500,100,50);
+  textSize(30);
+  fill(0, 0, 0);
+  text("Boards", 825, 540);
   
   //Board and Pieces
   if (prevTurnCount < turnCount){
@@ -74,20 +80,20 @@ void draw(){
     
     King king = field.getKing(turnCount % 2);
     
-    if (field.inCheck(turnCount % 2)){
-      king.inCheck = true;
-    }else{
-      king.inCheck = false;
-    }
+    //if (field.inCheck(turnCount % 2)){
+    //  king.inCheck = true;
+    //}else{
+    //  king.inCheck = false;
+    //}
     
-    //Checkmate
-    if (field.movesLeft(turnCount % 2)){
-      if (field.inCheck(turnCount % 2)){
-        gameEnd("checkmate");
-        }else{
-        gameEnd("stalemate");
-      }
-    }
+    ////Checkmate
+    //if (field.movesLeft(turnCount % 2)){
+    //  if (field.inCheck(turnCount % 2)){
+    //    gameEnd("checkmate");
+    //    }else{
+    //    gameEnd("stalemate");
+    //  }
+    //}
   }
 }
 
@@ -160,7 +166,7 @@ int[][] movementDraw(int x, int y){
   
     Piece held = field.chessBoard[y][x];
     held.movement(field.chessBoard);
-    field.futureMove(held);  
+    //field.futureMove(held);  
     
     int spaces = held.space.size();
     
@@ -222,19 +228,18 @@ boolean isMouseOver(int x, int y, int w, int h){
 
 void mouseClicked(){
   
-    if (isMouseOver(825, 500, 100, 50)){
-    println("prev: "+ states.get(currentState).toString(states.get(currentState).chessBoard));
+  if (isMouseOver(825, 500, 100, 50)){
+    println("prev: "+ prevField.toString(prevField.chessBoard));
     println("current: "+ field.toString(field.chessBoard));
   }
+  
   
   if(isMouseOver(825,100,100,50)){
   
   prevTurnCount = 1;
   turnCount = 1;
-  currentState = -1;
   
   field = new Board();
-  states = new ArrayList<Board>();
   phase = 1;
   
   background(255);
@@ -244,18 +249,15 @@ void mouseClicked(){
     println("Reset");
   }
   
-  if (isMouseOver(825, 200, 100, 50) && turnCount > 1){
-
-    field.copyOver(states.get(currentState));
-    currentState -=1;
+  if (isMouseOver(825, 300, 100, 50)){
+    println("Undo");
+    field.copyOver(prevField);
     turnCount -=1;
     prevTurnCount -=1;
-    
     background(255);
     image(board, 0, 0);
     loadPieces();  //draw out all the pieces
-    
-    println("Undo");
+      tempa = true;
   }
   
   if (gameEnd && isMouseOver(350, 400, 200, 80)){
@@ -294,17 +296,19 @@ void mouseClicked(){
       int[][]temp = movementDraw(x, y);
          
       moveable = temp;
-
+      
+      if (tempa){
+        for (int r = 0; r < 8; r +=1){
+          for (int c = 0; c < 8; c +=1){
+            println(moveable[r][c]);
+          }
+        }
+        }
     
   }
   
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
-  
-  removeStates(states, currentState);
-  states.add(new Board());
-  states.get(states.size() - 1).copyOver(field);
-  currentState +=1;
-
+  prevField.copyOver(field);
     field.move(y, x, lastY, lastX);
       if (field.chessBoard[y][x].name.equals("Pawn")){
         Pawn pawn = (Pawn)field.chessBoard[y][x];
@@ -338,45 +342,26 @@ void mouseClicked(){
         field.chessBoard[y][0] = null;
       }
     }
-        //return to neutral phaase
-        phase = 1;
-      
-        //increase turn count
-        turnCount +=1;
+    
+      //return to neutral phaase
+      phase = 1;
+    
+      //increase turn count
+      turnCount +=1;
       
     }
     
-    if (phase == 2){
-      if(field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
-        
-        removeStates(states, currentState);
-        states.add(new Board());
-        states.get(states.size() - 1).copyOver(field);
-        currentState +=1;
-        
-        field.passantMove(y, x, lastY, lastX);
-        
-        //return to neutral phaase
-        phase = 1;
+    if (phase == 2 && field.chessBoard[lastY][lastX].name.equals("Pawn") && moveable[y][x] == -1){
+      field.passantMove(y, x, lastY, lastX);
       
-        //increase turn count
-        turnCount +=1;
-      }
+      //return to neutral phaase
+      phase = 1;
+    
+      //increase turn count
+      turnCount +=1;
     }
     
   }
-}
-
-void removeStates(ArrayList<Board> states, int current){
-  for (int i = current + 1; i < states.size(); i +=1){
-    states.remove(i);
-  }
-}
-
-void promote(int y, int x){
- fill(255);
- square(x * 100, y * 100, 100); 
- println("YO");
 }
 
 void loadImages(){
