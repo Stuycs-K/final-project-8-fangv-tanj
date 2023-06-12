@@ -1,7 +1,8 @@
 # APCS Final Project
 THIS DOCUMENT IS REQUIRED
 ## Group Info
-Group Name:
+Group Name: kjbawdrdfo;jwqebf;kqebf;q
+
 Member Names: Victor Fang, Junxi Tan
 ## Overview
 For the final project, we have decided that we want to recreate the game of chess in processing. The player will be able to interact with the pieces through the use of their mouse. Every piece that is normally in chess will be implemented and be able to move just like how the pieces move in the real game. After someone's turn, the board will switch sides to simulate a real game of chess in which both players are sitting opposite each other. The game will end and reset either when one person checkmates the other: or the game ends in a stalemate.
@@ -9,6 +10,8 @@ For the final project, we have decided that we want to recreate the game of ches
 Once you click run, the game will immediately start.
 
 White moves first and each player can move a piece by clicking on a piece then clicking on a tile with circles on it.
+
+If a piece is capturable, the tile will become red.
 
 After each player moves the board will flip.
 
