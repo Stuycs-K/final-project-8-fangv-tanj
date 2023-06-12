@@ -5,7 +5,7 @@ Group Name: kjbawdrdfo;jwqebf;kqebf;q
 
 Member Names: Victor Fang, Junxi Tan
 ## Overview
-For the final project, we have decided that we want to recreate the game of chess in processing. The player will be able to interact with the pieces through the use of their mouse. Every piece that is normally in chess will be implemented and be able to move just like how the pieces move in the real game. After someone's turn, the board will switch sides to simulate a real game of chess in which both players are sitting opposite each other. The game will end and reset either when one person checkmates the other: or the game ends in a stalemate.
+For the final project, we have decided that we want to recreate the game of chess in processing. The player will be able to interact with the pieces through the use of their mouse. Every piece that is normally in chess will be implemented and be able to move just like how the pieces move in the real game. The game is played in turns, once a player has moved their piece, their turn ends and the turn passes to the other player. After someone's turn, the board will switch sides to simulate a real game of chess in which both players are sitting opposite each other. In normal chess, there are the black and white side. However in this version, the playing side will always be white and the opponent will always be black since the POV will be switching every turn. The game will end and reset either when one person checkmates the other: or the game ends in a stalemate.
 ## Instructions
 Once you click run, the game will immediately start.
 
