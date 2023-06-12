@@ -34,6 +34,7 @@ boolean promote;
 
 void setup(){
   monsterrat = createFont("Montserrat-Bold.ttf", 128);
+  textFont(monsterrat);
   size(950, 800);
   loadImages();
   
@@ -97,7 +98,6 @@ void gameEnd(String result){
   gameEnd = true;
   fill(255);
   square(250, 200, 400);
-  textFont(monsterrat);
 
   if (result.equals("checkmate")){
       
@@ -224,10 +224,6 @@ boolean isMouseOver(int x, int y, int w, int h){
 
 void mouseClicked(){
   
-    if (isMouseOver(825, 500, 100, 50)){
-    println("prev: "+ states.get(currentState).toString(states.get(currentState).chessBoard));
-    println("current: "+ field.toString(field.chessBoard));
-  }
   
   if(isMouseOver(825,100,100,50)){
   
@@ -235,6 +231,7 @@ void mouseClicked(){
   turnCount = 1;
   currentState = -1;
   
+  gameEnd = false;
   promote = false;
   
   field = new Board();
@@ -265,15 +262,22 @@ void mouseClicked(){
   }
   
   if (gameEnd && isMouseOver(350, 400, 200, 80)){
-    prevTurnCount = 1;
-    turnCount = 1;
+  prevTurnCount = 1;
+  turnCount = 1;
+  currentState = -1;
   
-    field = new Board();
-    phase = 1;
+  gameEnd = false;
+  promote = false;
   
-    background(255);
-    image(board, 0, 0);
-    loadPieces();  //draw out all the pieces
+  field = new Board();
+  states = new ArrayList<Board>();
+  phase = 1;
+  
+  background(255);
+  image(board, 0, 0);
+  loadPieces();  //draw out all the pieces
+    
+    println("Reset");
   }
 
   
