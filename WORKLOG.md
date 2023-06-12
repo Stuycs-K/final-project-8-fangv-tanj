@@ -104,6 +104,16 @@ Victor Fang
   * Began work on an undo button.
     * Currently debugging.
 
+  6/11/23
+
+  * Finished undo button.
+    * Can now undo multiple turns.
+  * Finished pawn promotion.
+    * If a pawn reaches the end, the game will pause and a screen will pop up allowing the player to promote the pawn
+      to a queen, a rook, a knight, or a bishop.
+  * Fixed a bug with game end not properly resetting game variables.
+  * Wrote the README but missing the devlog.
+
 Junxi Tan
 
 5/22/23
