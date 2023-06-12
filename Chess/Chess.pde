@@ -29,6 +29,8 @@ PFont monsterrat;
 ArrayList<Board> states;
 int currentState;
 
+boolean promote;
+
 
 void setup(){
   monsterrat = createFont("Montserrat-Bold.ttf", 128);
@@ -65,7 +67,7 @@ void draw(){
   text("Undo", 825, 240);
   
   //Board and Pieces
-  if (prevTurnCount < turnCount){
+  if (prevTurnCount < turnCount && !promote){
     background(255);
     field.flip(); //after each turn flip the board
     image(board, 0, 0);
@@ -233,6 +235,8 @@ void mouseClicked(){
   turnCount = 1;
   currentState = -1;
   
+  promote = false;
+  
   field = new Board();
   states = new ArrayList<Board>();
   phase = 1;
@@ -244,12 +248,14 @@ void mouseClicked(){
     println("Reset");
   }
   
-  if (isMouseOver(825, 200, 100, 50) && turnCount > 1){
+  if (isMouseOver(825, 200, 100, 50) && turnCount > 1 && !promote){
 
     field.copyOver(states.get(currentState));
     currentState -=1;
     turnCount -=1;
     prevTurnCount -=1;
+    
+    promote = false;
     
     background(255);
     image(board, 0, 0);
@@ -282,7 +288,8 @@ void mouseClicked(){
     int playerTurn = turnCount % 2;
 
 
-  if (clicked != null && playerTurn == clicked.Color){ //if player clicks on a tile with a piece
+
+  if (clicked != null && playerTurn == clicked.Color && !promote){ //if player clicks on a tile with a piece
       //reset screen
       background(255);
       image(board, 0, 0);
@@ -298,6 +305,26 @@ void mouseClicked(){
     
   }
   
+    if (promote){
+     if (isMouseOver(400, 200, 100, 100)){
+       field.chessBoard[lastY - 1][lastX] = new Piece(0, lastX, "Queen", (turnCount - 1) % 2);
+       promote = false;
+     }
+     if (isMouseOver(400, 300, 100, 100)){
+       field.chessBoard[lastY - 1][lastX] = new Piece(0, lastX, "Knight", (turnCount - 1) % 2);
+       promote = false;
+     }
+     if (isMouseOver(400, 400, 100, 100)){
+       field.chessBoard[lastY - 1][lastX] = new Piece(0, lastX, "Rook", (turnCount - 1) % 2);
+       promote = false;
+     }
+     if (isMouseOver(400, 500, 100, 100)){
+       field.chessBoard[lastY - 1][lastX] = new Piece(0, lastX, "Bishop", (turnCount - 1) % 2);
+       promote = false;
+     }
+   } 
+
+  
   if (phase == 2 && moveable[y][x] == 1){ //if player clicks on an empty space after clicking on a piece
   
   removeStates(states, currentState);
@@ -306,6 +333,7 @@ void mouseClicked(){
   currentState +=1;
 
     field.move(y, x, lastY, lastX);
+    
       if (field.chessBoard[y][x].name.equals("Pawn")){
         Pawn pawn = (Pawn)field.chessBoard[y][x];
         if (y - lastY == -2){
@@ -320,12 +348,11 @@ void mouseClicked(){
     
     
     //queen promotion
-   if(field.chessBoard[y][x].name == "Pawn" && field.chessBoard[y][x].row == 0){
-     field.chessBoard[y][x].setRow(y);
-     field.chessBoard[y][x].setCol(x);
-     field.chessBoard[y][x] = new Piece(field.chessBoard[y][x].row, field.chessBoard[y][x].col, "Queen", field.chessBoard[y][x].Color);
+   if(field.chessBoard[y][x].name.equals("Pawn") && field.chessBoard[y][x].row == 0){
+     promote = true;
+     promote();
    }
-    
+   
     
     //Moving rook over for castling
     if (field.chessBoard[y][x].name.equals("King")){
@@ -373,10 +400,20 @@ void removeStates(ArrayList<Board> states, int current){
   }
 }
 
-void promote(int y, int x){
+void promote(){
  fill(255);
- square(x * 100, y * 100, 100); 
- println("YO");
+ rect(400, 200, 100, 400);
+ if (turnCount % 2 == 1){
+   image(WhQueen, 400, 200);
+   image(WhKnight, 400, 300);
+   image(WhRook, 400, 400);
+   image(WhBishop, 400, 500);
+ }else{
+   image(BlQueen, 400, 200);
+   image(BlKnight, 400, 300);
+   image(BlRook, 400, 400);
+   image(BlBishop, 400, 500);
+ }
 }
 
 void loadImages(){
