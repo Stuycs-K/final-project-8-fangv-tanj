@@ -20,3 +20,19 @@ During the game you can click on the undo button to go back the previous turn or
 The game continues until a player is either in checkmate or stalemate and a screen will pop up with a button to start a new game.
 
 Prototype: https://docs.google.com/document/d/1tOsSN-AuSQ8sGFvIDjoF0P8RouA_OxhoVpcbSBmUS4Y/edit?usp=sharing
+
+## Dev Log
+
+## Working Features
+* Pieces can move and capture other pieces.
+* En passant
+* Castling
+* Check, checkmate, and stalemate
+* Undo button, reset button, and new game button.
+
+## Broken features/bugs
+* If a pawn reaches the end by capturing a piece and promotes, the pawn promotes as intended but there will be an extra pawn.
+
+## Content Resources
+* https://www.chess.com/article/view/how-to-capture-en-passant
+* https://processing.org/reference/image_.html
